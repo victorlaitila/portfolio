@@ -1,8 +1,26 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, ArrowDown } from "lucide-react";
 import CursorTrail from "./CursorTrail";
+import { useState, useEffect } from "react";
 
 export function Hero() {
+  const [displayedText, setDisplayedText] = useState("");
+  const fullText = "Software Engineer ";
+  const typingSpeed = 100;
+
+  useEffect(() => {
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      if (currentIndex <= fullText.length) {
+        setDisplayedText(fullText.slice(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(interval);
+      }
+    }, typingSpeed);
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <section 
       id="home" 
@@ -13,18 +31,22 @@ export function Hero() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
           <div className="space-y-4">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold">
-              Hi, I'm{" "}
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Victor Laitila
-              </span>
+            <h1 className="text-4xl sm:text-5xl tracking-widest uppercase font-bold mb-1">
+              <span className="text-foreground drop-shadow-[0_0_8px_hsl(var(--primary)/0.4)]">Hi I'm </span>
+              <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)]">Victor Laitila</span>
             </h1>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-muted-foreground">
-              Software Engineer
+            <h2 className="text-2xl tracking-widest uppercase font-bold mb-1 min-h-[2.5rem]">
+              <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)] tracking-[4px]">
+                {displayedText.slice(0, 9)}
+              </span>
+              <span className="text-foreground drop-shadow-[0_0_8px_hsl(var(--primary)/0.4)] tracking-[4px]">
+                {displayedText.slice(9)}
+              </span>
+              <span className="animate-pulse text-foreground relative bottom-0.5">|</span>
             </h2>
           </div>
 
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm tracking-widest uppercase font-bold mb-1 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             I build exceptional digital experiences with modern technologies. 
             Passionate about creating elegant solutions to complex problems.
           </p>

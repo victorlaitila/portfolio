@@ -17,7 +17,7 @@ const skillCategories = [
   {
     title: "Cloud & DevOps",
     icon: Cloud,
-    skills: ["Azure", "Google Cloud", "Docker", "CI/CD", "Terraform"],
+    skills: ["Azure DevOps", "Google Cloud", "Docker", "CI/CD", "Terraform"],
   },
   {
     title: "Tools & Others",

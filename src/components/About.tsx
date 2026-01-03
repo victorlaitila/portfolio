@@ -57,8 +57,8 @@ export function About() {
                   My Journey
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  I'm a passionate software engineer with a keen eye for creating seamless user experiences. 
-                  Driven by a profound interest in technology, I am committed to continuously expanding my knowledge and skills to stay at the forefront of innovation.
+                  I'm a software engineer with a keen eye for creating seamless user experiences. 
+                  Driven by a profound interest in technology, I'm committed to continuously expanding my knowledge and skills to stay at the forefront of innovation.
                 </p>
               </CardContent>
             </Card>
@@ -67,10 +67,10 @@ export function About() {
               <Shimmer />
               <CardContent className="relative p-8">
                 <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  Beyond Code
+                  Beyond Tech
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  While technology fuels my professional journey, I find balance by hitting the gym and strumming my guitar. Fitness and music not only keep me grounded, but also enhance my creativity and focus.
+                  While technology fuels my professional journey, I find balance by hitting the gym, playing sports, and strumming my guitar. Fitness and music not only keep me grounded, but also enhance my creativity and focus.
                 </p>
               </CardContent>
             </Card>
