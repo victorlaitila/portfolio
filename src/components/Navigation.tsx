@@ -13,9 +13,7 @@ export function Navigation() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <a href="#home">
-            <span className="font-bold text-xl bg-gradient-to-r from-emerald-400 to-emerald-300 bg-clip-text text-transparent">
-              VL<span className="text-muted-foreground text-sm">.dev</span>
-            </span>
+            <img src="/vldev.png" width={200} alt="Logo" className="relative top-1 brightness-150" />
           </a>
           
           <div className="hidden md:flex items-center gap-6">

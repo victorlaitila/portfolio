@@ -31,17 +31,16 @@ export function About() {
             <h2 className="text-4xl sm:text-5xl tracking-widest uppercase font-bold mb-1 bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]">
               About Me
             </h2>
-            <div className="w-20 h-1  mx-auto rounded-full shadow-glow" />
+            <div className="w-20 h-1 mx-auto rounded-full shadow-glow" />
           </div>
 
           {/* Badges Row */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12 animate-fade-in">
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
             {highlights.map((item, index) => (
               <Badge 
                 key={index}
                 variant="secondary"
-                className="px-6 py-3 text-base font-medium bg-card/80 backdrop-blur-sm border border-border/50 hover:border-primary/40 transition-all duration-300"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="px-6 py-3 text-base font-medium bg-background/80 hover:bg-background/80 border border-border/50"
               >
                 <item.icon className="h-5 w-5 mr-2 text-primary" />
                 {item.title}
@@ -51,7 +50,7 @@ export function About() {
 
           {/* Description Cards */}
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="relative bg-gradient-to-br from-card to-card border-border/50 hover:border-primary/40 transition-all duration-500 animate-scale-in overflow-hidden group hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]">
+            <Card className="relative bg-background/80 border-border/50 hover:border-primary/40 transition-all duration-500 animate-scale-in overflow-hidden group hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]">
               <Shimmer />
               <CardContent className="relative p-8">
                 <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -64,7 +63,7 @@ export function About() {
               </CardContent>
             </Card>
 
-            <Card className="relative bg-gradient-to-br from-card to-card border-border/50 hover:border-primary/40 transition-all duration-500 animate-scale-in overflow-hidden group hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]">
+            <Card className="relative bg-background/80 border-border/50 hover:border-primary/40 transition-all duration-500 animate-scale-in overflow-hidden group hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]">
               <Shimmer />
               <CardContent className="relative p-8">
                 <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">

@@ -43,18 +43,13 @@ export function Skills() {
             {skillCategories.map((category, index) => (
               <Card 
                 key={index}
-                className="group relative p-8 bg-gradient-to-br from-card to-card border-border/50 hover:border-primary/40 transition-all duration-500 animate-scale-in overflow-hidden group hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]"
+                className="group relative p-8 bg-background/80 border-border/50 hover:border-primary/40 transition-all duration-500 animate-scale-in overflow-hidden group hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]"
               >                  
                 <Shimmer />
                 <div className="relative z-10">
                   {/* Icon header with enhanced styling */}
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-accent rounded-lg blur-md opacity-0 group-hover:opacity-70 transition-opacity duration-500" />
-                      <div className="relative p-3 bg-gradient-to-br from-black to-gray-900 rounded-lg group-hover:scale-110 transition-transform duration-500">
-                        <category.icon className="h-6 w-6 text-primary group-hover:text-accent transition-colors duration-500" />
-                      </div>
-                    </div>
+                    <category.icon className="h-6 w-6 text-primary" />
                     <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                       {category.title}
                     </h3>
@@ -66,7 +61,7 @@ export function Skills() {
                       <Badge 
                         key={skill}
                         variant="secondary"
-                        className="px-4 py-2 text-sm font-medium bg-background/50 backdrop-blur-sm border border-border/50 cursor-default"
+                        className="px-4 py-2 text-sm font-medium bg-background/80 hover:bg-background/80 border border-border/50 cursor-default"
                       >
                         {skill}
                       </Badge>

@@ -52,25 +52,23 @@ export function Experience() {
             {experiences.map((exp, index) => (
               <Card 
                 key={index}
-                className="relative p-6 hover:border-primary/40 transition-all duration-500 
+                className="bg-background/80 relative p-6 hover:border-primary/40 transition-all duration-500 
                   animate-scale-in overflow-hidden group 
                   hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]"
               >
                 <Shimmer />
                 <div className="flex flex-col md:flex-row md:items-start gap-4">
-                  <div className="p-3 bg-gradient-to-br from-black to-gray-900 rounded-lg">
-                    <Briefcase className="h-6 w-6 text-primary" />
-                  </div>
-                  
+                  <Briefcase className="h-5 w-5 text-primary relative top-1" />
                   <div className="flex-1 space-y-3">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                       <div>
                         <h3 className="text-xl font-bold">{exp.title}</h3>
-                        <p className="text-muted-foreground">{exp.company}</p>
+                        <div className="flex items-center">
+                          <p className="text-muted-foreground">{exp.company}</p>
+                          <span aria-hidden className="h-4 w-px m-2 bg-muted-foreground" />
+                          <p className="text-muted-foreground">{exp.period}</p>
+                        </div>
                       </div>
-                      <span className="text-sm text-muted-foreground font-medium">
-                        {exp.period}
-                      </span>
                     </div>
 
                     <p className="text-muted-foreground leading-relaxed">

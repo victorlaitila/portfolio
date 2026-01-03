@@ -46,7 +46,7 @@ export function Projects() {
             {projects.map((project, index) => (
               <Card 
                 key={index}
-                className="relative overflow-hidden group bg-card border-border/50 hover:border-primary/40 transition-all duration-500 animate-scale-in group hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]"
+                className="relative overflow-hidden group bg-background/80 border-border/50 hover:border-primary/40 transition-all duration-500 animate-scale-in group hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]"
               > 
                 <Shimmer />
                 <a href={project.demo} target="_blank" rel="noopener noreferrer">
