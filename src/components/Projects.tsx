@@ -10,7 +10,7 @@ const projects = [
     title: "AI Article Summarizer",
     description: "A web application that extracts and summarizes content from URLs, text input, or uploaded files, providing concise summaries along with automatically generated keywords. It also includes features like saving summaries, text-to-speech playback, multi-mode summarization, and intuitive copy, download, and share options for a seamless reading experience.",
     image: project1,
-    tags: ["React", "TypeScript", "Tailwind CSS", "Python", "Docker", "SQLite", "Vitest"],
+    tags: ["React", "TypeScript", "Tailwind CSS", "Python", "Docker", "PostgreSQL", "Vitest", "GitHub Actions"],
     github: "https://github.com/victorlaitila/ai-article-summarizer",
     demo: "https://victorlaitila.github.io/ai-article-summarizer/",
   },
