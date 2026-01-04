@@ -1,22 +1,23 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Code, Database, Wrench, Cloud } from "lucide-react";
+import { Wrench, DatabaseBackup, SquareCode, CloudUpload } from "lucide-react";
 import Shimmer from "./ui/shimmer";
+import SectionHeader from "./SectionHeader";
 
 const skillCategories = [
   {
     title: "Frontend",
-    icon: Code,
+    icon: SquareCode,
     skills: ["React", "TypeScript", "Vue.js", "AngularJS", "CSS", "Tailwind CSS"],
   },
   {
     title: "Backend",
-    icon: Database,
+    icon: DatabaseBackup,
     skills: ["Node.js", "Python", "C/C++", "Java", "Scala", "SQL", "NoSQL"],
   },
   {
     title: "Cloud & DevOps",
-    icon: Cloud,
+    icon: CloudUpload,
     skills: ["Azure DevOps", "Google Cloud", "Docker", "Git", "GitHub", "GitLab", "Terraform"],
   },
   {
@@ -32,12 +33,7 @@ export function Skills() {
     
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-8 animate-fade-in">
-            <h2 className="text-4xl sm:text-5xl tracking-widest uppercase font-bold mb-1 bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]">
-              Skills & Tech Stack
-            </h2>
-            <div className="w-20 h-1 bg-gradient-accent mx-auto rounded-full shadow-glow" />
-          </div>
+          <SectionHeader title="Skills & Tech Stack" />
 
           <div className="grid md:grid-cols-2 gap-8">
             {skillCategories.map((category, index) => (

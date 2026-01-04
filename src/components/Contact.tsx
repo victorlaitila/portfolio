@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { useToast } from "@/hooks/useToast";
 import emailjs from 'emailjs-com';
+import SectionHeader from "./SectionHeader";
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/victorlaitila", label: "GitHub" },
@@ -67,18 +68,15 @@ export function Contact() {
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-4xl sm:text-5xl tracking-widest uppercase font-bold mb-1 bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]">
-              Get In Touch
-            </h2>
-            <div className="w-20 h-1 bg-gradient-accent mx-auto rounded-full" />
+            <SectionHeader title="Get in Touch" />
             <p className="mt-6 text-lg text-muted-foreground">
               Have a question or want to work together? Feel free to reach out!
             </p>
           </div>
 
-          <Card className="p-8 mb-8 animate-scale-in bg-card">
+          <Card className="p-8 mb-8 animate-scale-in bg-background/80">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2">

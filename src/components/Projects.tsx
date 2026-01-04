@@ -4,6 +4,7 @@ import project1 from "@/assets/article-summarizer-thumbnail.png";
 import project2 from "@/assets/construction1.png";
 import project3 from "@/assets/construction2.png";
 import Shimmer from "./ui/shimmer";
+import SectionHeader from "./SectionHeader";
 
 const projects = [
   {
@@ -34,10 +35,7 @@ export function Projects() {
     <section id="projects" className="py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="text-4xl sm:text-5xl tracking-widest uppercase font-bold mb-1 bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]">Featured Projects</h2>
-            <div className="w-20 h-1 bg-gradient-accent mx-auto rounded-full" />
-          </div>
+          <SectionHeader title="Featured Projects" />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (

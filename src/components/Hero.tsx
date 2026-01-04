@@ -31,11 +31,11 @@ export function Hero() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
           <div className="space-y-2 md:space-y-4">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-widest uppercase font-bold mb-1">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-widest uppercase font-bold mb-1" style={{fontFamily: 'Orbitron, sans-serif'}}>
               <span className="text-foreground drop-shadow-[0_0_8px_hsl(var(--primary)/0.4)]">Hi I'm </span>
               <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)]">Victor Laitila</span>
             </h1>
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-widest uppercase font-bold mb-1">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-widest uppercase font-bold mb-1" style={{fontFamily: 'Orbitron, sans-serif'}}>
               <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)] tracking-[4px]">
                 {displayedText.slice(0, 9)}
               </span>
@@ -46,7 +46,7 @@ export function Hero() {
             </h2>
           </div>
 
-          <p className="text-xs sm:text-sm md:text-base tracking-widest uppercase font-bold text-muted-foreground max-w-[80vw] mx-auto leading-relaxed mb-2">
+          <p className="text-[11px] sm:text-xs md:text-sm tracking-widest uppercase font-bold text-muted-foreground max-w-[80vw] mx-auto leading-relaxed mb-2" style={{fontFamily: 'Orbitron, sans-serif'}}>
             I build exceptional digital experiences with modern technologies - passionate about creating elegant solutions to complex problems.
           </p>
 

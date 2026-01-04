@@ -1,7 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, Briefcase } from "lucide-react";
+import { Download, BriefcaseBusiness } from "lucide-react";
 import Shimmer from "./ui/shimmer";
+import SectionHeader from "./SectionHeader";
 
 const experiences = [
   {
@@ -44,10 +45,7 @@ export function Experience() {
     <section id="experience" className="py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-8 animate-fade-in">
-            <h2 className="text-4xl sm:text-5xl tracking-widest uppercase font-bold mb-1 bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]">Experience</h2>
-            <div className="w-20 h-1 bg-gradient-accent mx-auto rounded-full" />
-          </div>
+          <SectionHeader title="Experience" />
 
           <div className="space-y-6 mb-12">
             {experiences.map((exp, index) => (
@@ -59,7 +57,7 @@ export function Experience() {
               >
                 <Shimmer />
                 <div className="flex flex-col md:flex-row md:items-start gap-4">
-                  <Briefcase className="h-5 w-5 text-primary relative top-1" />
+                  <BriefcaseBusiness className="h-5 w-5 text-primary relative top-1" />
                   <div className="flex-1 space-y-3">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                       <div>
