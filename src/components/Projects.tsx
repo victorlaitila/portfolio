@@ -1,8 +1,8 @@
 import { Card } from "@/components/ui/card";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Youtube } from "lucide-react";
 import project1 from "@/assets/article-summarizer-thumbnail.png";
-import project2 from "@/assets/project2.jpg";
-import project3 from "@/assets/project3.jpg";
+import project2 from "@/assets/construction1.png";
+import project3 from "@/assets/construction2.png";
 import Shimmer from "./ui/shimmer";
 
 const projects = [
@@ -13,22 +13,19 @@ const projects = [
     tags: ["React", "TypeScript", "Tailwind CSS", "Python", "Docker", "PostgreSQL", "Vitest", "GitHub Actions"],
     github: "https://github.com/victorlaitila/ai-article-summarizer",
     demo: "https://victorlaitila.github.io/ai-article-summarizer/",
+    video: "https://www.youtube.com/watch?v=lZrHd0tOBXo/"
   },
   {
-    title: "Project 2",
-    description: "To be added soon.",
+    title: "Under Construction",
+    description: "To be added soon...",
     image: project2,
     tags: [],
-    github: "https://github.com",
-    demo: "https://demo.com",
   },
   {
-    title: "Project 3",
-    description: "To be added soon.",
+    title: "Under Construction",
+    description: "To be added soon...",
     image: project3,
     tags: [],
-    github: "https://github.com",
-    demo: "https://demo.com",
   },
 ];
 
@@ -62,12 +59,21 @@ export function Projects() {
                 <div className="p-6 space-y-4">
                   <div className="flex items-center gap-4">
                     <h3 className="text-xl font-bold">{project.title}</h3>
-                      <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                        <Github className="h-4 w-4 text-primary" />
-                      </a>
-                      <a href={project.demo} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                        <ExternalLink className="h-4 w-4 text-primary" />
-                      </a>
+                      {project.demo && (
+                        <a href={project.demo} target="_blank" rel="noopener noreferrer" aria-label="Demo">
+                          <ExternalLink className="h-4 w-4 text-primary" />
+                        </a>
+                      )}
+                      {project.github && (
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                          <Github className="h-4 w-4 text-primary" />
+                        </a>
+                      )}
+                      {project.video && (
+                        <a href={project.video} target="_blank" rel="noopener noreferrer" aria-label="Video">
+                          <Youtube className="h-6 w-4 text-primary" />
+                        </a>
+                      )}
                    </div>
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     {project.description}
