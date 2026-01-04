@@ -7,22 +7,22 @@ const skillCategories = [
   {
     title: "Frontend",
     icon: Code,
-    skills: ["React", "Redux", "TypeScript", "Vue.js", "AngularJS", "CSS", "Tailwind CSS"],
+    skills: ["React", "TypeScript", "Vue.js", "AngularJS", "CSS", "Tailwind CSS"],
   },
   {
     title: "Backend",
     icon: Database,
-    skills: ["Node.js", "Express", "Python", "C/C++", "Java", "Scala", "PostgreSQL", "MongoDB"],
+    skills: ["Node.js", "Python", "C/C++", "Java", "Scala", "SQL", "NoSQL"],
   },
   {
     title: "Cloud & DevOps",
     icon: Cloud,
-    skills: ["Azure DevOps", "Google Cloud", "Docker", "CI/CD", "Terraform"],
+    skills: ["Azure DevOps", "Google Cloud", "Docker", "Git", "GitHub", "GitLab", "Terraform"],
   },
   {
-    title: "Tools & Others",
+    title: "Tools & Practices",
     icon: Wrench,
-    skills: ["Git", "Jest", "Robot Framework", "REST APIs", "Agile", "Figma"],
+    skills: ["Agile Development", "Software Architecture", "Software Testing", "Robot Framework", "REST APIs", "Figma", "AI-Assisted Development"],
   },
 ];
 

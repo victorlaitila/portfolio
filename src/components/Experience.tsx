@@ -8,24 +8,23 @@ const experiences = [
     title: "Software Developer",
     company: "ABB",
     period: "May 2023 - Present",
-    description: "Made significant contributions to the Drive Composer 3 project, successfully closing over 250 tickets of varying complexity.",
     achievements: [
-      "Full stack development using TypeScript, Vue and C++",
-      "Designing software architecture with comprehensive documentation",
-      "Using Git and Azure DevOps for management and version control",
-      "Close collaboration with other teams, such as designers and lower-level backend developers",
-      "Demoing implemented features to other teams and stakeholders",
-      "International SCRUM-based project"
+      "Closed 250+ tickets across bug fixes, feature development, and refactoring in a large-scale industrial software product (Drive Composer 3)",
+      "Delivered production-ready features using Vue, TypeScript, C++, Azure DevOps and Git",
+      "Improved system performance, maintainability, and overall quality while reducing technical debt",
+      "Designed software architecture and authored comprehensive technical documentation",
+      "Delivered regular feature demos to stakeholders, accelerating feedback and alignment",
+      "Worked in an international, SCRUM-based software team requiring close cross-functional collaboration",
     ],
   },
   {
     title: "Software Developer",
     company: "Teonos Oy",
     period: "May 2022 - Mar 2023",
-    description: "Developed new and improved existing features in an online booking service called Slotti.",
     achievements: [
-      "Frontend development using TypeScript, Vue and AngularJS",
-      "Using Git and GitLab for team collaboration, version control and project management",
+      "Developed and maintained core functionality in an online booking system (Slotti)",
+      "Implemented front-end features using Vue, TypeScript, AngularJS, Git and GitLab",
+      "Contributed to a major refactoring effort, reducing technical debt and improving system performance and scalability",
     ],
   },
   {
@@ -70,10 +69,6 @@ export function Experience() {
                         </div>
                       </div>
                     </div>
-
-                    <p className="text-muted-foreground leading-relaxed">
-                      {exp.description}
-                    </p>
 
                     <ul className="space-y-3">
                       {exp.achievements.map((achievement, i) => (
