@@ -38,6 +38,8 @@ const experiences = [
 ];
 
 export function Experience() {
+  const cvSrc = `${import.meta.env.BASE_URL}cv.pdf`;
+
   return (
     <section id="experience" className="py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -89,7 +91,7 @@ export function Experience() {
 
           <div className="text-center animate-fade-in">
             <Button variant="hero" size="lg" asChild>
-              <a href="/cv.pdf" download>
+              <a href={cvSrc} download>
                 <Download className="mr-2 h-5 w-5" />
                 Download CV
               </a>

@@ -30,12 +30,12 @@ export function Hero() {
       {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
-          <div className="space-y-4">
-            <h1 className="text-4xl sm:text-5xl tracking-widest uppercase font-bold mb-1">
+          <div className="space-y-2 md:space-y-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-widest uppercase font-bold mb-1">
               <span className="text-foreground drop-shadow-[0_0_8px_hsl(var(--primary)/0.4)]">Hi I'm </span>
               <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)]">Victor Laitila</span>
             </h1>
-            <h2 className="text-2xl tracking-widest uppercase font-bold mb-1 min-h-[2.5rem]">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-widest uppercase font-bold mb-1">
               <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)] tracking-[4px]">
                 {displayedText.slice(0, 9)}
               </span>
@@ -46,12 +46,11 @@ export function Hero() {
             </h2>
           </div>
 
-          <p className="text-sm tracking-widest uppercase font-bold mb-1 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            I build exceptional digital experiences with modern technologies. 
-            Passionate about creating elegant solutions to complex problems.
+          <p className="text-xs sm:text-sm md:text-base tracking-widest uppercase font-bold text-muted-foreground max-w-[80vw] mx-auto leading-relaxed mb-2">
+            I build exceptional digital experiences with modern technologies - passionate about creating elegant solutions to complex problems.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <Button variant="hero" size="lg" asChild>
               <a href="#projects">View Projects</a>
             </Button>
