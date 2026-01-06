@@ -35,7 +35,7 @@ export function Hero() {
               <span className="text-foreground drop-shadow-[0_0_8px_hsl(var(--primary)/0.4)]">Hi I'm </span>
               <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)]">Victor Laitila</span>
             </h1>
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-widest uppercase font-bold mb-1" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h2 className="text-md sm:text-2xl md:text-3xl lg:text-4xl tracking-widest uppercase font-bold mb-1" style={{fontFamily: 'Orbitron, sans-serif'}}>
               <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)] tracking-[4px]">
                 {displayedText.slice(0, 9)}
               </span>

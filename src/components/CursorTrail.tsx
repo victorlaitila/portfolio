@@ -10,7 +10,7 @@ export default function CursorTrail() {
       const newParticle = {
         x: e.clientX,
         y: e.clientY,
-        id: Date.now(),
+        id: Date.now() + Math.random(),
       };
 
       setParticles((prev) => [...prev.slice(-MAX_PARTICLES), newParticle]);

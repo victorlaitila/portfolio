@@ -56,12 +56,15 @@ export function Experience() {
                   hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]"
               >
                 <Shimmer />
-                <div className="flex flex-col md:flex-row md:items-start gap-4">
-                  <BriefcaseBusiness className="h-5 w-5 text-primary relative top-1" />
+                <div className="flex gap-4">
+                  <BriefcaseBusiness className="h-5 w-5 text-primary relative top-1 hidden md:block" />
                   <div className="flex-1 space-y-3">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                       <div>
-                        <h3 className="text-xl font-bold">{exp.title}</h3>
+                        <div className="flex items-start gap-3">
+                          <BriefcaseBusiness className="h-5 w-5 text-primary relative top-1 md:hidden" />
+                          <h3 className="text-xl font-bold">{exp.title}</h3>
+                        </div>
                         <div className="flex items-center">
                           <p className="text-muted-foreground">{exp.company}</p>
                           <span aria-hidden className="h-4 w-px m-2 bg-muted-foreground" />
