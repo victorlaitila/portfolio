@@ -10,7 +10,7 @@ const experiences = [
     company: "ABB",
     period: "May 2023 - Present",
     achievements: [
-      "Closed 250+ tickets across bug fixes, feature development, and refactoring in a large-scale industrial software product (Drive Composer 3)",
+      "Closed 300+ tickets across bug fixes, feature development, and refactoring in a large-scale industrial software product (Drive Composer 3)",
       "Delivered production-ready features using Vue, TypeScript, C++, Azure DevOps and Git",
       "Improved system performance, maintainability, and overall quality while reducing technical debt",
       "Designed software architecture and authored comprehensive technical documentation",
