@@ -7,15 +7,20 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import { useToast } from "@/hooks/useToast";
 import emailjs from 'emailjs-com';
 import SectionHeader from "./SectionHeader";
-
-const socialLinks = [
-  { icon: Github, href: "https://github.com/victorlaitila", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com/in/victorlaitila", label: "LinkedIn" },
-  { icon: Mail, href: "mailto:viclait@gmail.com", label: "Email" },
-];
+import { getCareerData } from "@/data";
 
 export function Contact() {
   const { toast } = useToast();
+  const career = getCareerData();
+  const { personal } = career;
+
+  // Build social links from career data
+  const socialLinks = [
+    personal.links.github && { icon: Github, href: personal.links.github, label: "GitHub" },
+    personal.links.linkedin && { icon: Linkedin, href: personal.links.linkedin, label: "LinkedIn" },
+    { icon: Mail, href: `mailto:${personal.email}`, label: "Email" },
+  ].filter(Boolean) as Array<{ icon: typeof Github; href: string; label: string }>;
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",

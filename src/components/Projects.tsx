@@ -1,36 +1,30 @@
 import { Card } from "@/components/ui/card";
 import { ExternalLink, Github, Youtube } from "lucide-react";
-import project1 from "@/assets/article-summarizer-thumbnail.png";
-import project2 from "@/assets/construction1.png";
-import project3 from "@/assets/construction2.png";
 import Shimmer from "./ui/shimmer";
 import SectionHeader from "./SectionHeader";
+import { getCareerData, getPortfolioExtensions } from "@/data";
 
-const projects = [
-  {
-    title: "AI Article Summarizer",
-    description: "A web application that extracts and summarizes content from URLs, text input, or uploaded files, providing concise summaries along with automatically generated keywords. It also includes features like saving summaries, text-to-speech playback, multi-mode summarization, and intuitive copy, download, and share options for a seamless reading experience.",
-    image: project1,
-    tags: ["React", "TypeScript", "Tailwind CSS", "Python", "Docker", "PostgreSQL", "Vitest", "GitHub Actions", "Sentry (Monitoring)"],
-    github: "https://github.com/victorlaitila/ai-article-summarizer",
-    demo: "https://victorlaitila.github.io/ai-article-summarizer/",
-    video: "https://www.youtube.com/watch?v=lZrHd0tOBXo/"
-  },
-  {
-    title: "Under Construction",
-    description: "To be added soon...",
-    image: project2,
-    tags: [],
-  },
-  {
-    title: "Under Construction",
-    description: "To be added soon...",
-    image: project3,
-    tags: [],
-  },
-];
+// Fallback image for projects without assets
+import constructionImg from "@/assets/construction1.png";
 
 export function Projects() {
+  const career = getCareerData();
+  const extensions = getPortfolioExtensions();
+
+  // Merge career data with portfolio extensions
+  const projects = career.projects.map((project, index) => {
+    const assets = extensions.projectAssets[index];
+    return {
+      title: project.name,
+      description: project.description,
+      image: assets?.image || constructionImg,
+      tags: assets?.tags || [],
+      github: project.url || undefined,
+      demo: assets?.demo,
+      video: assets?.video,
+    };
+  });
+
   return (
     <section id="projects" className="py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

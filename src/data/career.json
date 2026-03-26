@@ -1,0 +1,83 @@
+{
+  "personal": {
+    "name": "Victor Laitila",
+    "title": "Software Engineer",
+    "email": "viclait@gmail.com",
+    "location": "Finland",
+    "links": {
+      "github": "https://github.com/victorlaitila",
+      "linkedin": "https://linkedin.com/in/victorlaitila",
+      "website": null
+    }
+  },
+  "summary": "I build exceptional digital experiences with modern technologies - passionate about creating elegant solutions to complex problems.",
+  "experience": [
+    {
+      "company": "ABB",
+      "title": "Software Developer",
+      "location": "Finland",
+      "start": "2023-05",
+      "end": "present",
+      "duration": "1y 10m",
+      "highlights": [
+        "Closed 300+ tickets across bug fixes, feature development, and refactoring in a large-scale industrial software product (Drive Composer 3)",
+        "Delivered production-ready features using Vue, TypeScript, C++, Azure DevOps and Git",
+        "Improved system performance, maintainability, and overall quality while reducing technical debt",
+        "Designed software architecture and authored comprehensive technical documentation",
+        "Delivered regular feature demos to stakeholders, accelerating feedback and alignment",
+        "Worked in an international, SCRUM-based software team requiring close cross-functional collaboration"
+      ]
+    },
+    {
+      "company": "Teonos Oy",
+      "title": "Software Developer",
+      "location": "Finland",
+      "start": "2022-05",
+      "end": "2023-03",
+      "duration": "10m",
+      "highlights": [
+        "Developed and maintained core functionality in an online booking system (Slotti)",
+        "Implemented front-end features using Vue, TypeScript, AngularJS, Git and GitLab",
+        "Contributed to a major refactoring effort, reducing technical debt and improving system performance and scalability"
+      ]
+    },
+    {
+      "company": "ABB",
+      "title": "Summer Intern",
+      "location": "Finland",
+      "start": "2021-06",
+      "end": "2021-08",
+      "duration": "2m",
+      "highlights": [
+        "Different kinds of manual work with electric motors in a production chain."
+      ]
+    }
+  ],
+  "education": [],
+  "skills": {
+    "frontend": ["React", "TypeScript", "Vue.js", "AngularJS", "CSS", "Tailwind CSS"],
+    "backend": ["Node.js", "Python", "C/C++", "Java", "Scala", "SQL", "NoSQL"],
+    "technologies": ["Azure DevOps", "Google Cloud", "Docker", "Git", "GitHub", "GitLab", "Terraform"],
+    "practices": ["Agile Development", "Software Architecture", "Software Testing", "Robot Framework", "REST APIs", "Figma", "AI-Assisted Development"]
+  },
+  "projects": [
+    {
+      "name": "AI Article Summarizer",
+      "description": "A web application that extracts and summarizes content from URLs, text input, or uploaded files, providing concise summaries along with automatically generated keywords. It also includes features like saving summaries, text-to-speech playback, multi-mode summarization, and intuitive copy, download, and share options for a seamless reading experience.",
+      "url": "https://github.com/victorlaitila/ai-article-summarizer",
+      "highlights": []
+    },
+    {
+      "name": "Under Construction",
+      "description": "To be added soon...",
+      "url": null,
+      "highlights": []
+    },
+    {
+      "name": "Under Construction",
+      "description": "To be added soon...",
+      "url": null,
+      "highlights": []
+    }
+  ]
+}

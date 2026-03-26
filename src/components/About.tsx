@@ -3,27 +3,24 @@ import { Badge } from "@/components/ui/badge";
 import { Puzzle, Users, Code2, Brain, Footprints, Dumbbell } from "lucide-react";
 import Shimmer from "./ui/shimmer";
 import SectionHeader from "./SectionHeader";
+import { getPortfolioExtensions } from "@/data";
 
-const highlights = [
-  {
-    icon: Code2,
-    title: "Clean Code",
-  },
-  {
-    icon: Puzzle,
-    title: "Problem Solver",
-  },
-  {
-    icon: Users,
-    title: "Team Player",
-  },
-  {
-    icon: Brain,
-    title: "Fast Learner",
-  },
-];
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Code2,
+  Puzzle,
+  Users,
+  Brain,
+};
 
 export function About() {
+  const extensions = getPortfolioExtensions();
+  const { about } = extensions;
+
+  const highlights = about.highlights.map(h => ({
+    icon: iconMap[h.icon] || Code2,
+    title: h.title,
+  }));
+
   return (
     <section id="about" className="py-20 relative overflow-hidden ">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -55,8 +52,7 @@ export function About() {
                   </h3>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  I'm a software engineer with a keen eye for creating seamless user experiences. 
-                  Driven by a profound interest in technology, I'm committed to continuously expanding my knowledge and skills to stay at the forefront of innovation.
+                  {about.journey}
                 </p>
               </CardContent>
             </Card>
@@ -71,7 +67,7 @@ export function About() {
                   </h3>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  While technology fuels my professional journey, I find balance by hitting the gym, playing sports, and strumming my guitar. Fitness and music not only keep me grounded, but also enhance my creativity and focus.
+                  {about.beyondTech}
                 </p>
               </CardContent>
             </Card>

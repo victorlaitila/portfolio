@@ -3,43 +3,26 @@ import { Button } from "@/components/ui/button";
 import { Download, BriefcaseBusiness } from "lucide-react";
 import Shimmer from "./ui/shimmer";
 import SectionHeader from "./SectionHeader";
+import { getCareerData } from "@/data";
 
-const experiences = [
-  {
-    title: "Software Developer",
-    company: "ABB",
-    period: "May 2023 - Present",
-    achievements: [
-      "Closed 300+ tickets across bug fixes, feature development, and refactoring in a large-scale industrial software product (Drive Composer 3)",
-      "Delivered production-ready features using Vue, TypeScript, C++, Azure DevOps and Git",
-      "Improved system performance, maintainability, and overall quality while reducing technical debt",
-      "Designed software architecture and authored comprehensive technical documentation",
-      "Delivered regular feature demos to stakeholders, accelerating feedback and alignment",
-      "Worked in an international, SCRUM-based software team requiring close cross-functional collaboration",
-    ],
-  },
-  {
-    title: "Software Developer",
-    company: "Teonos Oy",
-    period: "May 2022 - Mar 2023",
-    achievements: [
-      "Developed and maintained core functionality in an online booking system (Slotti)",
-      "Implemented front-end features using Vue, TypeScript, AngularJS, Git and GitLab",
-      "Contributed to a major refactoring effort, reducing technical debt and improving system performance and scalability",
-    ],
-  },
-  {
-    title: "Summer Intern",
-    company: "ABB",
-    period: "Jun 2021 - Aug 2021",
-    achievements: [
-      "Different kinds of manual work with electric motors in a production chain.",
-    ],
-  },
-];
+// Format YYYY-MM to human readable
+function formatDate(dateStr: string): string {
+  const [year, month] = dateStr.split('-');
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return `${monthNames[parseInt(month) - 1]} ${year}`;
+}
 
 export function Experience() {
+  const career = getCareerData();
   const cvSrc = `${import.meta.env.BASE_URL}cv.pdf`;
+
+  // Map career data to display format
+  const experiences = career.experience.map(exp => ({
+    title: exp.title,
+    company: exp.company,
+    period: `${formatDate(exp.start)} - ${exp.end === 'present' ? 'Present' : formatDate(exp.end)}`,
+    achievements: exp.highlights,
+  }));
 
   return (
     <section id="experience" className="py-20 relative overflow-hidden">

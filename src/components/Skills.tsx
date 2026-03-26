@@ -3,31 +3,35 @@ import { Badge } from "@/components/ui/badge";
 import { Wrench, DatabaseBackup, SquareCode, CloudUpload } from "lucide-react";
 import Shimmer from "./ui/shimmer";
 import SectionHeader from "./SectionHeader";
-
-const skillCategories = [
-  {
-    title: "Frontend",
-    icon: SquareCode,
-    skills: ["React", "TypeScript", "Vue.js", "AngularJS", "CSS", "Tailwind CSS"],
-  },
-  {
-    title: "Backend",
-    icon: DatabaseBackup,
-    skills: ["Node.js", "Python", "C/C++", "Java", "Scala", "SQL", "NoSQL"],
-  },
-  {
-    title: "Cloud & DevOps",
-    icon: CloudUpload,
-    skills: ["Azure DevOps", "Google Cloud", "Docker", "Git", "GitHub", "GitLab", "Terraform"],
-  },
-  {
-    title: "Tools & Practices",
-    icon: Wrench,
-    skills: ["Agile Development", "Software Architecture", "Software Testing", "Robot Framework", "REST APIs", "Figma", "AI-Assisted Development"],
-  },
-];
+import { getCareerData } from "@/data";
 
 export function Skills() {
+  const career = getCareerData();
+  const { skills } = career;
+
+  const skillCategories = [
+    {
+      title: "Frontend",
+      icon: SquareCode,
+      skills: skills.frontend,
+    },
+    {
+      title: "Backend",
+      icon: DatabaseBackup,
+      skills: skills.backend,
+    },
+    {
+      title: "Cloud & DevOps",
+      icon: CloudUpload,
+      skills: skills.technologies,
+    },
+    {
+      title: "Tools & Practices",
+      icon: Wrench,
+      skills: skills.practices,
+    },
+  ].filter(cat => cat.skills.length > 0);
+
   return (
     <section id="skills" className="py-20 relative overflow-hidden">
     

@@ -2,10 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, ArrowDown } from "lucide-react";
 import CursorTrail from "./CursorTrail";
 import { useState, useEffect } from "react";
+import { getCareerData } from "@/data";
 
 export function Hero() {
+  const career = getCareerData();
+  const { personal } = career;
+  
   const [displayedText, setDisplayedText] = useState("");
-  const fullText = "Software Engineer ";
+  const fullText = `${personal.title} `;
   const typingSpeed = 100;
 
   useEffect(() => {
@@ -33,7 +37,7 @@ export function Hero() {
           <div className="space-y-2 md:space-y-4">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-widest uppercase font-bold mb-1" style={{fontFamily: 'Orbitron, sans-serif'}}>
               <span className="text-foreground drop-shadow-[0_0_8px_hsl(var(--primary)/0.4)]">Hi I'm </span>
-              <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)]">Victor Laitila</span>
+              <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)]">{personal.name}</span>
             </h1>
             <h2 className="text-md sm:text-2xl md:text-3xl lg:text-4xl tracking-widest uppercase font-bold mb-1" style={{fontFamily: 'Orbitron, sans-serif'}}>
               <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)] tracking-[4px]">
@@ -47,7 +51,7 @@ export function Hero() {
           </div>
 
           <p className="text-[11px] sm:text-xs md:text-sm tracking-widest uppercase font-bold text-muted-foreground max-w-[80vw] mx-auto leading-relaxed mb-2" style={{fontFamily: 'Orbitron, sans-serif'}}>
-            I build exceptional digital experiences with modern technologies - passionate about creating elegant solutions to complex problems.
+            {career.summary}
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
@@ -60,18 +64,22 @@ export function Hero() {
           </div>
 
           <div className="flex items-center justify-center gap-4 pt-4">
-            <Button variant="ghost" size="icon" asChild >
-              <a href="https://github.com/victorlaitila" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <Github className="h-5 w-5" />
-              </a>
-            </Button>
+            {personal.links.github && (
+              <Button variant="ghost" size="icon" asChild >
+                <a href={personal.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <Github className="h-5 w-5" />
+                </a>
+              </Button>
+            )}
+            {personal.links.linkedin && (
+              <Button variant="ghost" size="icon" asChild>
+                <a href={personal.links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <Linkedin className="h-5 w-5" />
+                </a>
+              </Button>
+            )}
             <Button variant="ghost" size="icon" asChild>
-              <a href="https://linkedin.com/in/victorlaitila" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <Linkedin className="h-5 w-5" />
-              </a>
-            </Button>
-            <Button variant="ghost" size="icon" asChild>
-              <a href="mailto:viclait@gmail.com" aria-label="Email">
+              <a href={`mailto:${personal.email}`} aria-label="Email">
                 <Mail className="h-5 w-5" />
               </a>
             </Button>
