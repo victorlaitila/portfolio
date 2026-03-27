@@ -1,0 +1,157 @@
+# Career Data - Source of Truth
+# All downstream artifacts (CV, portfolio, LinkedIn) are derived from this file.
+# 
+# Target system:
+#   - Items can have `targets: [cv, portfolio]` to control where they appear
+#   - Default is both [cv, portfolio] if not specified
+#   - Use `targets: [portfolio]` for portfolio-only items
+#   - Use `targets: [cv]` for CV-only items
+
+personal:
+  name: Victor Laitila
+  title: Software Engineer
+  email: viclait@gmail.com
+  phone: "+358 44 363 3883"
+  location: Helsinki
+  links:
+    github: https://github.com/victorlaitila
+    linkedin: https://linkedin.com/in/victorlaitila
+    website: null
+
+summary: |
+  Results-driven software engineer with strong full-stack experience in large-scale industrial software and
+  modern web systems. Proven ability to deliver production-quality features in fast-moving, evolving
+  environments. Backed by a strong academic foundation with top-tier GPAs and hands-on experience across
+  the full software development lifecycle.
+
+experience:
+  - company: ABB
+    title: Software Developer
+    location: Finland
+    start: 2023-05
+    end: present
+    highlights:
+      - Closed 300+ tickets across bug fixes, feature development, and refactoring in a large-scale industrial software product (Drive Composer 3)
+      - Delivered production-ready features using Vue, TypeScript, C++, Azure DevOps and Git
+      - Improved system performance, maintainability, and overall quality while reducing technical debt
+      - Designed software architecture and authored comprehensive technical documentation
+      - Delivered regular feature demos to stakeholders, accelerating feedback and alignment
+      - Worked in an international, SCRUM-based software team requiring close cross-functional collaboration
+
+  - company: Teonos Oy
+    title: Software Developer
+    location: Finland
+    start: 2022-05
+    end: 2023-03
+    highlights:
+      - Developed and maintained core functionality in an online booking system (Slotti)
+      - Implemented front-end features using Vue, TypeScript, AngularJS, Git and GitLab
+      - Contributed to a major refactoring effort, reducing technical debt and improving system performance and scalability
+
+  - company: ABB
+    title: Summer Intern
+    location: Finland
+    start: 2021-06
+    end: 2021-08
+    highlights:
+      - Different kinds of manual work with electric motors in a production chain.
+    targets: [portfolio]
+
+education:
+  - institution: Aalto University
+    degree: Software Engineering (M.Sc.)
+    field: null
+    start: 2024-09
+    end: present
+    details:
+      - "Minor in Machine Learning, Data Science and Artificial Intelligence"
+      - "Relevant coursework: Software Engineering, Software Design & Modeling, Software Architectures, Cloud Software & Systems, Software Testing & Quality Assurance"
+      - "GPA: 4.90/5.0"
+
+  - institution: Aalto University
+    degree: Automation and Robotics (B.Sc.)
+    field: null
+    start: 2021-09
+    end: 2024-05
+    details:
+      - "Minor in Computer Science"
+      - "GPA: 4.83/5.0"
+
+skills:
+  frontend:
+    - React
+    - TypeScript
+    - Vue.js
+    - AngularJS
+    - CSS
+    - Tailwind CSS
+  backend:
+    - Node.js
+    - Python
+    - SQL
+    - NoSQL
+    - C/C++
+    - Scala
+    - Java
+    - Kotlin
+  technologies:
+    - Azure DevOps
+    - Google Cloud
+    - Docker
+    - Git
+    - GitLab
+    - Terraform
+  practices:
+    - Agile Development
+    - Software Architecture
+    - Software Testing
+    - name: Robot Framework
+      targets: [portfolio]
+    - name: REST APIs
+      targets: [portfolio]
+    - name: Figma
+      targets: [portfolio]
+    - name: AI-Assisted Development
+      targets: [portfolio]
+  ai:
+    - Efficient in applying AI tools to enhance productivity in code generation, refactoring and debugging
+
+projects:
+  - name: AI Article Summarizer
+    description: A web application that extracts and summarizes content from URLs, text input, or uploaded files, providing concise summaries along with automatically generated keywords. It also includes features like saving summaries, text-to-speech playback, multi-mode summarization, and intuitive copy, download, and share options for a seamless reading experience.
+    url: https://github.com/victorlaitila/ai-article-summarizer
+    targets: [portfolio]
+    image: article-summarizer-thumbnail.png
+    tags:
+      - React
+      - TypeScript
+      - Tailwind CSS
+      - Python
+      - Docker
+      - PostgreSQL
+      - Vitest
+      - GitHub Actions
+      - Sentry (Monitoring)
+    demo: https://victorlaitila.github.io/ai-article-summarizer/
+    video: https://www.youtube.com/watch?v=lZrHd0tOBXo/
+
+  - name: Under Construction
+    description: Coming soon...
+    targets: [portfolio]
+    image: construction1.png
+
+  - name: Under Construction
+    description: Coming soon...
+    targets: [portfolio]
+    image: construction2.png
+
+additional:
+  languages:
+    - English (Fluent)
+    - Finnish (Native)
+    - Swedish (Native)
+  courses:
+    - Reserviupseerikurssi - RUK 257 (2021)
+  honors:
+    - Scholarships for good academic progress (2017, 2018, 2022, 2023, 2024)
+  references: "Available on request"

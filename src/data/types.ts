@@ -1,5 +1,8 @@
 /**
  * Career data types - matches career-engine output schema.
+ * 
+ * Target system: Items can have `targets: ['cv', 'portfolio']` to control
+ * where they appear. The portfolio filters for items with 'portfolio' target.
  */
 
 export interface PersonalLinks {
@@ -22,8 +25,8 @@ export interface Experience {
   location: string;
   start: string;
   end: string;
-  duration: string;
   highlights: string[];
+  targets?: string[];
 }
 
 export interface Education {
@@ -32,21 +35,23 @@ export interface Education {
   field: string | null;
   start: string;
   end: string;
+  targets?: string[];
 }
 
 export interface Skills {
-  frontend: string[];
-  backend: string[];
-  technologies: string[];
-  practices: string[];
+  frontend: Array<string | { name: string; targets?: string[] }>;
+  backend: Array<string | { name: string; targets?: string[] }>;
+  technologies: Array<string | { name: string; targets?: string[] }>;
+  practices: Array<string | { name: string; targets?: string[] }>;
 }
 
 export interface Project {
   name: string;
   description: string;
-  url: string | null;
-  highlights: string[];
-  // Portfolio-specific extensions (not from career-engine)
+  url?: string | null;
+  highlights?: string[];
+  targets?: string[];
+  // Portfolio-specific fields
   image?: string;
   tags?: string[];
   demo?: string;
@@ -59,26 +64,19 @@ export interface CareerData {
   experience: Experience[];
   education: Education[];
   skills: Skills;
-  projects: Project[];
+  projects?: Project[];
 }
 
 /**
  * Portfolio-specific extensions for data that career-engine doesn't manage.
- * These are merged with career.json data at runtime.
  */
-export interface ProjectAsset {
-  image: string;
-  tags: string[];
-  demo?: string;
-  video?: string;
-}
-
 export interface PortfolioExtensions {
+  tagline: string;
   about: {
     highlights: Array<{ icon: string; title: string }>;
     journey: string;
     beyondTech: string;
   };
-  // Array indexed by project position (allows different assets for same-named projects)
-  projectAssets: ProjectAsset[];
+  // Map image filenames to imported image assets
+  projectImages: Record<string, string>;
 }

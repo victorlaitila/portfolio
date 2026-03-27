@@ -2,28 +2,23 @@ import { Card } from "@/components/ui/card";
 import { ExternalLink, Github, Youtube } from "lucide-react";
 import Shimmer from "./ui/shimmer";
 import SectionHeader from "./SectionHeader";
-import { getCareerData, getPortfolioExtensions } from "@/data";
+import { getCareerData } from "@/data";
 
 // Fallback image for projects without assets
 import constructionImg from "@/assets/construction1.png";
 
 export function Projects() {
   const career = getCareerData();
-  const extensions = getPortfolioExtensions();
 
-  // Merge career data with portfolio extensions
-  const projects = career.projects.map((project, index) => {
-    const assets = extensions.projectAssets[index];
-    return {
-      title: project.name,
-      description: project.description,
-      image: assets?.image || constructionImg,
-      tags: assets?.tags || [],
-      github: project.url || undefined,
-      demo: assets?.demo,
-      video: assets?.video,
-    };
-  });
+  const projects = career.projects.map((project) => ({
+    title: project.name,
+    description: project.description,
+    image: project.image || constructionImg,
+    tags: project.tags || [],
+    github: project.url || undefined,
+    demo: project.demo,
+    video: project.video,
+  }));
 
   return (
     <section id="projects" className="py-20 relative overflow-hidden">

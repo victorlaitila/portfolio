@@ -2,10 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, ArrowDown } from "lucide-react";
 import CursorTrail from "./CursorTrail";
 import { useState, useEffect } from "react";
-import { getCareerData } from "@/data";
+import { getCareerData, getPortfolioExtensions } from "@/data";
 
 export function Hero() {
   const career = getCareerData();
+  const extensions = getPortfolioExtensions();
   const { personal } = career;
   
   const [displayedText, setDisplayedText] = useState("");
@@ -51,7 +52,7 @@ export function Hero() {
           </div>
 
           <p className="text-[11px] sm:text-xs md:text-sm tracking-widest uppercase font-bold text-muted-foreground max-w-[80vw] mx-auto leading-relaxed mb-2" style={{fontFamily: 'Orbitron, sans-serif'}}>
-            {career.summary}
+            {extensions.tagline}
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
