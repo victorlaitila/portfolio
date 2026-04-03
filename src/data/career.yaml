@@ -34,7 +34,7 @@ experience:
       - Closed 300+ tickets across bug fixes, feature development, and refactoring in a large-scale industrial software product (Drive Composer 3)
       - Delivered production-ready features using Vue, TypeScript, C++, Azure DevOps and Git
       - Improved system performance, maintainability, and overall quality while reducing technical debt
-      - Designed software architecture and authored comprehensive technical documentation
+      - Designed and contributed to software architecture decisions and authored technical documentation used by the development team
       - Delivered regular feature demos to stakeholders, accelerating feedback and alignment
       - Worked in an international, SCRUM-based software team requiring close cross-functional collaboration
 
@@ -62,7 +62,7 @@ education:
     degree: Software & Service Engineering (M.Sc.)
     field: null
     start: 2024-09
-    end: present
+    end: expected 2026-06
     details:
       - "Minor: Machine Learning, Data Science and Artificial Intelligence"
       - "Relevant Coursework: Software Engineering, Software Design & Modeling, Software Architectures, Cloud Software & Systems, Software Testing & Quality Assurance"
@@ -154,4 +154,3 @@ additional:
     - Reserviupseerikurssi - RUK 257 (2021)
   honors:
     - Scholarships for good academic progress (2017, 2018, 2022, 2023, 2024)
-  references: "References available on request"

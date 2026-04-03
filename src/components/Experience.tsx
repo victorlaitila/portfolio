@@ -14,7 +14,7 @@ function formatDate(dateStr: string): string {
 
 export function Experience() {
   const career = getCareerData();
-  const cvSrc = `${import.meta.env.BASE_URL}cv.pdf`;
+  const cvSrc = `${import.meta.env.BASE_URL}Victor-Laitila-Software-Engineer-CV.pdf`;
 
   // Map career data to display format
   const experiences = career.experience.map(exp => ({
