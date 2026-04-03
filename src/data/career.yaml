@@ -16,7 +16,7 @@ personal:
   links:
     github: https://github.com/victorlaitila
     linkedin: https://linkedin.com/in/victorlaitila
-    website: null
+    website: https://victorlaitila.github.io/portfolio
 
 summary: |
   Results-driven software engineer with strong full-stack experience in large-scale industrial software and
@@ -59,13 +59,13 @@ experience:
 
 education:
   - institution: Aalto University
-    degree: Software Engineering (M.Sc.)
+    degree: Software & Service Engineering (M.Sc.)
     field: null
     start: 2024-09
     end: present
     details:
-      - "Minor in Machine Learning, Data Science and Artificial Intelligence"
-      - "Relevant coursework: Software Engineering, Software Design & Modeling, Software Architectures, Cloud Software & Systems, Software Testing & Quality Assurance"
+      - "Minor: Machine Learning, Data Science and Artificial Intelligence"
+      - "Relevant Coursework: Software Engineering, Software Design & Modeling, Software Architectures, Cloud Software & Systems, Software Testing & Quality Assurance"
       - "GPA: 4.90/5.0"
 
   - institution: Aalto University
@@ -74,7 +74,7 @@ education:
     start: 2021-09
     end: 2024-05
     details:
-      - "Minor in Computer Science"
+      - "Minor: Computer Science"
       - "GPA: 4.83/5.0"
 
 skills:
@@ -154,4 +154,4 @@ additional:
     - Reserviupseerikurssi - RUK 257 (2021)
   honors:
     - Scholarships for good academic progress (2017, 2018, 2022, 2023, 2024)
-  references: "Available on request"
+  references: "References available on request"
