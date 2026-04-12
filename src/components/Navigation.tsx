@@ -1,4 +1,4 @@
-import { Home, User, Code, FolderKanban, Briefcase, Mail } from "lucide-react";
+import { Home, User, Code, FolderKanban, Briefcase, GraduationCap, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navLinks = [
@@ -7,6 +7,7 @@ const navLinks = [
   { href: "#skills", label: "Skills", icon: Code },
   { href: "#projects", label: "Projects", icon: FolderKanban },
   { href: "#experience", label: "Experience", icon: Briefcase },
+  { href: "#education", label: "Education", icon: GraduationCap },
   { href: "#contact", label: "Contact", icon: Mail },
 ];
 

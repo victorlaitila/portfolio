@@ -35,6 +35,7 @@ export interface Education {
   field: string | null;
   start: string;
   end: string;
+  details?: string[];
   targets?: string[];
 }
 
