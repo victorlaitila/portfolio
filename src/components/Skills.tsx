@@ -21,7 +21,7 @@ export function Skills() {
       skills: skills.backend,
     },
     {
-      title: "Cloud & DevOps",
+      title: "Cloud, Testing & DevOps",
       icon: CloudUpload,
       skills: skills.technologies,
     },
@@ -57,15 +57,18 @@ export function Skills() {
                   
                   {/* Skills badges */}
                   <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill) => (
+                    {category.skills.map((skill) => {
+                      const skillName = typeof skill === "string" ? skill : skill.name;
+                      return (
                       <Badge 
-                        key={skill}
+                        key={skillName}
                         variant="secondary"
                         className="px-4 py-2 text-sm font-medium bg-background/80 hover:bg-background/80 border border-border/50 cursor-default"
                       >
-                        {skill}
+                        {skillName}
                       </Badge>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </Card>

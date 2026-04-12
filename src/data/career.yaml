@@ -99,16 +99,17 @@ skills:
     - Google Cloud
     - Docker
     - Git
-    - GitLab
+    - GitHub Actions
     - Terraform
+    - Robot Framework
+    - name: Vitest
+      targets: [portfolio]
+    - name: Jest
+      targets: [portfolio]
   practices:
     - Agile Development
     - Software Architecture
-    - Software Testing
-    - name: Robot Framework
-      targets: [portfolio]
-    - name: REST APIs
-      targets: [portfolio]
+    - REST APIs
     - name: Figma
       targets: [portfolio]
     - name: AI-Assisted Development
