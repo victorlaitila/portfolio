@@ -32,7 +32,7 @@ experience:
     end: present
     highlights:
       - Closed 300+ tickets across bug fixes, feature development, and refactoring in a large-scale industrial software product (Drive Composer 3)
-      - Delivered production-ready features using Vue, TypeScript, C++, Azure DevOps and Git
+      - Delivered production-ready features using Vue, TypeScript, C#, Azure DevOps and Git
       - Improved system performance, maintainability, and overall quality while reducing technical debt
       - Designed and contributed to software architecture decisions and authored technical documentation used by the development team
       - Delivered regular feature demos to stakeholders, accelerating feedback and alignment
@@ -69,7 +69,7 @@ education:
       - "GPA: 4.90/5.0"
 
   - institution: Aalto University
-    degree: Automation and Robotics (B.Sc.)
+    degree: Automation & Robotics (B.Sc.)
     field: null
     start: 2021-09
     end: 2024-05
@@ -90,7 +90,7 @@ skills:
     - Python
     - SQL
     - NoSQL
-    - C/C++
+    - C/C#
     - Scala
     - Java
     - Kotlin

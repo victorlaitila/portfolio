@@ -5,6 +5,46 @@ import Shimmer from "./ui/shimmer";
 import SectionHeader from "./SectionHeader";
 import { getCareerData } from "@/data";
 
+const technologyKeywords = [
+  "Azure DevOps",
+  "TypeScript",
+  "AngularJS",
+  "GitLab",
+  "C#",
+  "Vue.js",
+  "SCRUM",
+  "Vue",
+  "Git",
+];
+
+const technologyPattern = new RegExp(
+  `(${technologyKeywords
+    .sort((a, b) => b.length - a.length)
+    .map((keyword) => keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("|")})`,
+  "gi"
+);
+
+function renderAchievementWithTechHighlights(text: string) {
+  const chunks = text.split(technologyPattern);
+
+  return chunks.map((chunk, index) => {
+    const isTechnology = technologyKeywords.some(
+      (keyword) => keyword.toLowerCase() === chunk.toLowerCase()
+    );
+
+    if (!isTechnology) {
+      return <span key={`${chunk}-${index}`}>{chunk}</span>;
+    }
+
+    return (
+      <strong key={`${chunk}-${index}`} className="font-semibold text-foreground">
+        {chunk}
+      </strong>
+    );
+  });
+}
+
 // Format YYYY-MM to human readable
 function formatDate(dateStr: string): string {
   const [year, month] = dateStr.split('-');
@@ -63,7 +103,7 @@ export function Experience() {
                           className="flex items-start gap-2 text-sm text-muted-foreground"
                         >
                           <span className="text-accent">▹</span>
-                          <span>{achievement}</span>
+                          <span>{renderAchievementWithTechHighlights(achievement)}</span>
                         </li>
                       ))}
                     </ul>

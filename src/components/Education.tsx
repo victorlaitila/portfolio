@@ -13,7 +13,7 @@ function formatDate(dateStr: string): string {
 function formatEndDate(end: string): string {
   if (end === "present") return "Present";
   if (end.startsWith("expected ")) {
-    return `Expected ${formatDate(end.replace("expected ", ""))}`;
+    return `Exp. ${formatDate(end.replace("expected ", ""))}`;
   }
   return formatDate(end);
 }
@@ -52,10 +52,10 @@ export function Education() {
                           <GraduationCap className="h-5 w-5 text-primary relative top-1 md:hidden" />
                           <h3 className="text-xl font-bold">{edu.degree}</h3>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-0 mt-2">
                           <p className="text-muted-foreground">{edu.institution}</p>
-                          <span aria-hidden className="h-4 w-px m-2 bg-muted-foreground" />
-                          <p className="text-muted-foreground">{edu.period}</p>
+                          <span aria-hidden className="hidden sm:block h-4 w-px m-2 bg-muted-foreground" />
+                          <p className="text-muted-foreground sm:whitespace-nowrap">{edu.period}</p>
                         </div>
                       </div>
                     </div>
