@@ -115,7 +115,7 @@ skills:
     - name: AI-Assisted Development
       targets: [portfolio]
   ai:
-    - Efficient in applying AI tools to enhance productivity in code generation, refactoring and debugging
+    - Efficient in AI-assisted development using tools such as GitHub Copilot, Claude, and Cursor
 
 projects:
   - name: AI Article Summarizer
@@ -152,6 +152,6 @@ additional:
     - Finnish (Native)
     - Swedish (Native)
   courses:
-    - Reserviupseerikurssi - RUK 257 (2021)
+    - Reserviupseerikurssi - RUK 257 (Finnish Reserve Officer Training, 2021)
   honors:
     - Scholarships for good academic progress (2017, 2018, 2022, 2023, 2024)
