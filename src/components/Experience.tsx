@@ -10,7 +10,7 @@ const technologyKeywords = [
   "TypeScript",
   "AngularJS",
   "GitLab",
-  "C#",
+  "C#/.NET",
   "Vue.js",
   "SCRUM",
   "Vue",
