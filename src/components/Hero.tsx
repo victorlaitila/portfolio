@@ -25,7 +25,7 @@ export function Hero() {
     }, typingSpeed);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [fullText]);
   return (
     <section 
       id="home" 

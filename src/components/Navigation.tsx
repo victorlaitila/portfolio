@@ -12,7 +12,7 @@ const navLinks = [
 ];
 
 export function Navigation() {
-  const logoSrc = `${import.meta.env.BASE_URL}vldev.png`;
+  const logoSrc = `${import.meta.env.BASE_URL}vl-logo.png`;
   const [activeSection, setActiveSection] = useState("home");
 
   const handleNavClick = (sectionId: string) => {
@@ -39,7 +39,7 @@ export function Navigation() {
 
     handleScroll();
     
-    let scrollTimeout: NodeJS.Timeout;
+    let scrollTimeout: ReturnType<typeof setTimeout>;
     const debouncedScroll = () => {
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(handleScroll, 50);
@@ -57,7 +57,11 @@ export function Navigation() {
       <div className="container px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
           <a href="#home">
-            <img src={logoSrc} alt="Logo" className="relative right-6 top-1 brightness-150 w-40 md:w-48" />
+            <img
+              src={logoSrc}
+              alt="Logo"
+              className="h-20 md:h-24 w-auto object-contain"
+            />
           </a>
           
           <div className="flex items-center gap-4 sm:gap-6 mr-2">

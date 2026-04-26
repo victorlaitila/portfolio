@@ -2,7 +2,7 @@ import Lottie from "lottie-react";
 import bgAnimation from "@/assets/bg-animation.json";
 import heroBgDark from "@/assets/hero-bg-dark.jpg";
 
-export function BackgroundAnimation({ overlayColor = "bg-black/75" }) {
+export function BackgroundAnimation({ overlayColor = "bg-black/80" }) {
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
       <div 
