@@ -4,16 +4,13 @@ import Shimmer from "./ui/shimmer";
 import SectionHeader from "./SectionHeader";
 import { getCareerData } from "@/data";
 
-// Fallback image for projects without assets
-import constructionImg from "@/assets/construction1.png";
-
 export function Projects() {
   const career = getCareerData();
 
   const projects = career.projects.map((project) => ({
     title: project.name,
     description: project.description,
-    image: project.image || constructionImg,
+    image: project.image,
     tags: project.tags || [],
     github: project.url || undefined,
     demo: project.demo,
@@ -40,6 +37,14 @@ export function Projects() {
                       alt={project.title}
                       className="w-full h-full object-cover"
                     />
+                    {/* TODO: Remove this badge once the project is out of beta */}
+                    {project.title === "Dependency Risk Scanner" && (
+                      <div className="absolute top-2 right-2">
+                        <span className="text-xs px-2 py-1 bg-primary text-primary-foreground rounded-md">
+                          Beta
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </a>
 

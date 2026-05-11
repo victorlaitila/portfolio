@@ -12,7 +12,7 @@
 import type { PortfolioExtensions } from './types';
 
 import project1 from '@/assets/article-summarizer-thumbnail.png';
-import project2 from '@/assets/construction1.png';
+import project2 from '@/assets/dependency-risk-scanner-thumbnail.png';
 import project3 from '@/assets/construction2.png';
 
 export const portfolioExtensions: PortfolioExtensions = {
@@ -30,7 +30,7 @@ export const portfolioExtensions: PortfolioExtensions = {
   // Map image filenames (from career.yaml) to imported assets
   projectImages: {
     'article-summarizer-thumbnail.png': project1,
-    'construction1.png': project2,
+    'dependency-risk-scanner-thumbnail.png': project2,
     'construction2.png': project3,
   },
 };
