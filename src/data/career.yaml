@@ -139,7 +139,7 @@ projects:
   - name: Dependency Risk Scanner
     url: https://github.com/victorlaitila/dependency-risk-scanner
     demo: https://victorlaitila.github.io/dependency-risk-scanner/
-    description: A full-stack web application that helps developers understand the security and structural risks within their project dependencies. Users can upload their lock files to visualize dependency relationships, identify high-impact packages, and assess vulnerability exposure. The app combines graph-based impact analysis with contextual AI insights to provide developers with both technical data and intelligent explanations for dependency risk decisions.
+    description: A full-stack web application that helps developers understand the security and structural risks within their project dependencies. Users upload lockfiles to visualize dependency relationships, identify high-impact packages, and assess known vulnerability exposure. The app combines graph-based impact analysis with contextual AI insights to provide both technical data and concise explanations for dependency-risk decisions.
     targets: [portfolio]
     image: dependency-risk-scanner-thumbnail.png
     tags:
@@ -147,6 +147,7 @@ projects:
       - TypeScript
       - Tailwind CSS
       - Node.js (Fastify)
+      - Redis (Upstash)
       - Vitest
       - GitHub Actions
 
