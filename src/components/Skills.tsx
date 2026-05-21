@@ -16,7 +16,7 @@ export function Skills() {
       skills: skills.frontend,
     },
     {
-      title: "Backend",
+      title: "Backend & Data",
       icon: DatabaseBackup,
       skills: skills.backend,
     },
@@ -26,7 +26,7 @@ export function Skills() {
       skills: skills.technologies,
     },
     {
-      title: "Tools & Practices",
+      title: "Engineering Practices",
       icon: Wrench,
       skills: skills.practices,
     },

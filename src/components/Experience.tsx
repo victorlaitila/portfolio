@@ -12,7 +12,7 @@ const technologyKeywords = [
   "GitLab",
   "C#/.NET",
   "Vue.js",
-  "SCRUM",
+  "Scrum",
   "Vue",
   "Git",
 ];

@@ -32,11 +32,11 @@ experience:
     end: present
     highlights:
       - Closed 300+ tickets across bug fixes, feature development, and refactoring in a large-scale industrial software product (Drive Composer 3)
-      - Delivered production-ready features using Vue, TypeScript, C#/.NET, Azure DevOps and Git
-      - Improved system performance, maintainability, and overall quality while reducing technical debt
-      - Designed and contributed to software architecture decisions and authored technical documentation used by the development team
-      - Delivered regular feature demos to stakeholders, accelerating feedback and alignment
-      - Worked in an international, SCRUM-based software team requiring close cross-functional collaboration
+      - Built and shipped production-ready software using Vue, TypeScript, C#/.NET, Azure DevOps, and Git
+      - Owned complex full-stack features, including technical design and architectural decisions
+      - Improved system performance and maintainability through core module optimization and major refactoring, reducing latency, memory usage, and technical debt
+      - Contributed to software architecture discussions and produced technical documentation supporting team-wide development standards
+      - Worked in an international, Scrum-based team, delivering regular stakeholder demos and collaborating closely across cross-functional teams
 
   - company: Teonos Oy
     title: Software Developer
@@ -45,7 +45,7 @@ experience:
     end: 2023-03
     highlights:
       - Developed and maintained core functionality in an online booking system (Slotti)
-      - Implemented front-end features using Vue, TypeScript, AngularJS, Git and GitLab
+      - Implemented production-ready front-end features using Vue, TypeScript, AngularJS, Git and GitLab
       - Contributed to a major refactoring effort, reducing technical debt and improving system performance and scalability
 
   - company: ABB
