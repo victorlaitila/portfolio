@@ -284,7 +284,7 @@ experience:
       - Owned complex full-stack features, including technical design and architectural decisions
       - Improved system performance and maintainability through core module optimization and major refactoring, reducing latency, memory usage, and technical debt
       - Contributed to software architecture discussions and produced technical documentation supporting team-wide development standards
-      - Worked in an international, Scrum-based team, delivering regular stakeholder demos and collaborating closely across cross-functional teams
+      - Worked in an international Scrum-based team, delivering regular demos to stakeholders and collaborating closely across cross-functional teams
 
   - company: Teonos Oy
     title: Software Developer
