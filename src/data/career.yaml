@@ -25,18 +25,26 @@ summary: |
   the full software development lifecycle.
 
 experience:
+  - company: Gofore
+    title: Software Consultant
+    location: Finland
+    start: 2026-06
+    end: present
+    highlights:
+      - Continuing development of ABB's Drive Composer 3 as a software consultant at Gofore.
+
   - company: ABB
     title: Software Developer
     location: Finland
     start: 2023-05
-    end: present
+    end: 2026-06
     highlights:
-      - Closed 300+ tickets across bug fixes, feature development, and refactoring in a large-scale industrial software product (Drive Composer 3)
-      - Built and shipped production-ready software using Vue, TypeScript, C#/.NET, Azure DevOps, and Git
-      - Owned complex full-stack features, including technical design and architectural decisions
-      - Improved system performance and maintainability through core module optimization and major refactoring, reducing latency, memory usage, and technical debt
-      - Contributed to software architecture discussions and produced technical documentation supporting team-wide development standards
-      - Worked in an international Scrum-based team, delivering regular demos to stakeholders and collaborating closely across cross-functional teams
+      - Closed 300+ tickets across bug fixes, feature development, and refactoring in a large-scale industrial software product (Drive Composer 3).
+      - Built and shipped production-ready software using Vue, TypeScript, C#/.NET, Azure DevOps, and Git.
+      - Owned complex full-stack features, including technical design and architectural decisions.
+      - Improved system performance and maintainability through core module optimization and major refactoring, reducing latency, memory usage, and technical debt.
+      - Contributed to software architecture discussions and produced technical documentation supporting team-wide development standards.
+      - Worked in an international Scrum-based team, delivering regular demos to stakeholders and collaborating closely across cross-functional teams.
 
   - company: Teonos Oy
     title: Software Developer
@@ -44,9 +52,9 @@ experience:
     start: 2022-05
     end: 2023-03
     highlights:
-      - Developed and maintained core functionality in an online booking system (Slotti)
-      - Implemented production-ready front-end features using Vue, TypeScript, AngularJS, Git and GitLab
-      - Contributed to a major refactoring effort, reducing technical debt and improving system performance and scalability
+      - Developed and maintained core functionality in an online booking system (Slotti).
+      - Implemented production-ready front-end features using Vue, TypeScript, AngularJS, Git and GitLab.
+      - Contributed to a major refactoring effort, reducing technical debt and improving system performance and scalability.
 
   - company: ABB
     title: Summer Intern
@@ -62,11 +70,12 @@ education:
     degree: Software & Service Engineering (M.Sc.)
     field: null
     start: 2024-09
-    end: expected 2026-06
+    end: 2026-07
     details:
       - "Minor: Machine Learning, Data Science and Artificial Intelligence"
       - "Relevant Coursework: Software Engineering, Software Design & Modeling, Software Architectures, Cloud Software & Systems, Software Testing & Quality Assurance"
-      - "GPA: 4.90/5.0"
+      - "GPA: 4.86/5.0"
+      - "Thesis: 'Design, Implementation, and Evaluation of an On-Device Voice User Interface for Industrial Drive Control' - 5/5"
 
   - institution: Aalto University
     degree: Automation & Robotics (B.Sc.)
@@ -76,6 +85,7 @@ education:
     details:
       - "Minor: Computer Science"
       - "GPA: 4.83/5.0"
+      - "Thesis: 'Visual-language maps and their applications in mobile robotics' - 5/5"
 
 skills:
   frontend:
@@ -92,20 +102,15 @@ skills:
     - NoSQL
     - C#/.NET
     - Scala
-    - Java
-    - Kotlin
   technologies:
     - Azure DevOps
     - Google Cloud
+    - AWS
     - Docker
     - Git
     - GitHub Actions
     - Terraform
     - Robot Framework
-    - name: Vitest
-      targets: [portfolio]
-    - name: Jest
-      targets: [portfolio]
   practices:
     - Agile Development
     - Software Architecture
