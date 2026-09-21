@@ -52,9 +52,9 @@ export function Education() {
                           <GraduationCap className="h-5 w-5 text-primary relative top-1 md:hidden" />
                           <h3 className="text-xl font-bold">{edu.degree}</h3>
                         </div>
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-0 mt-2">
+                        <div className="flex flex-row sm:items-center gap-1 sm:gap-0 mt-2">
                           <p className="text-muted-foreground">{edu.institution}</p>
-                          <span aria-hidden className="hidden sm:block h-4 w-px m-2 bg-muted-foreground" />
+                          <span aria-hidden className="h-4 w-px m-2 bg-muted-foreground" />
                           <p className="text-muted-foreground sm:whitespace-nowrap">{edu.period}</p>
                         </div>
                       </div>
@@ -68,7 +68,7 @@ export function Education() {
                             className="flex items-start gap-2 text-sm text-muted-foreground"
                           >
                             <span className="text-accent">▹</span>
-                            <span>{detail}</span>
+                            <span>{detail.toString()}</span>
                           </li>
                         ))}
                       </ul>

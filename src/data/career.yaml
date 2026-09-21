@@ -73,9 +73,9 @@ education:
     end: 2026-07
     details:
       - "Minor: Machine Learning, Data Science and Artificial Intelligence"
-      - "Relevant Coursework: Software Engineering, Software Design & Modeling, Software Architectures, Cloud Software & Systems, Software Testing & Quality Assurance"
       - "GPA: 4.86/5.0"
-      - "Thesis: 'Design, Implementation, and Evaluation of an On-Device Voice User Interface for Industrial Drive Control' - 5/5"
+      - text: "Thesis: 'Design, Implementation, and Evaluation of an On-Device Voice User Interface for Industrial Drive Control' - 5/5"
+        targets: [portfolio]
 
   - institution: Aalto University
     degree: Automation & Robotics (B.Sc.)
@@ -85,7 +85,8 @@ education:
     details:
       - "Minor: Computer Science"
       - "GPA: 4.83/5.0"
-      - "Thesis: 'Visual-language maps and their applications in mobile robotics' - 5/5"
+      - text: "Thesis: 'Visual-language maps and their applications in mobile robotics' - 5/5"
+        targets: [portfolio]
 
 skills:
   frontend:
@@ -109,18 +110,16 @@ skills:
     - Docker
     - Git
     - GitHub Actions
-    - Terraform
     - Robot Framework
   practices:
     - Agile Development
     - Software Architecture
     - REST APIs
     - name: Figma
-      targets: [portfolio]
     - name: AI-Assisted Development
       targets: [portfolio]
   ai:
-    - Efficient in AI-assisted development using tools such as GitHub Copilot, Claude, and Cursor
+    - Efficient in AI-driven development using tools such as GitHub Copilot, Claude Code, and Codex
 
 projects:
   - name: AI Article Summarizer

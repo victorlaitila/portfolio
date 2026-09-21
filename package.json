@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "generate:cv": "cv-generator/generate-cv.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

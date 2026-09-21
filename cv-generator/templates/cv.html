@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.personal.name }} - CV</title>
+    <style>
+        @page {
+            /* Use equal top and bottom margins for consistent spacing */
+            margin: 0.75cm 1.5cm 0.75cm;
+            size: A4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --separator-width: 1px;
+            --separator-color: #333;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 9.5pt;
+            line-height: 1.4;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 24pt;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 2pt;
+            margin-bottom: 2.5pt;
+        }
+
+        h2 {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 1pt;
+            margin-top: 7.5pt;
+            margin-bottom: 7.5pt;
+            border-top: var(--separator-width) solid var(--separator-color);
+            padding-top: 5pt;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 5pt;
+        }
+
+        .title {
+            font-size: 14pt;
+            font-weight: 600;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1pt;
+            margin-bottom: 5pt;
+        }
+
+        .contact {
+            font-size: 9pt;
+            color: #444;
+        }
+
+        .contact a {
+            color: #444;
+            text-decoration: none;
+        }
+
+        .header-separator {
+            border: none;
+            border-top: var(--separator-width) solid var(--separator-color);
+            margin-top: 5pt;
+            margin-bottom: 0;
+        }
+
+        .summary {
+            text-align: justify;
+            margin: 5pt 0;
+        }
+
+        .entry {
+            margin-bottom: 9pt;
+        }
+
+        .entry-header {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2.5pt;
+        }
+
+        .entry-header td {
+            padding: 0;
+            vertical-align: baseline;
+        }
+
+        .entry-title {
+            font-size: 10pt;
+            font-weight: 700;
+        }
+
+        .entry-date {
+            font-size: 9pt;
+            font-weight: 600;
+            color: #333;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        ul {
+            margin-left: 14pt;
+            margin-top: 2.5pt;
+        }
+
+        li {
+            margin-bottom: 1.5pt;
+        }
+
+        li:empty {
+            display: none;
+            list-style: none;
+        }
+
+        .skills-section {
+            margin-bottom: 5pt;
+        }
+
+        .skill-line {
+            margin-bottom: 2.5pt;
+        }
+
+        .skill-label {
+            font-weight: 600;
+        }
+
+        .education-details {
+            margin-top: 2.5pt;
+        }
+
+        .detail-line {
+            margin-bottom: 1.5pt;
+        }
+
+        .detail-label {
+            font-weight: 600;
+        }
+
+        .additional-section {
+            margin-top: 8.5pt;
+        }
+
+        .additional-item {
+            margin-bottom: 2.5pt;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>{{ data.personal.name }}</h1>
+        <div class="title">{{ data.personal.title }}</div>
+        <div class="contact">
+            {{ data.personal.location }}
+            · {{ data.personal.email }}
+            {% if data.personal.phone %}· {{ data.personal.phone }}{% endif %}
+            {% if data.personal.links.linkedin %}· <a href="{{ data.personal.links.linkedin }}">{{ data.personal.links.linkedin | replace('https://', '') }}</a>{% endif %}
+            {% if data.personal.links.website %}· <a href="{{ data.personal.links.website }}">{{ data.personal.links.website | replace('https://', '') }}</a>{% endif %}
+        </div>
+        <hr class="header-separator">
+    </header>
+
+    <p class="summary">{{ data.summary | trim }}</p>
+
+    <section>
+        <h2>Professional Experience</h2>
+        {% for exp in data.experience %}
+        <div class="entry">
+            <table class="entry-header">
+                <tr>
+                    <td class="entry-title">{{ exp.title }} - {{ exp.company }}</td>
+                    <td class="entry-date">{{ exp.start | format_date }} - {{ exp.end | format_date }}</td>
+                </tr>
+            </table>
+            {% set valid_highlights = exp.highlights | select('string') | map('trim') | reject('equalto', '') | list %}
+            {% if valid_highlights | length > 0 %}
+            <ul>
+                {% for highlight in valid_highlights %}
+                <li>{{ highlight | bold_tech }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </section>
+
+    {% if data.education %}
+    <section>
+        <h2>Education</h2>
+        {% for edu in data.education %}
+        <div class="entry">
+            <table class="entry-header">
+                <tr>
+                    <td class="entry-title">{{ edu.degree }} - {{ edu.institution }}</td>
+                    <td class="entry-date">{{ edu.start | format_date }} - {{ edu.end | format_date }}</td>
+                </tr>
+            </table>
+            {% set valid_details = edu.details | select('string') | map('trim') | reject('equalto', '') | list %}
+            {% if valid_details | length > 0 %}
+            <div class="education-details">
+                {% for detail in valid_details %}
+                <div class="detail-line">
+                    {% if ':' in detail %}
+                    <span class="detail-label">{{ detail.split(':')[0] }}:</span>{{ detail.split(':')[1] }}
+                    {% else %}
+                    {{ detail }}
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </section>
+    {% endif %}
+
+    <section>
+        <h2>Skills</h2>
+        <div class="skills-section">
+            {% if data.skills.frontend %}
+            <div class="skill-line">
+                <span class="skill-label">Frontend:</span>
+                {% for skill in data.skills.frontend %}{{ skill.name if skill is mapping else skill }}{% if not loop.last %}, {% endif %}{% endfor %}
+            </div>
+            {% endif %}
+            {% if data.skills.backend %}
+            <div class="skill-line">
+                <span class="skill-label">Backend & Data:</span>
+                {% for skill in data.skills.backend %}{{ skill.name if skill is mapping else skill }}{% if not loop.last %}, {% endif %}{% endfor %}
+            </div>
+            {% endif %}
+            {% if data.skills.technologies %}
+            <div class="skill-line">
+                <span class="skill-label">Cloud, Testing & DevOps:</span>
+                {% for skill in data.skills.technologies %}{{ skill.name if skill is mapping else skill }}{% if not loop.last %}, {% endif %}{% endfor %}
+            </div>
+            {% endif %}
+            {% if data.skills.practices %}
+            <div class="skill-line">
+                <span class="skill-label">Engineering Practices:</span>
+                {% for skill in data.skills.practices %}{{ skill.name if skill is mapping else skill }}{% if not loop.last %}, {% endif %}{% endfor %}
+            </div>
+            {% endif %}
+            {% if data.skills.ai %}
+            <div class="skill-line">
+                <span class="skill-label">AI:</span>
+                {% for skill in data.skills.ai %}{{ skill.name if skill is mapping else skill }}{% if not loop.last %}, {% endif %}{% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    {% if data.additional %}
+    <section>
+        <h2>Additional Information</h2>
+        <div class="additional-section">
+            {% if data.additional.languages %}
+            <div class="additional-item"><span class="skill-label">Languages:</span> {{ data.additional.languages | join(', ') }}</div>
+            {% endif %}
+            {% if data.additional.courses %}
+            <div class="additional-item"><span class="skill-label">Courses:</span> {{ data.additional.courses | join(', ') }}</div>
+            {% endif %}
+            {% if data.additional.honors %}
+            <div class="additional-item"><span class="skill-label">Honors/Awards:</span> {{ data.additional.honors | join(', ') }}</div>
+            {% endif %}
+            {% if data.additional.references %}
+            <div class="additional-item">{{ data.additional.references }}</div>
+            {% endif %}
+        </div>
+    </section>
+    {% endif %}
+</body>
+</html>

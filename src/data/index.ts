@@ -1,10 +1,9 @@
 /**
- * Career data loader - loads data from career.yaml (synced by career-engine).
- * 
- * The portfolio reads from a YAML file that career-engine copies
- * during the sync process. This keeps the portfolio in sync with the
- * canonical career.yaml source of truth.
- * 
+ * Career data loader - loads data from career.yaml.
+ *
+ * career.yaml is the canonical source of truth for both this site and the
+ * CV PDF (generated via `npm run generate:cv`, see cv-generator/).
+ *
  * Target filtering: Items with `targets: [portfolio]` or `targets: [cv, portfolio]`
  * are included. Items with only `targets: [cv]` are excluded.
  */
@@ -44,6 +43,24 @@ function filterSkills(skills: Array<string | { name: string; targets?: string[] 
 }
 
 /**
+ * Get detail text from a detail item (can be string or object).
+ */
+function getDetailText(detail: string | { text: string; targets?: string[] }): string | null {
+  if (typeof detail === 'string') return detail;
+  if (!hasPortfolioTarget(detail.targets)) return null;
+  return detail.text;
+}
+
+/**
+ * Filter a details array for portfolio target and extract text.
+ */
+function filterDetails(details?: Array<string | { text: string; targets?: string[] }>): string[] {
+  return (details || [])
+    .map(getDetailText)
+    .filter((text): text is string => text !== null);
+}
+
+/**
  * Get the full career data filtered for portfolio and with images resolved.
  */
 export function getCareerData(): CareerData & { projects: Project[] } {
@@ -51,9 +68,10 @@ export function getCareerData(): CareerData & { projects: Project[] } {
   const experience = rawCareerData.experience
     .filter(exp => hasPortfolioTarget(exp.targets));
 
-  // Filter education for portfolio target
+  // Filter education for portfolio target, and their details similarly
   const education = rawCareerData.education
-    .filter(edu => hasPortfolioTarget(edu.targets));
+    .filter(edu => hasPortfolioTarget(edu.targets))
+    .map(edu => ({ ...edu, details: filterDetails(edu.details) }));
 
   // Filter skills for portfolio target
   const skills = {

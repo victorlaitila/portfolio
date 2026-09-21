@@ -1,8 +1,9 @@
 /**
- * Career data types - matches career-engine output schema.
- * 
+ * Career data types - matches career.yaml and cv-generator's schema.
+ *
  * Target system: Items can have `targets: ['cv', 'portfolio']` to control
- * where they appear. The portfolio filters for items with 'portfolio' target.
+ * where they appear. The portfolio filters for items with 'portfolio' target;
+ * cv-generator filters for items with 'cv' target.
  */
 
 export interface PersonalLinks {
@@ -35,7 +36,7 @@ export interface Education {
   field: string | null;
   start: string;
   end: string;
-  details?: string[];
+  details?: Array<string | { text: string; targets?: string[] }>;
   targets?: string[];
 }
 
