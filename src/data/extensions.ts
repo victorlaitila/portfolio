@@ -13,7 +13,7 @@ import type { PortfolioExtensions } from './types';
 
 import project1 from '@/assets/article-summarizer-thumbnail.png';
 import project2 from '@/assets/dependency-risk-scanner-thumbnail.png';
-import project3 from '@/assets/construction2.png';
+import project3 from '@/assets/sound-atlas-thumbnail.png';
 
 export const portfolioExtensions: PortfolioExtensions = {
   tagline: "I build exceptional digital experiences with modern technologies - passionate about creating elegant solutions to complex problems.",
@@ -31,6 +31,6 @@ export const portfolioExtensions: PortfolioExtensions = {
   projectImages: {
     'article-summarizer-thumbnail.png': project1,
     'dependency-risk-scanner-thumbnail.png': project2,
-    'construction2.png': project3,
+    'sound-atlas-thumbnail.png': project3,
   },
 };

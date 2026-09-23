@@ -155,10 +155,21 @@ projects:
       - Vitest
       - GitHub Actions
 
-  - name: Under Construction
-    description: Coming soon...
+  - name: SoundAtlas
+    description: A web application that lets users explore the world through music, playing a curated soundtrack preview for whichever country they click on an interactive map. Each click reveals a track chosen to capture that country's musical character, giving users a fast, playful way to browse the globe by sound. The app draws from a curated dataset sourced from iTunes to ensure every country plays a consistent, high-quality track instead of a random or irrelevant result.
+    url: https://github.com/victorlaitila/sound-atlas
     targets: [portfolio]
-    image: construction2.png
+    image: sound-atlas-thumbnail.png
+    tags:
+      - React
+      - TypeScript
+      - Tailwind CSS
+      - Next.js
+      - MapLibre GL
+      - AWS (Lambda, DynamoDB)
+      - Vitest
+      - GitHub Actions
+    video: https://www.youtube.com/watch?v=YKBDeGWDreQ
 
 additional:
   languages:
