@@ -4,6 +4,7 @@ import { Wrench, DatabaseBackup, SquareCode, CloudUpload } from "lucide-react";
 import Shimmer from "./ui/shimmer";
 import SectionHeader from "./SectionHeader";
 import { getCareerData } from "@/data";
+import { getSkillIcon } from "@/data/skillIcons";
 
 export function Skills() {
   const career = getCareerData();
@@ -59,12 +60,14 @@ export function Skills() {
                   <div className="flex flex-wrap gap-2">
                     {category.skills.map((skill) => {
                       const skillName = typeof skill === "string" ? skill : skill.name;
+                      const SkillIcon = getSkillIcon(skillName);
                       return (
-                      <Badge 
+                      <Badge
                         key={skillName}
                         variant="secondary"
-                        className="px-4 py-2 text-sm font-medium bg-background/80 hover:bg-background/80 border border-border/50 cursor-default"
+                        className="gap-1.5 px-4 py-2 text-sm font-medium bg-background/80 hover:bg-background/80 border border-border/50 cursor-default"
                       >
+                        {SkillIcon && <SkillIcon className="h-3.5 w-3.5 shrink-0 opacity-80" />}
                         {skillName}
                       </Badge>
                       );
