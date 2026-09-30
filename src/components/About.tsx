@@ -3,7 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { Puzzle, Users, Code2, Brain, Footprints, Dumbbell } from "lucide-react";
 import Shimmer from "./ui/shimmer";
 import SectionHeader from "./SectionHeader";
+import { SectionBackground } from "./SectionBackground";
 import { getPortfolioExtensions } from "@/data";
+import backgroundSections from "@/assets/background-sections.png";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Code2,
@@ -23,6 +25,7 @@ export function About() {
 
   return (
     <section id="about" className="py-20 relative overflow-hidden ">
+      <SectionBackground src={backgroundSections} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           <SectionHeader title="About Me" />

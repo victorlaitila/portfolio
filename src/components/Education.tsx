@@ -2,7 +2,9 @@ import { Card } from "@/components/ui/card";
 import { GraduationCap } from "lucide-react";
 import Shimmer from "./ui/shimmer";
 import SectionHeader from "./SectionHeader";
+import { SectionBackground } from "./SectionBackground";
 import { getCareerData } from "@/data";
+import backgroundSections from "@/assets/background-sections.png";
 
 function formatDate(dateStr: string): string {
   const [year, month] = dateStr.split("-");
@@ -30,7 +32,8 @@ export function Education() {
 
   return (
     <section id="education" className="py-20 relative overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionBackground src={backgroundSections} />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           <SectionHeader title="Education" />
 

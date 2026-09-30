@@ -3,8 +3,10 @@ import { Badge } from "@/components/ui/badge";
 import { Wrench, DatabaseBackup, SquareCode, CloudUpload } from "lucide-react";
 import Shimmer from "./ui/shimmer";
 import SectionHeader from "./SectionHeader";
+import { SectionBackground } from "./SectionBackground";
 import { getCareerData } from "@/data";
 import { getSkillIcon } from "@/data/skillIcons";
+import backgroundSections from "@/assets/background-sections.png";
 
 export function Skills() {
   const career = getCareerData();
@@ -35,7 +37,7 @@ export function Skills() {
 
   return (
     <section id="skills" className="py-20 relative overflow-hidden">
-    
+      <SectionBackground src={backgroundSections} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           <SectionHeader title="Skills & Tech Stack" />

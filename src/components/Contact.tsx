@@ -7,7 +7,9 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import { useToast } from "@/hooks/useToast";
 import emailjs from 'emailjs-com';
 import SectionHeader from "./SectionHeader";
+import { SectionBackground } from "./SectionBackground";
 import { getCareerData } from "@/data";
+import backgroundSections from "@/assets/background-sections.png";
 
 export function Contact() {
   const { toast } = useToast();
@@ -72,7 +74,8 @@ export function Contact() {
 
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionBackground src={backgroundSections} />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12 animate-fade-in">
             <SectionHeader title="Get in Touch" />
