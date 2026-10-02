@@ -136,7 +136,7 @@ export function Contact() {
                 variant="hero"
                 size="lg"
                 className="w-full"
-                style={{ fontFamily: "Orbitron, sans-serif" }}
+                style={{ fontFamily: "Orbitron, sans-serif", fontWeight: "bold" }}
               >
                 Send Message
               </Button>

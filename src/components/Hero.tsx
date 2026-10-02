@@ -203,12 +203,12 @@ export function Hero() {
           {/* Text content */}
           <div className="space-y-6 md:space-y-8 animate-fade-in text-center lg:text-left order-2 lg:order-1">
             <div className="space-y-2 md:space-y-4">
-              <div className="flex gap-2">
+              <div className="flex justify-center lg:justify-start gap-2">
                 <p
                 className="text-xs sm:text-sm tracking-[0.3em] uppercase font-bold text-accent drop-shadow-[0_0_8px_hsl(var(--accent)/0.5)]"
                 style={{ fontFamily: "Orbitron, sans-serif" }}
                 >
-                  Hi, 
+                  Hi,
                 </p>
                 <p
                   className="text-xs sm:text-sm tracking-[0.3em] uppercase font-bold drop-shadow-[0_0_8px_hsl(var(--accent)/0.5)]"
@@ -233,22 +233,22 @@ export function Hero() {
                 <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)] tracking-[4px]">
                   {displayedText.slice(0, 9)}
                 </span>
-                <span className="text-foreground drop-shadow-[0_0_8px_hsl(var(--primary)/0.4)] tracking-[4px]">
-                  {displayedText.slice(9)}
+                <span className="whitespace-nowrap text-foreground drop-shadow-[0_0_8px_hsl(var(--primary)/0.4)] tracking-[4px]">
+                  {displayedText.slice(9).trimEnd()}
+                  <span className="animate-pulse relative bottom-0.5 ml-1">|</span>
                 </span>
-                <span className="animate-pulse text-foreground relative bottom-0.5">|</span>
               </h2>
             </div>
 
-            <p 
-              className="text-sm sm:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed" 
+            <p
+              className="text-sm sm:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed"
               style={{ fontFamily: "Orbitron, sans-serif" }}
             >
               {extensions.tagline}
             </p>
 
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-              <Button variant="hero" size="lg" asChild style={{ fontFamily: "Orbitron, sans-serif" }}>
+              <Button variant="hero" size="lg" asChild style={{ fontFamily: "Orbitron, sans-serif", fontWeight: "bold" }}>
                 <a href="#projects">View Projects</a>
               </Button>
               <Button variant="hero-outline" size="lg" asChild style={{ fontFamily: "Orbitron, sans-serif" }}>

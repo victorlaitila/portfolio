@@ -129,7 +129,7 @@ export function Experience() {
           </div>
 
           <div className="text-center animate-fade-in">
-            <Button variant="hero" size="lg" asChild style={{ fontFamily: "Orbitron, sans-serif" }}>
+            <Button variant="hero" size="lg" asChild style={{ fontFamily: "Orbitron, sans-serif", fontWeight: "bold" }}>
               <a href={cvSrc} download>
                 <Download className="mr-2 h-5 w-5" />
                 Download CV
