@@ -1,12 +1,12 @@
 import { SectionBackground } from "./SectionBackground";
-import backgroundSections from "@/assets/background-sections.png";
+import backgroundImg from "@/assets/background-general.png";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="py-8 border-t border-border relative z-10 overflow-hidden">
-      <SectionBackground src={backgroundSections} />
+      <SectionBackground src={backgroundImg} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center text-muted-foreground">
           <p className="text-sm">

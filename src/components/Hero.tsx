@@ -241,17 +241,17 @@ export function Hero() {
             </div>
 
             <p 
-              className="text-sm sm:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed uppercase" 
+              className="text-sm sm:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed" 
               style={{ fontFamily: "Orbitron, sans-serif" }}
             >
               {extensions.tagline}
             </p>
 
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-              <Button variant="hero" size="lg" asChild>
+              <Button variant="hero" size="lg" asChild style={{ fontFamily: "Orbitron, sans-serif" }}>
                 <a href="#projects">View Projects</a>
               </Button>
-              <Button variant="hero-outline" size="lg" asChild>
+              <Button variant="hero-outline" size="lg" asChild style={{ fontFamily: "Orbitron, sans-serif" }}>
                 <a href="#contact">Contact Me</a>
               </Button>
             </div>

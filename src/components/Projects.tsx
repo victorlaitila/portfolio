@@ -4,7 +4,7 @@ import Shimmer from "./ui/shimmer";
 import SectionHeader from "./SectionHeader";
 import { SectionBackground } from "./SectionBackground";
 import { getCareerData } from "@/data";
-import backgroundSections from "@/assets/background-sections.png";
+import backgroundImg from "@/assets/background-projects.png";
 
 export function Projects() {
   const career = getCareerData();
@@ -21,7 +21,7 @@ export function Projects() {
 
   return (
     <section id="projects" className="py-20 relative overflow-hidden">
-      <SectionBackground src={backgroundSections} />
+      <SectionBackground src={backgroundImg} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           <SectionHeader title="Featured Projects" />
@@ -53,7 +53,9 @@ export function Projects() {
 
                 <div className="p-6 space-y-4">
                   <div className="flex items-center gap-4">
-                    <h3 className="text-xl font-bold">{project.title}</h3>
+                    <h3 className="text-base font-bold" style={{ fontFamily: "Orbitron, sans-serif" }}>
+                      {project.title}
+                    </h3>
                       {project.demo && (
                         <a href={project.demo} target="_blank" rel="noopener noreferrer" aria-label="Demo">
                           <ExternalLink className="h-4 w-4 text-primary" />

@@ -75,7 +75,8 @@ export function Navigation() {
                   onClick={() => handleNavClick(link.href.substring(1))}
                   className={`${
                     isActive ? "text-foreground" : "text-muted-foreground"
-                  } transition-smooth text-sm font-medium flex items-center gap-2`}
+                  } transition-smooth text-xs font-medium flex items-center gap-2`}
+                  style={{ fontFamily: "Orbitron, sans-serif" }}
                   aria-label={link.label}
                 >
                   <Icon className="h-4 w-4 md:hidden" />

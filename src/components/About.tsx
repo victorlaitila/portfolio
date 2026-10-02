@@ -5,7 +5,7 @@ import Shimmer from "./ui/shimmer";
 import SectionHeader from "./SectionHeader";
 import { SectionBackground } from "./SectionBackground";
 import { getPortfolioExtensions } from "@/data";
-import backgroundSections from "@/assets/background-sections.png";
+import backgroundImg from "@/assets/background-general.png";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Code2,
@@ -25,17 +25,18 @@ export function About() {
 
   return (
     <section id="about" className="py-20 relative overflow-hidden ">
-      <SectionBackground src={backgroundSections} />
+      <SectionBackground src={backgroundImg} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           <SectionHeader title="About Me" />
           {/* Badges Row */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {highlights.map((item, index) => (
-              <Badge 
+              <Badge
                 key={index}
                 variant="secondary"
-                className="px-6 py-3 text-base font-medium bg-background/80 hover:bg-background/80 border border-border/50"
+                className="px-6 py-3 text-sm font-medium bg-background/80 hover:bg-background/80 border border-border/50"
+                style={{ fontFamily: "Orbitron, sans-serif" }}
               >
                 <item.icon className="h-5 w-5 mr-2 text-primary" />
                 {item.title}
@@ -50,7 +51,10 @@ export function About() {
               <CardContent className="relative p-8">
                 <div className="flex items-center gap-3 mb-4">
                   <Footprints className="h-6 w-6 text-primary" />
-                  <h3 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  <h3
+                    className="text-lg font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+                    style={{ fontFamily: "Orbitron, sans-serif" }}
+                  >
                     My Journey
                   </h3>
                 </div>
@@ -65,7 +69,10 @@ export function About() {
               <CardContent className="relative p-8">
                 <div className="flex items-center gap-3 mb-4">
                   <Dumbbell className="h-6 w-6 text-primary" />
-                  <h3 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  <h3
+                    className="text-lg font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+                    style={{ fontFamily: "Orbitron, sans-serif" }}
+                  >
                     Beyond Tech
                   </h3>
                 </div>

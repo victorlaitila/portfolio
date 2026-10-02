@@ -6,7 +6,7 @@ import SectionHeader from "./SectionHeader";
 import { SectionBackground } from "./SectionBackground";
 import { getCareerData } from "@/data";
 import { getSkillIcon } from "@/data/skillIcons";
-import backgroundSections from "@/assets/background-sections.png";
+import backgroundImg from "@/assets/background-skills.png";
 
 export function Skills() {
   const career = getCareerData();
@@ -37,7 +37,7 @@ export function Skills() {
 
   return (
     <section id="skills" className="py-20 relative overflow-hidden">
-      <SectionBackground src={backgroundSections} />
+      <SectionBackground src={backgroundImg} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           <SectionHeader title="Skills & Tech Stack" />
@@ -53,7 +53,10 @@ export function Skills() {
                   {/* Icon header with enhanced styling */}
                   <div className="flex items-center gap-3 mb-6">
                     <category.icon className="h-6 w-6 text-primary" />
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    <h3
+                      className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+                      style={{ fontFamily: "Orbitron, sans-serif" }}
+                    >
                       {category.title}
                     </h3>
                   </div>
