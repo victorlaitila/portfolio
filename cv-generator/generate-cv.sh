@@ -26,7 +26,7 @@ if [ ! -x "$VENV/bin/python" ]; then
   echo "Setting up cv-generator virtualenv with $PYTHON..."
   "$PYTHON" -m venv "$VENV"
   "$VENV/bin/pip" install --quiet --upgrade pip
-  "$VENV/bin/pip" install --quiet -r "$DIR/requirements.txt"
+  "$VENV/bin/pip" install --quiet -r "$DIR/requirements-dev.txt"
 fi
 
 exec "$VENV/bin/python" "$DIR/generate.py"

@@ -9,18 +9,36 @@ Visit the live site at: [https://victorlaitila.github.io/portfolio/](https://vic
 ## 🚀 Development
 
 ```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Deploy to GitHub Pages
-npm run deploy
+npm install          # install dependencies
+npm run dev          # dev server at http://localhost:8080/portfolio/
+npm run build        # production build into dist/
+npm run generate:cv  # regenerate public/Victor-Laitila-Software-Engineer-CV.pdf from src/data/career.yaml
 ```
+
+`src/data/career.yaml` is the single source of truth for both the site and the CV.
+After editing it, run `npm run generate:cv` and commit the updated PDF. CI fails otherwise.
+
+## ✅ Quality checks
+
+Run **`npm run check`** before pushing. It runs everything CI runs and ends with a pass/fail summary
+that tells you which command to rerun for each failure. The individual checks:
+
+| Command             | What it checks                                                                  |
+| ------------------- | ------------------------------------------------------------------------------- |
+| `npm run lint`      | ESLint                                                                          |
+| `npm run typecheck` | TypeScript                                                                      |
+| `npm test`          | `career.yaml` is valid for the site (dates, targets, project images and links)  |
+| `npm run test:cv`   | The committed CV PDF has all current CV data, no portfolio-only data, and is 1 page |
+| `npm run test:e2e`  | Production build renders every section, **Download CV** serves the PDF, and the contact form sends via EmailJS (mocked, so no real email) and handles errors (desktop + mobile) |
+
+`test:cv` uses the CV generator's virtualenv, so run `npm run generate:cv` once first.
+`test:e2e` needs Playwright's browser once: `npx playwright install chromium`.
+In CI the e2e tests also fail if the `VITE_EMAILJS_*` repo secrets are missing, so a broken contact form can't be deployed.
+
+## 🔁 CI/CD
+
+`.github/workflows/ci.yml` runs every check above on each pull request and push to `main`.
+Pushes to `main` that pass all checks are deployed to GitHub Pages automatically. There is no manual deploy step.
 
 ## 📧 Contact
 

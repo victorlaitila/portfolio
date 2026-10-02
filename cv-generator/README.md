@@ -28,5 +28,7 @@ cv-generator/
 │   └── pdf.py             # Jinja2 HTML rendering + WeasyPrint PDF generation
 ├── templates/
 │   └── cv.html           # CV layout/styling
-└── requirements.txt
+├── tests/               # pytest: committed PDF matches career.yaml (npm run test:cv)
+├── requirements.txt
+└── requirements-dev.txt
 ```
