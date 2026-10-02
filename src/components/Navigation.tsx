@@ -26,8 +26,10 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           <a href={`#${SECTION_IDS.home}`}>
             <img
-              src={`${import.meta.env.BASE_URL}vl-logo.png`}
+              src={`${import.meta.env.BASE_URL}vl-logo.webp`}
               alt={`${personal.name} logo`}
+              width={432}
+              height={288}
               className="h-20 md:h-24 w-auto object-contain"
             />
           </a>

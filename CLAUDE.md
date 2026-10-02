@@ -66,8 +66,9 @@ with Jinja2/WeasyPrint for the CV.
   `<TimelineItem>` with `<BulletList>`.
 - Headings and labels use the Orbitron font through the `font-display` class. Don't set
   `fontFamily` inline.
-- Images go in `src/assets/` as WebP, sized for display (full-bleed backgrounds ~2560px wide).
-  Below-the-fold images use `loading="lazy"`.
+- Images go in `src/assets/` as WebP, sized for display (full-bleed backgrounds ~2560px wide,
+  others ~3x their displayed size). The same applies to `public/`. Below-the-fold images use
+  `loading="lazy"`.
 - Use theme tokens (`primary`, `accent`, `muted-foreground`, defined in `src/index.css`), not raw
   colours. The site is dark-only.
 - External links: `target="_blank" rel="noopener noreferrer"`. The e2e tests enforce this.
