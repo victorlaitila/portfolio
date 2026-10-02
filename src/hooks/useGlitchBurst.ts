@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 interface GlitchTiming {
   /** How long each burst lasts. */
   burstMs: number;
-  /** Delay before the first burst, kept short so it isn't missed. */
+  /** Delay before the first burst. */
   firstDelayMs: number;
   /** Bursts after the first one start at a random delay in this range. */
   minDelayMs: number;

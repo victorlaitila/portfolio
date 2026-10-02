@@ -8,9 +8,10 @@ import heroCharcoal from "@/assets/hero-charcoal.webp";
 // jump-cut every so often, then settles back on the cyan background.
 const GLITCH_TIMING = {
   burstMs: 900,
-  firstDelayMs: 500,
-  minDelayMs: 7000,
-  maxDelayMs: 13000,
+  // Lands just after the hero title finishes typing out.
+  firstDelayMs: 2400,
+  minDelayMs: 3000,
+  maxDelayMs: 6000,
 };
 
 // The base frame plus two tinted copies for the chromatic-aberration fringe.

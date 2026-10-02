@@ -62,6 +62,10 @@ with Jinja2/WeasyPrint for the CV.
 - New sections use `<Section id={SECTION_IDS.x} title="..." background={img}>` (`Section.tsx`). It
   renders the wrapper, the background image from `src/assets/`, the container and the
   `<SectionHeader />`.
+- Split a component into its own file when more than one place uses it (`GlowCard`,
+  `TimelineItem`, `SectionHeader`). A sub-component used only by one section stays in that
+  section's file (`ProjectCard` in `Projects.tsx`, `Module` in `Skills.tsx`). Split a section file
+  that grows hard to follow, not just to make files smaller.
 - Content cards use `<GlowCard>` (border, glow and `<Shimmer />` on hover). Timeline entries use
   `<TimelineItem>` with `<BulletList>`.
 - Headings and labels use the Orbitron font through the `font-display` class. Don't set
@@ -81,3 +85,8 @@ with Jinja2/WeasyPrint for the CV.
 Tests live in `tests/`: `unit/` (Vitest, data layer), `cv/` (pytest, the committed PDF matches
 `career.yaml`), `e2e/` (Playwright against the production build). When adding or changing tests,
 use the `writing-tests` skill.
+
+Add or update tests as part of the change, without being asked, when it adds or changes something a
+visitor would notice breaking. That includes content that should appear, links, forms, navigation,
+and anything that hides content until it runs (e.g. scroll-triggered animations,
+`tests/e2e/skills.spec.ts`). Purely visual changes don't need tests.

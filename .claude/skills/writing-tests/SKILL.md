@@ -45,6 +45,9 @@ a unit test; whether that link opens in a new tab is e2e.
   or the test will be flaky.
 - **Labels collide.** "Email", "GitHub" and "LinkedIn" are also `aria-label`s on icon links. Scope
   locators, e.g. `getByLabel("Email", { exact: true }).and(page.locator("input"))`.
+- **Text filters match substrings.** `filter({ hasText: "CSS" })` also matches "Tailwind CSS", and
+  "Git" matches "GitHub Actions". When looping over names from `career.yaml`, match exactly with
+  `filter({ has: page.getByText(name, { exact: true }) })`.
 - Smooth scrolling is on: use the auto-retrying `toBeInViewport()` rather than one-off position
   checks.
 - Files in `tests/e2e` and the Playwright config are type-checked by `tsconfig.node.json`.
