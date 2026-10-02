@@ -1,16 +1,24 @@
 name: CI
 
+# Checks only. Deploying is a separate, manual step: see deploy.yml, which reuses this workflow.
 on:
   push:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      upload-pages:
+        description: Upload the build as the GitHub Pages artifact for deploy.yml
+        type: boolean
+        default: false
 
 permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  # A separate group for deploy.yml's check run, so it never cancels or queues behind a push's run.
+  group: ci-${{ github.ref }}${{ inputs.upload-pages && '-deploy' || '' }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
@@ -41,7 +49,7 @@ jobs:
           path: playwright-report
           retention-days: 7
       - uses: actions/upload-pages-artifact@v4
-        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        if: inputs.upload-pages
         with:
           path: dist
 
@@ -57,21 +65,3 @@ jobs:
           cache-dependency-path: cv-generator/requirements-dev.txt
       - run: pip install -r cv-generator/requirements-dev.txt
       - run: python -m pytest
-
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: [web, cv]
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    concurrency:
-      group: pages
-      cancel-in-progress: false
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4

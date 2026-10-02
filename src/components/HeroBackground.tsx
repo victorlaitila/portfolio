@@ -39,6 +39,8 @@ export function HeroBackground() {
           className={cn("hero-image hero-glitch-layer", layer, isGlitching && "hero-glitch-play")}
         />
       ))}
+      {/* Below lg the text column is centered over the avatar, so darken the image to keep it readable. */}
+      <div className="absolute inset-0 bg-background/80 lg:hidden" />
     </div>
   );
 }

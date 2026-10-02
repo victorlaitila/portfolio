@@ -1,5 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import emailjs from "@emailjs/browser";
+import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -31,6 +32,7 @@ const EMAILJS = {
 export function Contact() {
   const { toast } = useToast();
   const [form, setForm] = useState<ContactForm>(EMPTY_FORM);
+  const [isSending, setIsSending] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -45,6 +47,7 @@ export function Contact() {
       return;
     }
 
+    setIsSending(true);
     try {
       const result = await emailjs.send(EMAILJS.serviceId, EMAILJS.templateId, form, {
         publicKey: EMAILJS.publicKey,
@@ -59,6 +62,8 @@ export function Contact() {
         description: "Failed to send message. Please try again later.",
         variant: "destructive",
       });
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -84,8 +89,22 @@ export function Contact() {
             );
           })}
 
-          <Button type="submit" variant="hero" size="lg" className="w-full font-display font-bold">
-            Send Message
+          <Button
+            type="submit"
+            variant="hero"
+            size="lg"
+            disabled={isSending}
+            aria-busy={isSending}
+            className="w-full font-display font-bold disabled:opacity-80"
+          >
+            {isSending ? (
+              <>
+                <Loader2 className="animate-spin" />
+                Sending...
+              </>
+            ) : (
+              "Send Message"
+            )}
           </Button>
         </form>
       </Card>

@@ -10,9 +10,13 @@ with Jinja2/WeasyPrint for the CV.
 
 - `npm run dev`: dev server at http://localhost:8080/portfolio/
 - `npm run check`: lint, typecheck, unit, CV and e2e tests, with a pass/fail summary. **Run it
-  before calling any change done.** It's the same set of checks CI runs.
+  before calling any change done.** It's the same set of checks CI runs. One-time setup:
+  `npm run generate:cv` (creates the Python venv that `test:cv` uses) and
+  `npx playwright install chromium`.
 - `npm run generate:cv`: regenerates `public/Victor-Laitila-Software-Engineer-CV.pdf` from
   `career.yaml`. The PDF is committed.
+- `npm run generate:og-image`: regenerates `public/og-image.jpg`, the link-preview image, from the
+  hero section. Rerun it when the name, title, tagline or hero design changes.
 
 ## How the project fits together
 
@@ -26,17 +30,35 @@ with Jinja2/WeasyPrint for the CV.
     on both the site and the CV.
   - Any `career.yaml` change that affects CV content needs `npm run generate:cv` and the updated PDF
     committed. `tests/cv` fails otherwise. For content changes, use the `update-career-content` skill.
-- **The site is served under `/portfolio/`.** Files in `public/` must be linked as
+- **What "no hard-coding" covers:** content and data (`career.yaml`, `extensions.ts`), the site URL
+  and path, section ids (`SECTION_IDS`), file names like `CV_FILENAME`, and anything else that would
+  otherwise be written in two places. UI copy (button labels, toasts, form labels and placeholders,
+  section titles) stays inline in the component that uses it. The site is single-language, so it
+  doesn't go through a strings file.
+- **The site is served under `/portfolio/`.** That path, the canonical and link-preview URLs and the
+  test URLs all derive from `personal.links.website` in `career.yaml` (via `scripts/career.ts`).
+  Never hard-code the site URL or path. Files in `public/` must be linked as
   `` `${import.meta.env.BASE_URL}file` ``. Router links use `<Link>`, never `<a href="/">`.
 - `src/pages/Index.tsx` stacks the section components, separated by `<SectionDivider />`. Section
   ids live in `SECTION_IDS` (`src/config/site.ts`). Use them for anchors instead of string literals.
-- **Pushing to `main` deploys to the live site** (`.github/workflows/ci.yml`), but only once all
-  checks pass. There is no manual deploy.
+- **Pushing to `main` runs the checks but does not deploy.**
+  - `ci.yml`: every check, on pushes to `main` and on pull requests. Never deploys.
+  - `deploy.yml`: manual only (Actions → Deploy, or `gh workflow run deploy.yml`). Reruns every
+    check through `ci.yml` and deploys `main` to GitHub Pages only if they pass. Never trigger it
+    unless the user asks.
+  - `links.yml`: weekly, and on PRs that change `career.yaml`. Checks that the external links
+    still respond. It doesn't block deploys.
 - The contact form uses EmailJS. Its `VITE_EMAILJS_*` keys come from the local `.env` (gitignored)
   and from repo secrets in CI.
 
 ## Conventions
 
+- After a change, update the documentation it makes inaccurate: `README.md`, this file,
+  `cv-generator/README.md` and the skills in `.claude/skills/`. Only add or extend docs when there
+  is something a reader actually needs to know. Don't write docs just to have them.
+- `README.md` is for visitors (recruiters, developers browsing GitHub). Keep it short and personal:
+  what the site is, what it's built with, how to run it. Development details (checks, CI, data
+  rules, conventions) belong here in CLAUDE.md, not in the README.
 - New sections use `<Section id={SECTION_IDS.x} title="..." background={img}>` (`Section.tsx`). It
   renders the wrapper, the background image from `src/assets/`, the container and the
   `<SectionHeader />`.

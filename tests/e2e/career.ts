@@ -1,10 +1,8 @@
-// Reads career.yaml so tests derive expectations from the same data the site renders.
-import { readFileSync } from "node:fs";
-import yaml from "js-yaml";
+// Derives test expectations from career.yaml, the same data the site renders.
+import { career } from "../../scripts/career";
 import { isForPortfolio } from "../../src/data/targets";
-import type { CareerYaml } from "../../src/data/types";
 
-const career = yaml.load(readFileSync("src/data/career.yaml", "utf8")) as CareerYaml;
+export { BASE_PATH, SITE_URL } from "../../scripts/career";
 
 export const personal = career.personal;
 export const projects = (career.projects ?? []).filter((p) => isForPortfolio(p.targets));

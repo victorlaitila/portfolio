@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { CV_FILENAME, SECTION_IDS } from "../../src/config/site";
-import { personal, projects } from "./career";
+import { BASE_PATH, personal, projects, SITE_URL } from "./career";
 
 const SECTIONS = Object.values(SECTION_IDS);
 
@@ -47,6 +47,16 @@ test("has the metadata used by search engines and link previews", async ({ page,
   await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /\S/);
   await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", /\S/);
 
+  // Previews and canonical links must point at the deployed site from career.yaml.
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", SITE_URL);
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", SITE_URL);
+  const ogImage = (await page.locator('meta[property="og:image"]').getAttribute("content"))!;
+  expect(ogImage, "og:image must be an absolute URL on the site").toMatch(new RegExp(`^${SITE_URL}.+`));
+  // Fetch the image from the local build: same path, without the production origin.
+  const ogImageLocal = await request.get(new URL(ogImage).pathname);
+  expect(ogImageLocal.ok(), `og:image ${ogImage}`).toBe(true);
+  expect(ogImageLocal.headers()["content-type"]).toMatch(/^image\/(jpeg|png)/);
+
   const favicon = await page.locator('link[rel="icon"]').getAttribute("href");
   expect((await request.get(favicon!)).ok(), `favicon ${favicon}`).toBe(true);
 });
@@ -73,10 +83,10 @@ test("unknown URLs show the 404 page with a working way back", async ({ page }) 
   await page.goto("./does-not-exist");
   await expect(page.getByRole("heading", { name: "404" })).toBeVisible();
 
-  // "/" alone would leave the site on GitHub Pages, which hosts it under /portfolio/.
+  // "/" alone would leave the site on GitHub Pages, which hosts it under a sub-path.
   const home = page.getByRole("link", { name: "Return to Home" });
-  await expect(home).toHaveAttribute("href", "/portfolio/");
+  await expect(home).toHaveAttribute("href", BASE_PATH);
   await home.click();
-  await expect(page).toHaveURL(/\/portfolio\/$/);
+  await expect(page).toHaveURL((url) => url.pathname === BASE_PATH);
   await expect(page.locator("section#home")).toBeVisible();
 });

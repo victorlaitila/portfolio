@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { expectedExternalLinks, personal } from "./career";
+import { BASE_PATH, expectedExternalLinks, personal } from "./career";
 
 test.beforeEach(async ({ context, page }) => {
   // Answer navigations to other sites with a stub page, so tests check where links
@@ -34,7 +34,7 @@ for (const url of expectedExternalLinks) {
     ]);
     await popup.waitForLoadState();
     expect(popup.url()).toBe(url);
-    expect(page.url(), "portfolio tab should stay open").toContain("/portfolio/");
+    expect(page.url(), "portfolio tab should stay open").toContain(BASE_PATH);
   });
 }
 

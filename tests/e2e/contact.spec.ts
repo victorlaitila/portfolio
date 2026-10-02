@@ -50,6 +50,29 @@ test("sends the message through EmailJS", async ({ page }) => {
   await expect(page.getByLabel("Message")).toHaveValue("");
 });
 
+test("shows a loading state while sending and blocks double submits", async ({ page }) => {
+  let requests = 0;
+  let respond!: () => void;
+  const responded = new Promise<void>((resolve) => (respond = resolve));
+  await page.route(EMAILJS_SEND, async (route) => {
+    requests++;
+    await responded;
+    return route.fulfill({ status: 200, body: "OK" });
+  });
+
+  await fillForm(page);
+  await submit(page);
+
+  const sending = page.getByRole("button", { name: "Sending..." });
+  await expect(sending).toBeDisabled();
+  await sending.click({ force: true });
+
+  respond();
+  await expect(toast(page, "Message Sent!")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Send Message" })).toBeEnabled();
+  expect(requests).toBe(1);
+});
+
 test("shows an error and keeps the input when sending fails", async ({ page }) => {
   await page.route(EMAILJS_SEND, (route) => route.fulfill({ status: 400, body: "Bad Request" }));
 

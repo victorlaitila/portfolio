@@ -1,0 +1,35 @@
+name: Deploy
+
+# Deploys to GitHub Pages on demand: Actions -> Deploy -> Run workflow (or `gh workflow run deploy.yml`).
+# Runs every CI check against the commit first and deploys only if they all pass.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Checks
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/ci.yml
+    with:
+      upload-pages: true
+    secrets: inherit
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: checks
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

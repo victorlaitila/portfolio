@@ -105,5 +105,18 @@ def test_cv_excludes_portfolio_only_entries(pdf_text: str, raw_yaml: dict):
     assert not leaked, f"{REGENERATE_HINT}\nPortfolio-only content found on CV: {leaked}"
 
 
+def test_cv_links_point_to_current_urls(reader: PdfReader):
+    # The text check above only sees the printed link text, so also check where each link goes.
+    links = parse_career_yaml(CAREER_YAML, target="cv").personal.links
+    expected = sorted(url for url in (links.linkedin, links.website) if url)
+    actual = sorted(
+        annot.get_object()["/A"]["/URI"]
+        for page in reader.pages
+        for annot in page.get("/Annots") or []
+        if "/URI" in annot.get_object().get("/A", {})
+    )
+    assert actual == expected, f"{REGENERATE_HINT}\nCV links {actual} != career.yaml {expected}"
+
+
 def test_cv_fits_on_one_page(reader: PdfReader):
     assert len(reader.pages) == 1, f"CV is {len(reader.pages)} pages, keep it to one"

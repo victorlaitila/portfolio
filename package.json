@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://victorlaitila.github.io/portfolio/",
   "scripts": {
     "dev": "vite",
     "build": "vite build && cp dist/index.html dist/404.html",
@@ -15,7 +14,8 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "test:cv": "cv-generator/.venv/bin/python -m pytest",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "generate:og-image": "node --experimental-strip-types scripts/generate-og-image.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

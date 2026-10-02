@@ -45,6 +45,12 @@ file, but some need companion edits that are easy to miss. Work through the rele
 `cv-generator/engine/parser.py`, `cv-generator/engine/schema.py` and `cv-generator/templates/cv.html`.
 Confirm with the user before doing it.
 
+**Name, title or contact links:**
+- If `personal.name` or `personal.title` changes, also run `npm run generate:og-image` and commit
+  `public/og-image.jpg`, since the link-preview image shows them.
+- `personal.links.website` is the site's own URL. Changing it moves the deploy path (`/portfolio/`)
+  and the link-preview URLs too. Confirm with the user that the site is actually moving.
+
 ## 3. Regenerate the CV
 
 If the change affects anything that appears on the CV (any entry not limited to `[portfolio]`):
