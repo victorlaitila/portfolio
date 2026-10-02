@@ -32,3 +32,6 @@ __pycache__
 test-results
 playwright-report
 .pytest_cache
+
+# Claude Code personal settings
+.claude/settings.local.json
