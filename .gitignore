@@ -24,6 +24,11 @@ dist-ssr
 *.sln
 *.sw?
 
+# Python
+__pycache__
+*.pyc
+
 # Test output
 test-results
 playwright-report
+.pytest_cache

@@ -18,6 +18,6 @@ export default defineConfig(({ mode }) => ({
     },
   },
   test: {
-    include: ["src/**/*.test.ts"],
+    include: ["tests/unit/**/*.test.ts"],
   },
 }));

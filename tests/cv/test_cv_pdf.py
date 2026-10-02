@@ -7,14 +7,18 @@ case.
 """
 
 import re
+from pathlib import Path
 
 import pytest
 import yaml
 from pypdf import PdfReader
 
-from conftest import CAREER_YAML, CV_PDF
 from engine.parser import parse_career_yaml
 from engine.pdf import format_date
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+CAREER_YAML = REPO_ROOT / "src" / "data" / "career.yaml"
+CV_PDF = REPO_ROOT / "public" / "Victor-Laitila-Software-Engineer-CV.pdf"
 
 REGENERATE_HINT = "CV PDF is out of date with career.yaml - run `npm run generate:cv` and commit the PDF"
 

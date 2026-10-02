@@ -1,0 +1,11 @@
+# Python tooling config for the CV generator (cv-generator/) and its tests (tests/cv/).
+
+[tool.pytest.ini_options]
+testpaths = ["tests/cv"]
+pythonpath = ["cv-generator"]
+
+# Lets the editor (Pylance/Pyright) resolve `engine` and the venv's packages.
+[tool.pyright]
+extraPaths = ["cv-generator"]
+venvPath = "cv-generator"
+venv = ".venv"

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import yaml from 'js-yaml';
-import careerYamlRaw from './career.yaml?raw';
-import { getCareerData, portfolioExtensions } from './index';
-import type { CareerData } from './types';
+import careerYamlRaw from '@/data/career.yaml?raw';
+import { getCareerData, portfolioExtensions } from '@/data';
+import type { CareerData } from '@/data/types';
 
 // career.yaml is hand-edited and drives both the site and the CV, so these
 // tests guard against edits that would silently break the rendered portfolio.
@@ -68,6 +68,19 @@ describe('getCareerData', () => {
   it('gives every project at least one link', () => {
     for (const project of career.projects) {
       expect(project.url || project.demo || project.video, project.name).toBeTruthy();
+    }
+  });
+
+  it('uses well-formed project links', () => {
+    for (const project of career.projects) {
+      for (const link of [project.url, project.demo, project.video].filter(Boolean)) {
+        expect(link, project.name).toMatch(/^https:\/\//);
+      }
+      // YouTube answers 200 even for a malformed id (e.g. a trailing slash), so
+      // a link checker can't catch this. Check the id format instead.
+      if (project.video) {
+        expect(project.video, project.name).toMatch(/^https:\/\/www\.youtube\.com\/watch\?v=[\w-]{11}$/);
+      }
     }
   });
 });

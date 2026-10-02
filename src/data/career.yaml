@@ -138,7 +138,7 @@ projects:
       - GitHub Actions
       - Sentry (Monitoring)
     demo: https://victorlaitila.github.io/ai-article-summarizer/
-    video: https://www.youtube.com/watch?v=lZrHd0tOBXo/
+    video: https://www.youtube.com/watch?v=lZrHd0tOBXo
 
   - name: Dependency Risk Scanner
     url: https://github.com/victorlaitila/dependency-risk-scanner

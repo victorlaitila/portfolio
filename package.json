@@ -6,7 +6,7 @@
   "homepage": "https://victorlaitila.github.io/portfolio/",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp dist/index.html dist/404.html",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -14,7 +14,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "test:cv": "cv-generator/.venv/bin/python -m pytest cv-generator/tests",
+    "test:cv": "cv-generator/.venv/bin/python -m pytest",
     "check": "node scripts/check.mjs"
   },
   "dependencies": {

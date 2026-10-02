@@ -56,7 +56,7 @@ jobs:
           cache: pip
           cache-dependency-path: cv-generator/requirements-dev.txt
       - run: pip install -r cv-generator/requirements-dev.txt
-      - run: python -m pytest cv-generator/tests
+      - run: python -m pytest
 
   deploy:
     name: Deploy to GitHub Pages

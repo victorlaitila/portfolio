@@ -7,7 +7,7 @@ const CHECKS = [
   { name: "Typecheck", script: "typecheck" },
   { name: "Unit tests (career data)", script: "test" },
   { name: "CV up to date", script: "test:cv", hint: "If content is missing, run `npm run generate:cv` and commit the PDF" },
-  { name: "E2E (site, CV download, contact form)", script: "test:e2e" },
+  { name: "E2E (site, links, CV, contact form)", script: "test:e2e" },
 ];
 
 const results = CHECKS.map((check) => {
