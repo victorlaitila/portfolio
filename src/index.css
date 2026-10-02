@@ -2,50 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* The site is dark-only, so there is a single set of theme tokens. */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 10%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 10%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 10%;
-
-    --primary: 237 84% 17%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 240 5% 96%;
-    --secondary-foreground: 240 10% 10%;
-
-    --muted: 240 5% 96%;
-    --muted-foreground: 214 41% 78%;
-
-    --accent: 193 95% 58%;
-    --accent-foreground: 240 10% 10%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 240 6% 90%;
-    --input: 240 6% 90%;
-    --ring: 237 84% 17%;
-
-    --radius: 0.75rem;
-
-    /* Custom tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(237 84% 17%) 0%, hsl(237 84% 25%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(193 95% 58%) 0%, hsl(237 84% 25%) 100%);
-    --shadow-sm: 0 2px 8px hsl(240 10% 10% / 0.05);
-    --shadow-md: 0 4px 16px hsl(240 10% 10% / 0.08);
-    --shadow-lg: 0 8px 32px hsl(240 10% 10% / 0.12);
-    --shadow-glow: 0 0 40px hsl(193 95% 58% / 0.3);
-    
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .dark {
     --background: 240 10% 6%;
     --foreground: 0 0% 98%;
 
@@ -74,44 +33,36 @@
     --input: 240 6% 20%;
     --ring: 193 95% 58%;
 
-    /* Dark mode custom tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(237 84% 25%) 0%, hsl(237 84% 35%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(193 95% 58%) 0%, hsl(237 84% 35%) 100%);
-    --shadow-sm: 0 2px 8px hsl(0 0% 0% / 0.3);
-    --shadow-md: 0 4px 16px hsl(0 0% 0% / 0.4);
-    --shadow-lg: 0 8px 32px hsl(0 0% 0% / 0.5);
-    --shadow-glow: 0 0 60px hsl(193 95% 58% / 0.4);
-  }
-}
+    --radius: 0.75rem;
 
-@layer base {
+    --shadow-glow: 0 0 60px hsl(var(--accent) / 0.4);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
   * {
     @apply border-border;
   }
 
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: 'cv11', 'ss01';
+    font-feature-settings: "cv11", "ss01";
   }
 
   html {
     scroll-behavior: smooth;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-bold tracking-tight;
   }
 }
 
 @layer utilities {
-  .gradient-primary {
-    background: var(--gradient-primary);
-  }
-
-  .gradient-accent {
-    background: var(--gradient-accent);
-  }
-
   .shadow-glow {
     box-shadow: var(--shadow-glow);
   }
@@ -119,19 +70,113 @@
   .transition-smooth {
     transition: var(--transition-smooth);
   }
+}
 
-  .space-bg {
-    background-color: hsl(var(--background));
-    background-image: 
-      radial-gradient(circle at 20% 50%, hsl(var(--primary) / 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, hsl(var(--accent) / 0.03) 0%, transparent 50%),
-      radial-gradient(1px 1px at 20px 30px, hsl(var(--foreground) / 0.15), transparent),
-      radial-gradient(1px 1px at 60px 70px, hsl(var(--foreground) / 0.1), transparent),
-      radial-gradient(1px 1px at 120px 50px, hsl(var(--foreground) / 0.12), transparent),
-      radial-gradient(1px 1px at 180px 90px, hsl(var(--foreground) / 0.08), transparent),
-      radial-gradient(2px 2px at 250px 30px, hsl(var(--primary) / 0.2), transparent),
-      radial-gradient(1px 1px at 320px 120px, hsl(var(--foreground) / 0.1), transparent);
-    background-size: 200% 200%, 200% 200%, 200px 200px, 200px 200px, 200px 200px, 200px 200px, 200px 200px, 200px 200px;
-    background-position: 0% 0%, 100% 100%, 0 0, 40px 60px, 80px 10px, 140px 80px, 200px 20px, 280px 100px;
+/* Hero glitch (see HeroBackground.tsx). The burst duration comes from --hero-glitch-duration. */
+@layer components {
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 78% center;
   }
+  @media (min-width: 640px) {
+    .hero-image {
+      object-position: 75% center;
+    }
+  }
+  @media (min-width: 1024px) {
+    .hero-image {
+      object-position: 72% center;
+    }
+  }
+
+  .hero-glitch-layer {
+    pointer-events: none;
+    opacity: 0;
+    will-change: opacity, transform, clip-path;
+  }
+
+  .hero-glitch-cyan-tint,
+  .hero-glitch-magenta-tint {
+    mix-blend-mode: screen;
+  }
+  .hero-glitch-cyan-tint {
+    filter: grayscale(1) sepia(1) hue-rotate(152deg) saturate(2) brightness(1.05);
+  }
+  .hero-glitch-magenta-tint {
+    filter: grayscale(1) sepia(1) hue-rotate(305deg) saturate(2) brightness(1);
+  }
+
+  .hero-glitch-base.hero-glitch-play {
+    animation: hero-glitch-base-flicker var(--hero-glitch-duration) steps(1, end) 1;
+  }
+  .hero-glitch-cyan-tint.hero-glitch-play {
+    animation: hero-glitch-cyan-flicker var(--hero-glitch-duration) steps(1, end) 1;
+  }
+  .hero-glitch-magenta-tint.hero-glitch-play {
+    animation: hero-glitch-magenta-flicker var(--hero-glitch-duration) steps(1, end) 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-glitch-play {
+      animation: none !important;
+      opacity: 0 !important;
+    }
+  }
+}
+
+/* Base charcoal frame: quick clipped flickers first (the "glitch"),
+   then one held full-frame reveal near the end (~600-850ms) that
+   lingers long enough to actually register as another photo. */
+@keyframes hero-glitch-base-flicker {
+  0%, 100% { opacity: 0; clip-path: inset(0 0 0 0); transform: translateX(0); }
+  1.6%  { opacity: 1; clip-path: inset(8% 0 62% 0);  transform: translateX(-1%); }
+  7%    { opacity: 0; }
+  12.4% { opacity: 1; clip-path: inset(55% 0 6% 0);  transform: translateX(1.2%); }
+  17.9% { opacity: 0; }
+  25.7% { opacity: 1; clip-path: inset(20% 0 45% 0); transform: translateX(-0.8%); }
+  31.1% { opacity: 0; }
+  38.9% { opacity: 1; clip-path: inset(70% 0 3% 0);  transform: translateX(1%); }
+  44.3% { opacity: 0; }
+  52.9% { opacity: 1; clip-path: inset(4% 0 78% 0);  transform: translateX(-1.2%); }
+  58.3% { opacity: 0; }
+  66.7% { opacity: 1; clip-path: inset(0 0 0 0);     transform: translateX(0); }
+  94.4% { opacity: 0; }
+}
+
+/* RGB-split fringe layers: subtle, only near the slice edges - a hint
+   of chromatic aberration, not a color wash over the whole image. */
+@keyframes hero-glitch-cyan-flicker {
+  0%, 100% { opacity: 0; transform: translateX(0); }
+  1.6%  { opacity: 0.35; transform: translateX(-3px); }
+  7%    { opacity: 0; }
+  12.4% { opacity: 0.3;  transform: translateX(3px); }
+  17.9% { opacity: 0; }
+  25.7% { opacity: 0.3;  transform: translateX(-2px); }
+  31.1% { opacity: 0; }
+  38.9% { opacity: 0.3;  transform: translateX(3px); }
+  44.3% { opacity: 0; }
+  52.9% { opacity: 0.3;  transform: translateX(-3px); }
+  58.3% { opacity: 0; }
+  66.7% { opacity: 0.2;  transform: translateX(2px); }
+  94.4% { opacity: 0; }
+}
+
+@keyframes hero-glitch-magenta-flicker {
+  0%, 100% { opacity: 0; transform: translateX(0); }
+  1.6%  { opacity: 0.3;  transform: translateX(3px); }
+  7%    { opacity: 0; }
+  12.4% { opacity: 0.28; transform: translateX(-3px); }
+  17.9% { opacity: 0; }
+  25.7% { opacity: 0.28; transform: translateX(2px); }
+  31.1% { opacity: 0; }
+  38.9% { opacity: 0.28; transform: translateX(-3px); }
+  44.3% { opacity: 0; }
+  52.9% { opacity: 0.28; transform: translateX(3px); }
+  58.3% { opacity: 0; }
+  66.7% { opacity: 0.18; transform: translateX(-2px); }
+  94.4% { opacity: 0; }
 }

@@ -12,40 +12,23 @@ from engine.schema import CareerData
 
 logger = logging.getLogger(__name__)
 
-TECH_KEYWORDS = [
-    "TypeScript",
-    "JavaScript",
-    "Vue.js",
-    "Vue",
-    "React",
-    "AngularJS",
-    "Angular",
-    "Node.js",
-    "Python",
-    "C#/.NET",
-    "Java",
-    "Kotlin",
-    "Scala",
-    "SQL",
-    "NoSQL",
-    "Git",
-    "GitLab",
-    "Azure DevOps",
-    "Docker",
-    "Scrum",
-]
+def make_keyword_bolder(keywords: list[str]):
+    """Build a Jinja filter that bolds whole-word occurrences of `keywords`.
 
+    Longer keywords are tried first, so "Vue.js" wins over "Vue".
+    """
+    if not keywords:
+        return lambda value: Markup(escape(value or ""))
 
-def bold_tech(value: str | None) -> Markup:
-    """Bold known technology names in a sentence for better scanability."""
-    if not value:
-        return Markup("")
+    alternatives = "|".join(re.escape(k) for k in sorted(keywords, key=len, reverse=True))
+    pattern = re.compile(rf"(?<!\w)({alternatives})(?!\w)")
 
-    text = escape(str(value))
-    for keyword in sorted(TECH_KEYWORDS, key=len, reverse=True):
-        pattern = re.compile(rf"(?<!\\w){re.escape(keyword)}(?!\\w)")
-        text = Markup(pattern.sub(lambda m: f"<strong>{m.group(0)}</strong>", str(text)))
-    return Markup(text)
+    def bold_keywords(value: str | None) -> Markup:
+        if not value:
+            return Markup("")
+        return Markup(pattern.sub(lambda m: f"<strong>{m.group(0)}</strong>", str(escape(value))))
+
+    return bold_keywords
 
 
 def format_date(value: str | int | None) -> str:
@@ -90,7 +73,7 @@ def render_cv_html(data: CareerData, template_path: Path) -> str:
 
     env = Environment(loader=FileSystemLoader(template_dir), autoescape=True)
     env.filters["format_date"] = format_date
-    env.filters["bold_tech"] = bold_tech
+    env.filters["bold_keywords"] = make_keyword_bolder(data.keywords)
     template = env.get_template(template_name)
 
     return template.render(data=data)

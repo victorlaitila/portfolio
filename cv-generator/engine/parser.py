@@ -79,16 +79,13 @@ def _parse_experience(data: dict, index: int) -> Experience:
     )
 
 
-def _filter_detail_items(items: list, target: str | None) -> list[str]:
-    """Filter a details list where items may be a string or {text, targets}."""
-    filtered = []
-    for item in items:
-        if isinstance(item, dict):
-            if _has_target(item, target):
-                filtered.append(item.get("text", ""))
-            continue
-        filtered.append(item)
-    return filtered
+def _filter_targeted(items: list, target: str | None) -> list:
+    """Filter a list whose items are plain values or dicts with an optional `targets` key."""
+    return [item for item in items if not isinstance(item, dict) or _has_target(item, target)]
+
+
+def _detail_text(item: str | dict) -> str:
+    return item.get("text", "") if isinstance(item, dict) else item
 
 
 def _parse_education(data: dict, index: int, target: str | None = None) -> Education:
@@ -100,7 +97,7 @@ def _parse_education(data: dict, index: int, target: str | None = None) -> Educa
         start=_require(data, "start", ctx),
         end=_require(data, "end", ctx),
         field=data.get("field"),
-        details=_filter_detail_items(data.get("details", []), target),
+        details=[_detail_text(d) for d in _filter_targeted(data.get("details", []), target)],
         targets=data.get("targets"),
     )
 
@@ -117,32 +114,13 @@ def _parse_project(data: dict, index: int) -> Project:
     )
 
 
-def _filter_targeted_list(items: list, target: str | None) -> list:
-    """Filter a list where items may have an optional `targets` key."""
-    filtered = []
-    for item in items:
-        if isinstance(item, dict):
-            if _has_target(item, target):
-                filtered.append(item)
-            continue
-        filtered.append(item)
-    return filtered
-
-
 def _parse_skills(data: dict, target: str | None = None) -> Skills:
     """Parse skills section."""
-    frontend = _filter_targeted_list(data.get("frontend", []), target)
-    backend = _filter_targeted_list(data.get("backend", []), target)
-    technologies = _filter_targeted_list(data.get("technologies", []), target)
-    practices = _filter_targeted_list(data.get("practices", []), target)
-    ai = _filter_targeted_list(data.get("ai", []), target)
-
     return Skills(
-        frontend=frontend,
-        backend=backend,
-        technologies=technologies,
-        practices=practices,
-        ai=ai,
+        **{
+            category: _filter_targeted(data.get(category, []), target)
+            for category in ("frontend", "backend", "technologies", "practices", "ai")
+        }
     )
 
 
@@ -202,6 +180,10 @@ def parse_career_yaml(path: Path, target: str | None = None) -> CareerData:
 
     additional = _parse_additional(raw.get("additional", {}))
 
+    keywords = raw.get("keywords", [])
+    if not isinstance(keywords, list):
+        raise ParseError("'keywords' must be a list")
+
     return CareerData(
         personal=personal,
         summary=summary,
@@ -210,4 +192,5 @@ def parse_career_yaml(path: Path, target: str | None = None) -> CareerData:
         skills=skills,
         projects=projects,
         additional=additional,
+        keywords=[str(k) for k in keywords],
     )

@@ -22,12 +22,14 @@ with Jinja2/WeasyPrint for the CV.
   - `targets: [cv]` or `[portfolio]` limits an entry to one output. Leaving `targets` out means both.
   - Site-only content that isn't career data (tagline, About text, project image imports) lives in
     `src/data/extensions.ts`.
+  - `keywords` in `career.yaml` lists the technology names shown in bold in experience highlights,
+    on both the site and the CV.
   - Any `career.yaml` change that affects CV content needs `npm run generate:cv` and the updated PDF
     committed. `tests/cv` fails otherwise. For content changes, use the `update-career-content` skill.
 - **The site is served under `/portfolio/`.** Files in `public/` must be linked as
   `` `${import.meta.env.BASE_URL}file` ``. Router links use `<Link>`, never `<a href="/">`.
-- `src/pages/Index.tsx` stacks the section components, separated by `<SectionDivider />`. Each
-  section's `id` is a nav anchor in `Navigation.tsx`.
+- `src/pages/Index.tsx` stacks the section components, separated by `<SectionDivider />`. Section
+  ids live in `SECTION_IDS` (`src/config/site.ts`). Use them for anchors instead of string literals.
 - **Pushing to `main` deploys to the live site** (`.github/workflows/ci.yml`), but only once all
   checks pass. There is no manual deploy.
 - The contact form uses EmailJS. Its `VITE_EMAILJS_*` keys come from the local `.env` (gitignored)
@@ -35,13 +37,15 @@ with Jinja2/WeasyPrint for the CV.
 
 ## Conventions
 
-- New sections follow the existing pattern (see `Skills.tsx`):
-  - wrapper: `<section id="..." className="py-20 relative overflow-hidden">`
-  - `<SectionBackground src={...} />` with an image from `src/assets/`
-  - `container mx-auto px-4 sm:px-6 lg:px-8 relative z-10`
-  - `<SectionHeader title="..." />`
-- Headings and labels use the Orbitron font via `style={{ fontFamily: "Orbitron, sans-serif" }}`.
-  Cards use `bg-background/80 border-border/50 hover:border-primary/40` with `<Shimmer />`.
+- New sections use `<Section id={SECTION_IDS.x} title="..." background={img}>` (`Section.tsx`). It
+  renders the wrapper, the background image from `src/assets/`, the container and the
+  `<SectionHeader />`.
+- Content cards use `<GlowCard>` (border, glow and `<Shimmer />` on hover). Timeline entries use
+  `<TimelineItem>` with `<BulletList>`.
+- Headings and labels use the Orbitron font through the `font-display` class. Don't set
+  `fontFamily` inline.
+- Images go in `src/assets/` as WebP, sized for display (full-bleed backgrounds ~2560px wide).
+  Below-the-fold images use `loading="lazy"`.
 - Use theme tokens (`primary`, `accent`, `muted-foreground`, defined in `src/index.css`), not raw
   colours. The site is dark-only.
 - External links: `target="_blank" rel="noopener noreferrer"`. The e2e tests enforce this.

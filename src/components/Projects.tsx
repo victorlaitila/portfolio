@@ -1,96 +1,76 @@
-import { Card } from "@/components/ui/card";
 import { ExternalLink, Github, Youtube } from "lucide-react";
-import Shimmer from "./ui/shimmer";
-import SectionHeader from "./SectionHeader";
-import { SectionBackground } from "./SectionBackground";
+import { SECTION_IDS } from "@/config/site";
 import { getCareerData } from "@/data";
-import backgroundImg from "@/assets/background-projects.png";
+import type { Project } from "@/data/types";
+import backgroundImg from "@/assets/background-projects.webp";
+import { GlowCard } from "./GlowCard";
+import { Section } from "./Section";
 
-export function Projects() {
-  const career = getCareerData();
+const EXTERNAL = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-  const projects = career.projects.map((project) => ({
-    title: project.name,
-    description: project.description,
-    image: project.image,
-    tags: project.tags || [],
-    github: project.url || undefined,
-    demo: project.demo,
-    video: project.video,
-  }));
+const PROJECT_LINKS = [
+  { field: "demo", label: "Demo", icon: ExternalLink, iconClassName: "h-4 w-4" },
+  { field: "url", label: "GitHub", icon: Github, iconClassName: "h-4 w-4" },
+  { field: "video", label: "Video", icon: Youtube, iconClassName: "h-6 w-4" },
+] as const;
 
+function ProjectCard({ project }: { project: Project }) {
   return (
-    <section id="projects" className="py-20 relative overflow-hidden">
-      <SectionBackground src={backgroundImg} />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader title="Featured Projects" />
+    <GlowCard>
+      <a href={project.demo ?? project.video ?? project.url ?? undefined} {...EXTERNAL}>
+        <div className="relative overflow-hidden aspect-video">
+          <img
+            src={project.image}
+            alt={project.name}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover"
+          />
+          {project.badge && (
+            <div className="absolute top-2 right-2">
+              <span className="text-xs px-2 py-1 bg-primary text-primary-foreground rounded-md">{project.badge}</span>
+            </div>
+          )}
+        </div>
+      </a>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <Card 
-                key={index}
-                className="relative overflow-hidden group bg-background/80 border-border/50 hover:border-primary/40 transition-all duration-500 animate-scale-in group hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]"
-              > 
-                <Shimmer />
-                <a href={project.demo || project.video} target="_blank" rel="noopener noreferrer">
-                  <div className="relative overflow-hidden aspect-video">
-                    <img 
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover"
-                    />
-                    {/* TODO: Remove this badge once the project is out of beta */}
-                    {project.title === "Dependency Risk Scanner" && (
-                      <div className="absolute top-2 right-2">
-                        <span className="text-xs px-2 py-1 bg-primary text-primary-foreground rounded-md">
-                          Beta
-                        </span>
-                      </div>
-                    )}
-                  </div>
+      <div className="p-6 space-y-4">
+        <div className="flex items-center gap-4">
+          <h3 className="font-display text-base font-bold">{project.name}</h3>
+          {PROJECT_LINKS.map(({ field, label, icon: Icon, iconClassName }) => {
+            const href = project[field];
+            return (
+              href && (
+                <a key={field} href={href} aria-label={label} {...EXTERNAL}>
+                  <Icon className={`${iconClassName} text-primary`} />
                 </a>
-
-                <div className="p-6 space-y-4">
-                  <div className="flex items-center gap-4">
-                    <h3 className="text-base font-bold" style={{ fontFamily: "Orbitron, sans-serif" }}>
-                      {project.title}
-                    </h3>
-                      {project.demo && (
-                        <a href={project.demo} target="_blank" rel="noopener noreferrer" aria-label="Demo">
-                          <ExternalLink className="h-4 w-4 text-primary" />
-                        </a>
-                      )}
-                      {project.github && (
-                        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                          <Github className="h-4 w-4 text-primary" />
-                        </a>
-                      )}
-                      {project.video && (
-                        <a href={project.video} target="_blank" rel="noopener noreferrer" aria-label="Video">
-                          <Youtube className="h-6 w-4 text-primary" />
-                        </a>
-                      )}
-                   </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span 
-                        key={tag}
-                        className="text-xs px-2 py-1 bg-secondary text-secondary-foreground rounded-md"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
+              )
+            );
+          })}
+        </div>
+        <p className="text-muted-foreground text-sm leading-relaxed">{project.description}</p>
+        <div className="flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <span key={tag} className="text-xs px-2 py-1 bg-secondary text-secondary-foreground rounded-md">
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
-    </section>
+    </GlowCard>
+  );
+}
+
+export function Projects() {
+  const { projects } = getCareerData();
+
+  return (
+    <Section id={SECTION_IDS.projects} title="Featured Projects" background={backgroundImg}>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projects.map((project) => (
+          <ProjectCard key={project.name} project={project} />
+        ))}
+      </div>
+    </Section>
   );
 }

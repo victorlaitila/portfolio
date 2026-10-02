@@ -1,9 +1,10 @@
 import { expect, test } from "@playwright/test";
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
+import { CV_FILENAME, SECTION_IDS } from "../../src/config/site";
 import { personal, projects } from "./career";
 
-const SECTIONS = ["home", "about", "skills", "projects", "experience", "education", "contact"];
+const SECTIONS = Object.values(SECTION_IDS);
 
 test("renders every section without errors", async ({ page }) => {
   const errors: string[] = [];
@@ -57,11 +58,11 @@ test("Download CV serves the committed PDF", async ({ page }) => {
 
   const [download] = await Promise.all([page.waitForEvent("download"), link.click()]);
 
-  expect(download.suggestedFilename()).toBe("Victor-Laitila-Software-Engineer-CV.pdf");
+  expect(download.suggestedFilename()).toBe(CV_FILENAME);
   const file = await readFile(await download.path());
   expect(file.subarray(0, 5).toString()).toBe("%PDF-");
   // The deployed file must be the committed one, which tests/cv checks against career.yaml.
-  expect(file.equals(await readFile("public/Victor-Laitila-Software-Engineer-CV.pdf"))).toBe(true);
+  expect(file.equals(await readFile(`public/${CV_FILENAME}`))).toBe(true);
 });
 
 test("unknown URLs show the 404 page with a working way back", async ({ page }) => {

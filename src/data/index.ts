@@ -1,113 +1,64 @@
 /**
- * Career data loader - loads data from career.yaml.
+ * Career data loader.
  *
- * career.yaml is the canonical source of truth for both this site and the
- * CV PDF (generated via `npm run generate:cv`, see cv-generator/).
- *
- * Target filtering: Items with `targets: [portfolio]` or `targets: [cv, portfolio]`
- * are included. Items with only `targets: [cv]` are excluded.
+ * career.yaml is the single source of truth for both this site and the CV PDF (generated with
+ * `npm run generate:cv`, see cv-generator/). Entries limited to `targets: [cv]` are dropped here.
  */
 
-import yaml from 'js-yaml';
-import type { CareerData, PortfolioExtensions, Project } from './types';
-import careerYamlRaw from './career.yaml?raw';
-import { portfolioExtensions } from './extensions';
+import yaml from "js-yaml";
+import careerYamlRaw from "./career.yaml?raw";
+import { portfolioExtensions, type PortfolioExtensions } from "./extensions";
+import { isForPortfolio } from "./targets";
+import {
+  SKILL_CATEGORIES,
+  type CareerData,
+  type CareerYaml,
+  type DetailEntry,
+  type SkillCategory,
+  type SkillEntry,
+} from "./types";
 
-const rawCareerData = yaml.load(careerYamlRaw) as CareerData;
-
-/**
- * Check if an item should appear in the portfolio.
- * Default is true if targets is not specified.
- */
-function hasPortfolioTarget(targets?: string[]): boolean {
-  if (!targets || targets.length === 0) return true;
-  return targets.includes('portfolio');
+/** Flattens a list of plain or `{text|name, targets}` entries to the strings shown on the site. */
+function pickPortfolioText(entries: Array<DetailEntry | SkillEntry> = []): string[] {
+  return entries.flatMap((entry) => {
+    if (typeof entry === "string") return [entry];
+    if (!isForPortfolio(entry.targets)) return [];
+    return ["text" in entry ? entry.text : entry.name];
+  });
 }
 
-/**
- * Get skill name from skill item (can be string or object).
- */
-function getSkillName(skill: string | { name: string; targets?: string[] }): string | null {
-  if (typeof skill === 'string') return skill;
-  if (!hasPortfolioTarget(skill.targets)) return null;
-  return skill.name;
-}
-
-/**
- * Filter skills array for portfolio target and extract names.
- */
-function filterSkills(skills: Array<string | { name: string; targets?: string[] }>): string[] {
-  return skills
-    .map(getSkillName)
-    .filter((name): name is string => name !== null);
-}
-
-/**
- * Get detail text from a detail item (can be string or object).
- */
-function getDetailText(detail: string | { text: string; targets?: string[] }): string | null {
-  if (typeof detail === 'string') return detail;
-  if (!hasPortfolioTarget(detail.targets)) return null;
-  return detail.text;
-}
-
-/**
- * Filter a details array for portfolio target and extract text.
- */
-function filterDetails(details?: Array<string | { text: string; targets?: string[] }>): string[] {
-  return (details || [])
-    .map(getDetailText)
-    .filter((text): text is string => text !== null);
-}
-
-/**
- * Get the full career data filtered for portfolio and with images resolved.
- */
-export function getCareerData(): CareerData & { projects: Project[] } {
-  // Filter experience for portfolio target
-  const experience = rawCareerData.experience
-    .filter(exp => hasPortfolioTarget(exp.targets));
-
-  // Filter education for portfolio target, and their details similarly
-  const education = rawCareerData.education
-    .filter(edu => hasPortfolioTarget(edu.targets))
-    .map(edu => ({ ...edu, details: filterDetails(edu.details) }));
-
-  // Filter skills for portfolio target
-  const skills = {
-    frontend: filterSkills(rawCareerData.skills.frontend),
-    backend: filterSkills(rawCareerData.skills.backend),
-    technologies: filterSkills(rawCareerData.skills.technologies),
-    practices: filterSkills(rawCareerData.skills.practices),
-  };
-
-  // Filter and process projects for portfolio target
-  const projects = (rawCareerData.projects || [])
-    .filter(proj => hasPortfolioTarget(proj.targets))
-    .map(project => ({
-      ...project,
-      // Resolve image filename to imported asset
-      image: project.image 
-        ? portfolioExtensions.projectImages[project.image] || project.image
-        : undefined,
-    }));
-
+function resolveCareerData(raw: CareerYaml): CareerData {
   return {
-    personal: rawCareerData.personal,
-    summary: rawCareerData.summary,
-    experience,
-    education,
-    skills,
-    projects,
+    personal: raw.personal,
+    summary: raw.summary,
+    keywords: raw.keywords ?? [],
+    experience: raw.experience.filter((exp) => isForPortfolio(exp.targets)),
+    education: raw.education
+      .filter((edu) => isForPortfolio(edu.targets))
+      .map((edu) => ({ ...edu, details: pickPortfolioText(edu.details) })),
+    skills: Object.fromEntries(
+      SKILL_CATEGORIES.map((category) => [category, pickPortfolioText(raw.skills[category])]),
+    ) as Record<SkillCategory, string[]>,
+    projects: (raw.projects ?? [])
+      .filter((project) => isForPortfolio(project.targets))
+      .map((project) => ({
+        ...project,
+        image: project.image ? (portfolioExtensions.projectImages[project.image] ?? project.image) : undefined,
+        tags: project.tags ?? [],
+      })),
   };
 }
 
-/**
- * Get portfolio-specific extensions (about section, tagline, etc.)
- */
+const careerData = resolveCareerData(yaml.load(careerYamlRaw) as CareerYaml);
+
+/** Career data from career.yaml, filtered for the portfolio. */
+export function getCareerData(): CareerData {
+  return careerData;
+}
+
+/** Site-only content that isn't career data (tagline, About text, project images). */
 export function getPortfolioExtensions(): PortfolioExtensions {
   return portfolioExtensions;
 }
 
-export { portfolioExtensions };
-export type { CareerData, PortfolioExtensions } from './types';
+export type { CareerData, PortfolioExtensions };

@@ -24,6 +24,29 @@ summary: |
   environments. Backed by a strong academic foundation with top-tier GPAs and hands-on experience across
   the full software development lifecycle.
 
+# Technology names shown in bold wherever they appear in experience highlights (site and CV).
+keywords:
+  - TypeScript
+  - JavaScript
+  - Vue.js
+  - Vue
+  - React
+  - AngularJS
+  - Angular
+  - Node.js
+  - Python
+  - C#/.NET
+  - Java
+  - Kotlin
+  - Scala
+  - SQL
+  - NoSQL
+  - Git
+  - GitLab
+  - Azure DevOps
+  - Docker
+  - Scrum
+
 experience:
   - company: Gofore
     title: Software Consultant
@@ -126,7 +149,7 @@ projects:
     description: A full-stack web application that extracts and summarizes content from URLs, uploaded files, and free text using advanced AI models. Users can generate summaries in multiple modes, extract keywords automatically, save summaries to a personal library, access text-to-speech playback, and easily copy, download, or share results. The app combines web scraping and PDF extraction with Hugging Face's transformer models to deliver concise, non-destructive summaries, helping readers quickly grasp article content without losing important context.
     url: https://github.com/victorlaitila/ai-article-summarizer
     targets: [portfolio]
-    image: article-summarizer-thumbnail.png
+    image: article-summarizer-thumbnail.webp
     tags:
       - React
       - TypeScript
@@ -145,7 +168,8 @@ projects:
     demo: https://victorlaitila.github.io/dependency-risk-scanner/
     description: A full-stack web application that helps developers understand the security and structural risks within their project dependencies. Users upload lockfiles to visualize dependency relationships, identify high-impact packages, and assess known vulnerability exposure. The app combines graph-based impact analysis with contextual AI insights to provide both technical data and concise explanations for dependency-risk decisions.
     targets: [portfolio]
-    image: dependency-risk-scanner-thumbnail.png
+    image: dependency-risk-scanner-thumbnail.webp
+    badge: Beta
     tags:
       - React
       - TypeScript
@@ -159,7 +183,7 @@ projects:
     description: A web application that lets users explore the world through music, playing a curated soundtrack preview for whichever country they click on an interactive map. Each click reveals a track chosen to capture that country's musical character, giving users a fast, playful way to browse the globe by sound. The app draws from a curated dataset sourced from iTunes to ensure every country plays a consistent, high-quality track instead of a random or irrelevant result.
     url: https://github.com/victorlaitila/sound-atlas
     targets: [portfolio]
-    image: sound-atlas-thumbnail.png
+    image: sound-atlas-thumbnail.webp
     tags:
       - React
       - TypeScript

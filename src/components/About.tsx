@@ -1,89 +1,44 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Puzzle, Users, Code2, Brain, Footprints, Dumbbell } from "lucide-react";
-import Shimmer from "./ui/shimmer";
-import SectionHeader from "./SectionHeader";
-import { SectionBackground } from "./SectionBackground";
+import { CardContent } from "@/components/ui/card";
+import { SECTION_IDS } from "@/config/site";
 import { getPortfolioExtensions } from "@/data";
-import backgroundImg from "@/assets/background-general.png";
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Code2,
-  Puzzle,
-  Users,
-  Brain,
-};
+import backgroundImg from "@/assets/background-general.webp";
+import { GlowCard } from "./GlowCard";
+import { Section } from "./Section";
 
 export function About() {
-  const extensions = getPortfolioExtensions();
-  const { about } = extensions;
-
-  const highlights = about.highlights.map(h => ({
-    icon: iconMap[h.icon] || Code2,
-    title: h.title,
-  }));
+  const { about } = getPortfolioExtensions();
 
   return (
-    <section id="about" className="py-20 relative overflow-hidden ">
-      <SectionBackground src={backgroundImg} />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader title="About Me" />
-          {/* Badges Row */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {highlights.map((item, index) => (
-              <Badge
-                key={index}
-                variant="secondary"
-                className="px-6 py-3 text-sm font-medium bg-background/80 hover:bg-background/80 border border-border/50"
-                style={{ fontFamily: "Orbitron, sans-serif" }}
-              >
-                <item.icon className="h-5 w-5 mr-2 text-primary" />
-                {item.title}
-              </Badge>
-            ))}
-          </div>
-
-          {/* Description Cards */}
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="relative bg-background/80 border-border/50 hover:border-primary/40 transition-all duration-500 animate-scale-in overflow-hidden group hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]">
-              <Shimmer />
-              <CardContent className="relative p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <Footprints className="h-6 w-6 text-primary" />
-                  <h3
-                    className="text-lg font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
-                    style={{ fontFamily: "Orbitron, sans-serif" }}
-                  >
-                    My Journey
-                  </h3>
-                </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  {about.journey}
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="relative bg-background/80 border-border/50 hover:border-primary/40 transition-all duration-500 animate-scale-in overflow-hidden group hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]">
-              <Shimmer />
-              <CardContent className="relative p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <Dumbbell className="h-6 w-6 text-primary" />
-                  <h3
-                    className="text-lg font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
-                    style={{ fontFamily: "Orbitron, sans-serif" }}
-                  >
-                    Beyond Tech
-                  </h3>
-                </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  {about.beyondTech}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+    <Section id={SECTION_IDS.about} title="About Me" background={backgroundImg}>
+      <div className="flex flex-wrap justify-center gap-4 mb-12">
+        {about.highlights.map(({ icon: Icon, title }) => (
+          <Badge
+            key={title}
+            variant="secondary"
+            className="font-display px-6 py-3 text-sm font-medium bg-background/80 hover:bg-background/80 border border-border/50"
+          >
+            <Icon className="h-5 w-5 mr-2 text-primary" />
+            {title}
+          </Badge>
+        ))}
       </div>
-    </section>
+
+      <div className="grid md:grid-cols-2 gap-8">
+        {about.stories.map(({ icon: Icon, title, text }) => (
+          <GlowCard key={title}>
+            <CardContent className="relative p-8">
+              <div className="flex items-center gap-3 mb-4">
+                <Icon className="h-6 w-6 text-primary" />
+                <h3 className="font-display text-lg font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  {title}
+                </h3>
+              </div>
+              <p className="text-muted-foreground leading-relaxed">{text}</p>
+            </CardContent>
+          </GlowCard>
+        ))}
+      </div>
+    </Section>
   );
 }

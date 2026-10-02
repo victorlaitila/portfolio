@@ -1,13 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import yaml from 'js-yaml';
 import careerYamlRaw from '@/data/career.yaml?raw';
-import { getCareerData, portfolioExtensions } from '@/data';
-import type { CareerData } from '@/data/types';
+import { getCareerData, getPortfolioExtensions } from '@/data';
+import type { CareerYaml } from '@/data/types';
+import { isForPortfolio } from '@/data/targets';
 
 // career.yaml is hand-edited and drives both the site and the CV, so these
 // tests guard against edits that would silently break the rendered portfolio.
 
-const raw = yaml.load(careerYamlRaw) as CareerData;
+const raw = yaml.load(careerYamlRaw) as CareerYaml;
 const career = getCareerData();
 
 const YEAR_MONTH = /^\d{4}-(0[1-9]|1[0-2])$/;
@@ -39,9 +40,7 @@ describe('career.yaml', () => {
 
 describe('getCareerData', () => {
   it('keeps exactly the experience entries targeting the portfolio', () => {
-    const expected = raw.experience.filter(
-      (exp) => !exp.targets || exp.targets.includes('portfolio'),
-    );
+    const expected = raw.experience.filter((exp) => isForPortfolio(exp.targets));
     expect(career.experience).toEqual(expected);
   });
 
@@ -59,7 +58,7 @@ describe('getCareerData', () => {
     for (const project of career.projects) {
       expect(project.image, `${project.name} has no image`).toBeTruthy();
       expect(
-        Object.keys(portfolioExtensions.projectImages),
+        Object.keys(getPortfolioExtensions().projectImages),
         `${project.name}: add ${project.image} to projectImages in extensions.ts`,
       ).toContain(raw.projects!.find((p) => p.name === project.name)!.image);
     }

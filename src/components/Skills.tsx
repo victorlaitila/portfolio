@@ -1,89 +1,59 @@
-import { Card } from "@/components/ui/card";
+import { CloudUpload, DatabaseBackup, SquareCode, Wrench, type LucideIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Wrench, DatabaseBackup, SquareCode, CloudUpload } from "lucide-react";
-import Shimmer from "./ui/shimmer";
-import SectionHeader from "./SectionHeader";
-import { SectionBackground } from "./SectionBackground";
+import { SECTION_IDS } from "@/config/site";
 import { getCareerData } from "@/data";
 import { getSkillIcon } from "@/data/skillIcons";
-import backgroundImg from "@/assets/background-skills.png";
+import { SKILL_CATEGORIES, type SkillCategory } from "@/data/types";
+import backgroundImg from "@/assets/background-skills.webp";
+import { GlowCard } from "./GlowCard";
+import { Section } from "./Section";
+
+const CATEGORY_HEADINGS: Record<SkillCategory, { title: string; icon: LucideIcon }> = {
+  frontend: { title: "Frontend", icon: SquareCode },
+  backend: { title: "Backend & Data", icon: DatabaseBackup },
+  technologies: { title: "Cloud, Testing & DevOps", icon: CloudUpload },
+  practices: { title: "Engineering Practices", icon: Wrench },
+};
 
 export function Skills() {
-  const career = getCareerData();
-  const { skills } = career;
-
-  const skillCategories = [
-    {
-      title: "Frontend",
-      icon: SquareCode,
-      skills: skills.frontend,
-    },
-    {
-      title: "Backend & Data",
-      icon: DatabaseBackup,
-      skills: skills.backend,
-    },
-    {
-      title: "Cloud, Testing & DevOps",
-      icon: CloudUpload,
-      skills: skills.technologies,
-    },
-    {
-      title: "Engineering Practices",
-      icon: Wrench,
-      skills: skills.practices,
-    },
-  ].filter(cat => cat.skills.length > 0);
+  const { skills } = getCareerData();
+  const categories = SKILL_CATEGORIES.filter((category) => skills[category].length > 0);
 
   return (
-    <section id="skills" className="py-20 relative overflow-hidden">
-      <SectionBackground src={backgroundImg} />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader title="Skills & Tech Stack" />
+    <Section id={SECTION_IDS.skills} title="Skills & Tech Stack" background={backgroundImg}>
+      <div className="grid md:grid-cols-2 gap-8">
+        {categories.map((category) => {
+          const { title, icon: Icon } = CATEGORY_HEADINGS[category];
+          return (
+            <GlowCard key={category} className="p-8">
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-6">
+                  <Icon className="h-6 w-6 text-primary" />
+                  <h3 className="font-display text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    {title}
+                  </h3>
+                </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {skillCategories.map((category, index) => (
-              <Card 
-                key={index}
-                className="group relative p-8 bg-background/80 border-border/50 hover:border-primary/40 transition-all duration-500 animate-scale-in overflow-hidden group hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]"
-              >                  
-                <Shimmer />
-                <div className="relative z-10">
-                  {/* Icon header with enhanced styling */}
-                  <div className="flex items-center gap-3 mb-6">
-                    <category.icon className="h-6 w-6 text-primary" />
-                    <h3
-                      className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
-                      style={{ fontFamily: "Orbitron, sans-serif" }}
-                    >
-                      {category.title}
-                    </h3>
-                  </div>
-                  
-                  {/* Skills badges */}
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill) => {
-                      const skillName = typeof skill === "string" ? skill : skill.name;
-                      const SkillIcon = getSkillIcon(skillName);
-                      return (
+                <div className="flex flex-wrap gap-2">
+                  {skills[category].map((skill) => {
+                    const SkillIcon = getSkillIcon(skill);
+                    return (
                       <Badge
-                        key={skillName}
+                        key={skill}
                         variant="secondary"
                         className="gap-1.5 px-4 py-2 text-sm font-medium bg-background/80 hover:bg-background/80 border border-border/50 cursor-default"
                       >
                         {SkillIcon && <SkillIcon className="h-3.5 w-3.5 shrink-0 opacity-80" />}
-                        {skillName}
+                        {skill}
                       </Badge>
-                      );
-                    })}
-                  </div>
+                    );
+                  })}
                 </div>
-              </Card>
-            ))}
-          </div>
-        </div>
+              </div>
+            </GlowCard>
+          );
+        })}
       </div>
-    </section>
+    </Section>
   );
 }

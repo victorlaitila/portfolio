@@ -1,10 +1,22 @@
 /**
- * Career data types - matches career.yaml and cv-generator's schema.
+ * Career data types.
  *
- * Target system: Items can have `targets: ['cv', 'portfolio']` to control
- * where they appear. The portfolio filters for items with 'portfolio' target;
- * cv-generator filters for items with 'cv' target.
+ * `CareerYaml` mirrors career.yaml as written (and cv-generator's schema). `CareerData` is what
+ * `getCareerData()` returns: filtered to portfolio entries, with targeted items flattened to
+ * plain strings and project images resolved to asset URLs.
  */
+
+import type { Target } from "./targets";
+
+interface Targeted {
+  targets?: Target[];
+}
+
+export type DetailEntry = string | ({ text: string } & Targeted);
+export type SkillEntry = string | ({ name: string } & Targeted);
+
+export const SKILL_CATEGORIES = ["frontend", "backend", "technologies", "practices"] as const;
+export type SkillCategory = (typeof SKILL_CATEGORIES)[number];
 
 export interface PersonalLinks {
   github: string | null;
@@ -20,65 +32,62 @@ export interface Personal {
   links: PersonalLinks;
 }
 
-export interface Experience {
+export interface Experience extends Targeted {
   company: string;
   title: string;
   location: string;
   start: string;
   end: string;
   highlights: string[];
-  targets?: string[];
 }
 
-export interface Education {
+interface EducationBase extends Targeted {
   institution: string;
   degree: string;
   field: string | null;
   start: string;
   end: string;
-  details?: Array<string | { text: string; targets?: string[] }>;
-  targets?: string[];
 }
 
-export interface Skills {
-  frontend: Array<string | { name: string; targets?: string[] }>;
-  backend: Array<string | { name: string; targets?: string[] }>;
-  technologies: Array<string | { name: string; targets?: string[] }>;
-  practices: Array<string | { name: string; targets?: string[] }>;
-}
-
-export interface Project {
+export interface ProjectYaml extends Targeted {
   name: string;
   description: string;
+  /** GitHub repository. */
   url?: string | null;
-  highlights?: string[];
-  targets?: string[];
-  // Portfolio-specific fields
-  image?: string;
-  tags?: string[];
   demo?: string;
   video?: string;
+  /** Filename in src/assets, mapped to an import in extensions.ts. */
+  image?: string;
+  /** Short label shown over the thumbnail, e.g. "Beta". */
+  badge?: string;
+  tags?: string[];
+}
+
+export interface CareerYaml {
+  personal: Personal;
+  summary: string;
+  /** Technology names shown in bold in experience highlights, on the site and the CV. */
+  keywords?: string[];
+  experience: Experience[];
+  education: Array<EducationBase & { details?: DetailEntry[] }>;
+  skills: Record<SkillCategory, SkillEntry[]>;
+  projects?: ProjectYaml[];
+}
+
+export type Education = EducationBase & { details: string[] };
+
+export interface Project extends Omit<ProjectYaml, "image" | "tags"> {
+  /** Resolved asset URL. */
+  image?: string;
+  tags: string[];
 }
 
 export interface CareerData {
   personal: Personal;
   summary: string;
+  keywords: string[];
   experience: Experience[];
   education: Education[];
-  skills: Skills;
-  projects?: Project[];
-}
-
-/**
- * Portfolio-specific extensions for data that career-engine doesn't manage.
- */
-export interface PortfolioExtensions {
-  tagline: string;
-  about: {
-    highlights: Array<{ icon: string; title: string }>;
-    journey: string;
-    beyondTech: string;
-  };
-  // Map image filenames to imported image assets
-  projectImages: Record<string, string>;
+  skills: Record<SkillCategory, string[]>;
+  projects: Project[];
 }

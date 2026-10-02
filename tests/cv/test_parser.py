@@ -5,7 +5,7 @@ import textwrap
 import pytest
 
 from engine.parser import ParseError, parse_career_yaml
-from engine.pdf import format_date
+from engine.pdf import format_date, make_keyword_bolder
 
 MINIMAL_YAML = """
 personal: {name: A, title: B, email: a@b.c, location: X}
@@ -59,3 +59,10 @@ def test_missing_required_field_is_reported(tmp_path):
 )
 def test_format_date(value, expected):
     assert format_date(value) == expected
+
+
+def test_keywords_are_bolded_as_whole_words_only():
+    bold = make_keyword_bolder(["Git", "GitLab", "Vue", "Vue.js"])
+    assert bold("Vue.js, Git and GitLab, but not Vuex or Gitea") == (
+        "<strong>Vue.js</strong>, <strong>Git</strong> and <strong>GitLab</strong>, but not Vuex or Gitea"
+    )

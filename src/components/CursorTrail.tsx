@@ -1,19 +1,22 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const MAX_PARTICLES = 20;
 
-export default function CursorTrail() {
-  const [particles, setParticles] = useState([]);
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+}
+
+/** Fading dots that follow the mouse pointer. */
+export function CursorTrail() {
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const nextId = useRef(0);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      const newParticle = {
-        x: e.clientX,
-        y: e.clientY,
-        id: Date.now() + Math.random(),
-      };
-
-      setParticles((prev) => [...prev.slice(-MAX_PARTICLES), newParticle]);
+    const handleMouseMove = (e: MouseEvent) => {
+      const particle = { id: nextId.current++, x: e.clientX, y: e.clientY };
+      setParticles((prev) => [...prev.slice(-MAX_PARTICLES), particle]);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -25,23 +28,10 @@ export default function CursorTrail() {
       {particles.map((p) => (
         <span
           key={p.id}
-          className="absolute w-2 h-2 bg-gradient-to-r from-emerald-400 to-primary/10 rounded-full"
-          style={{
-            left: p.x,
-            top: p.y,
-            transform: "translate(-50%, -50%)",
-            animation: "fadeOut 0.6s forwards",
-          }}
+          className="absolute w-2 h-2 bg-gradient-to-r from-emerald-400 to-primary/10 rounded-full animate-cursor-fade"
+          style={{ left: p.x, top: p.y, transform: "translate(-50%, -50%)" }}
         />
       ))}
-
-      {/* Tailwind does not have keyframes by default, so we add it here */}
-      <style>{`
-        @keyframes fadeOut {
-          0% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
-          100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-        }
-      `}</style>
     </div>
   );
 }

@@ -112,6 +112,7 @@ class CareerData:
     skills: Skills
     projects: list[Project] = dc_field(default_factory=list)
     additional: Additional = dc_field(default_factory=Additional)
+    keywords: list[str] = dc_field(default_factory=list)
 
     @property
     def current_position(self) -> Experience | None:

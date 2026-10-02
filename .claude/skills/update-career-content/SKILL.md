@@ -24,23 +24,24 @@ file, but some need companion edits that are easy to miss. Work through the rele
 ## 2. Companion edits
 
 **New project** (shown in the Projects grid):
-1. Put the thumbnail in `src/assets/` (16:9, like the existing `*-thumbnail.png` files).
+1. Put the thumbnail in `src/assets/` as WebP (16:9, ~1280px wide, like the existing
+   `*-thumbnail.webp` files), e.g. `cwebp -q 85 -resize 1280 0 in.png -o out.webp`.
 2. In `career.yaml`, set `image: <filename>` and include at least one of `url` (GitHub), `demo`,
    or `video`. Every link must be `https://`.
 3. Import the thumbnail in `src/data/extensions.ts` and add it to `projectImages` under the same
    filename. A unit test fails if this mapping is missing.
 4. YouTube links must be exactly `https://www.youtube.com/watch?v=<11-char id>`, with no trailing
    `/` and no extra query parameters.
-5. Add `tags` for the badges on the card.
+5. Add `tags` for the badges on the card, and optionally `badge: Beta` for a label on the thumbnail.
 
 **New skill:**
 - Add an icon for it in `src/data/skillIcons.tsx`, keyed by the exact skill name. Use `react-icons/si`
   for brands, `lucide-react` otherwise. Without an entry the skill renders with no icon.
-- If it's a technology that should be bold in CV bullet points, add it to `TECH_KEYWORDS` in
-  `cv-generator/engine/pdf.py`.
+- If it's a technology that should be bold in experience bullet points, add it to `keywords` in
+  `career.yaml`. The site and the CV both use that list.
 
 **New skill category** (a new key under `skills:`): this needs code changes in
-`src/data/index.ts`, `src/data/types.ts`, `src/components/Skills.tsx`,
+`SKILL_CATEGORIES` in `src/data/types.ts`, `CATEGORY_HEADINGS` in `src/components/Skills.tsx`,
 `cv-generator/engine/parser.py`, `cv-generator/engine/schema.py` and `cv-generator/templates/cv.html`.
 Confirm with the user before doing it.
 
