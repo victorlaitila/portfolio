@@ -220,3 +220,75 @@
   transform: translateX(100%);
   transition: transform 0.6s ease;
 }
+
+/* About ID card (see About.tsx): 3D tilt and flip, pointer-following foil, tinted portrait. */
+.holo-stage {
+  perspective: 1200px;
+}
+.holo-card {
+  display: grid;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.holo-face {
+  grid-area: 1 / 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid hsl(var(--primary) / 0.45);
+  background:
+    linear-gradient(135deg, hsl(var(--card) / 0.95), hsl(var(--background) / 0.95)),
+    hsl(var(--background));
+  box-shadow: 0 30px 60px -30px hsl(var(--primary) / 0.5), inset 0 0 0 1px hsl(var(--foreground) / 0.04);
+  backface-visibility: hidden;
+}
+.holo-back {
+  transform: rotateY(180deg);
+}
+/* Iridescent foil that follows the pointer. */
+.holo-foil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: color-dodge;
+  opacity: 0.18;
+  background:
+    radial-gradient(circle at var(--mx) var(--my), hsl(0 0% 100% / 0.35), transparent 40%),
+    linear-gradient(
+      115deg,
+      transparent 20%,
+      hsl(193 95% 58% / 0.5) 35%,
+      hsl(280 90% 65% / 0.45) 45%,
+      hsl(330 90% 65% / 0.35) 52%,
+      hsl(160 90% 55% / 0.4) 60%,
+      transparent 75%
+    );
+  background-size: 100% 100%, 250% 250%;
+  background-position: center, var(--mx) var(--my);
+}
+.holo-face::after {
+  /* Fine holographic line pattern. */
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(45deg, hsl(var(--primary) / 0.04) 0 2px, transparent 2px 6px);
+}
+
+/* Portrait: a faint cyan tint and scanlines so the photo sits in the holographic theme. */
+.holo-portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, hsl(var(--primary) / 0.08) 0 1px, transparent 1px 3px),
+    linear-gradient(to bottom, hsl(var(--primary) / 0.12), hsl(var(--background) / 0.35));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .holo-card {
+    transition: none;
+  }
+}
