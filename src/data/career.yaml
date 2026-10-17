@@ -20,10 +20,10 @@ personal:
 
 summary: |
   Full-stack software engineer and consultant with an M.Sc. in Software & Service Engineering and
-  nearly 5 years of production experience, from large-scale industrial software to modern web systems.
-  Currently embedded in an ABB product team, owning features end to end and working closely with
-  stakeholders. Hands-on with AI-driven development: LLM integrations, agentic workflows, custom skills
-  and MCP servers.
+  nearly 5 years of production experience across large-scale industrial software, modern web systems
+  and AI-driven development. Currently embedded in an ABB product team, owning features end to end and
+  working closely with stakeholders. Hands-on with LLM integrations, agentic workflows, skills and
+  MCP servers across professional and personal projects.
 
 # Technology names shown in bold wherever they appear in experience highlights (site and CV).
 keywords:
@@ -194,3 +194,8 @@ additional:
     - English (Fluent)
     - Finnish (Native)
     - Swedish (Native)
+  # Not shown anywhere at the moment
+  courses:
+    - Reserviupseerikurssi - RUK 257 (Finnish Reserve Officer Training, 2021)
+  honors:
+    - Scholarships for good academic progress (2017, 2018, 2022, 2023, 2024, 2025, 2026)

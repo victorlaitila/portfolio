@@ -2,12 +2,11 @@ import { BriefcaseBusiness, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CV_FILENAME, SECTION_IDS } from "@/config/site";
 import { getCareerData } from "@/data";
-import { formatPeriod } from "@/lib/dates";
 import { splitByKeywords } from "@/lib/keywords";
 import backgroundImg from "@/assets/background-experience.webp";
 import { BulletList } from "./BulletList";
 import { Section } from "./Section";
-import { MetaSeparator, TimelineItem } from "./TimelineItem";
+import { MetaSeparator, Period, TimelineItem } from "./TimelineItem";
 
 function HighlightedText({ text, keywords }: { text: string; keywords: string[] }) {
   return (
@@ -38,10 +37,10 @@ export function Experience() {
             title={exp.title}
             hasNext={index < experience.length - 1}
             meta={
-              <div className="flex items-center">
+              <div className="flex items-center text-sm sm:text-base">
                 <p className="text-muted-foreground">{exp.company}</p>
                 <MetaSeparator />
-                <p className="text-muted-foreground">{formatPeriod(exp.start, exp.end)}</p>
+                <Period start={exp.start} end={exp.end} />
               </div>
             }
           >

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
+import { formatPeriod } from "@/lib/dates";
 import { GlowCard } from "./GlowCard";
 
 interface TimelineItemProps {
@@ -47,4 +48,14 @@ export function TimelineItem({ icon: Icon, title, meta, hasNext, children }: Tim
 /** Thin vertical separator between items in a timeline entry's meta line. */
 export function MetaSeparator() {
   return <span aria-hidden className="h-4 w-px m-2 bg-muted-foreground" />;
+}
+
+/** A timeline entry's start-end period. Narrow screens get numeric months so it fits beside the name. */
+export function Period({ start, end }: { start: string; end: string }) {
+  return (
+    <p className="text-muted-foreground sm:whitespace-nowrap">
+      <span className="sm:hidden">{formatPeriod(start, end, { numeric: true })}</span>
+      <span className="hidden sm:inline">{formatPeriod(start, end)}</span>
+    </p>
+  );
 }

@@ -82,9 +82,8 @@ def expected_cv_strings() -> list[str]:
         strings += [skill_name(s) for s in group]
 
     extra = cv.additional
-    strings += [*extra.languages, *extra.courses, *extra.honors]
-    if extra.references:
-        strings.append(extra.references)
+    # Courses, honors and references are stored in career.yaml but not rendered on the CV.
+    strings += extra.languages
     return strings
 
 
@@ -104,6 +103,9 @@ def test_cv_excludes_portfolio_only_entries(pdf_text: str, raw_yaml: dict):
         excluded += [d["text"] for d in edu.get("details", []) if portfolio_only(d)]
     for group in raw_yaml.get("skills", {}).values():
         excluded += [s["name"] for s in group if portfolio_only(s)]
+    # Stored for later, but the CV doesn't render them.
+    extra = raw_yaml.get("additional", {})
+    excluded += [*extra.get("courses", []), *extra.get("honors", [])]
     # The CV only shows projects with a one-line `cv_summary`.
     excluded += [p["name"] for p in raw_yaml.get("projects", []) if portfolio_only(p) or not p.get("cv_summary")]
 
