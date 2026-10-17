@@ -80,6 +80,8 @@ class Project:
     name: str
     description: str
     url: str | None = None
+    demo: str | None = None
+    cv_summary: str | None = None  # One-liner rendered on the CV - projects without one are left off
     highlights: list[str] = dc_field(default_factory=list)
     targets: list[str] | None = None
 

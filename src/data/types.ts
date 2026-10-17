@@ -15,7 +15,7 @@ interface Targeted {
 export type DetailEntry = string | ({ text: string } & Targeted);
 export type SkillEntry = string | ({ name: string } & Targeted);
 
-export const SKILL_CATEGORIES = ["frontend", "backend", "technologies", "practices"] as const;
+export const SKILL_CATEGORIES = ["frontend", "backend", "technologies", "practices", "ai"] as const;
 export type SkillCategory = (typeof SKILL_CATEGORIES)[number];
 
 export interface PersonalLinks {
@@ -52,6 +52,8 @@ interface EducationBase extends Targeted {
 export interface ProjectYaml extends Targeted {
   name: string;
   description: string;
+  /** One-line version of `description` for the CV. Only projects with one appear on the CV. */
+  cv_summary?: string;
   /** GitHub repository. */
   url?: string | null;
   demo?: string;

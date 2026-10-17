@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { CloudUpload, DatabaseBackup, SquareCode, Wrench, type LucideIcon } from "lucide-react";
+import { CloudUpload, DatabaseBackup, Sparkles, SquareCode, Wrench, type LucideIcon } from "lucide-react";
 import { SECTION_IDS } from "@/config/site";
 import { getCareerData } from "@/data";
 import { getSkillIcon } from "@/data/skillIcons";
@@ -15,6 +15,7 @@ const CATEGORY_HEADINGS: Record<SkillCategory, { title: string; module: string; 
   backend: { title: "Backend & Data", module: "backend", icon: DatabaseBackup },
   technologies: { title: "Cloud, Testing & DevOps", module: "cloud_ops", icon: CloudUpload },
   practices: { title: "Engineering Practices", module: "practices", icon: Wrench },
+  ai: { title: "AI-Driven Development", module: "ai", icon: Sparkles },
 };
 
 // Boot animation timing: each module types out its log, then its skill tiles appear one by one.
@@ -23,15 +24,18 @@ const MODULE_STAGGER_MS = 450;
 const TILE_STAGGER_MS = 70;
 const ANIMATION_END_MS = 8000;
 
+const LONG_SKILL_NAME = 30;
+
 interface ModuleProps {
   category: SkillCategory;
+  className?: string;
   skills: string[];
   index: number;
   /** Milliseconds since the boot animation started. */
   elapsed: number;
 }
 
-function Module({ category, skills, index, elapsed }: ModuleProps) {
+function Module({ category, className, skills, index, elapsed }: ModuleProps) {
   const { title, module, icon: Icon } = CATEGORY_HEADINGS[category];
   const lines = [`> mount ${module}.module`, `> load ${skills.length} packages ........ done`, "> status: ONLINE"];
   const start = index * MODULE_STAGGER_MS;
@@ -48,7 +52,7 @@ function Module({ category, skills, index, elapsed }: ModuleProps) {
   });
 
   return (
-    <div className="relative min-w-0 border border-primary/30 bg-background/70 backdrop-blur-sm">
+    <div className={cn("relative min-w-0 border border-primary/30 bg-background/70 backdrop-blur-sm", className)}>
       <span className="hud-corner hud-corner-tl" />
       <span className="hud-corner hud-corner-tr" />
       <span className="hud-corner hud-corner-bl" />
@@ -94,11 +98,16 @@ function Module({ category, skills, index, elapsed }: ModuleProps) {
                 visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2",
               )}
             >
-              <span className="font-mono text-[10px] text-primary/50 w-6 shrink-0">
-                {(i + 1).toString(16).toUpperCase().padStart(2, "0")}
-              </span>
               {SkillIcon && <SkillIcon className="h-4 w-4 shrink-0 text-primary/80 group-hover:text-primary" />}
-              <span className="min-w-0 text-sm font-medium text-foreground">{skill}</span>
+              {/* Long names, e.g. ones listing tools in parentheses, get a smaller font so the tile stays tidy. */}
+              <span
+                className={cn(
+                  "min-w-0 font-medium text-foreground",
+                  skill.length > LONG_SKILL_NAME ? "text-xs leading-snug" : "text-sm",
+                )}
+              >
+                {skill}
+              </span>
             </li>
           );
         })}
@@ -141,6 +150,8 @@ export function Skills() {
               category={category}
               skills={skills[category]}
               index={index}
+              // An odd last module spans both columns instead of leaving an empty cell beside it.
+              className={index === categories.length - 1 && categories.length % 2 === 1 ? "md:col-span-2" : undefined}
               elapsed={reducedMotion ? Infinity : elapsed}
             />
           ))}

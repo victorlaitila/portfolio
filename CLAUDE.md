@@ -24,6 +24,7 @@ with Jinja2/WeasyPrint for the CV.
   hard-code career content (jobs, projects, skills, contact info) in components. Read it through
   `getCareerData()` from `@/data`.
   - `targets: [cv]` or `[portfolio]` limits an entry to one output. Leaving `targets` out means both.
+    Projects appear on the CV only if they also have a one-line `cv_summary`.
   - Site-only content that isn't career data (tagline, About text, project image imports) lives in
     `src/data/extensions.ts`.
   - `keywords` in `career.yaml` lists the technology names shown in bold in experience highlights,

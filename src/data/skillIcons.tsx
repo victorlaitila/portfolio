@@ -18,7 +18,7 @@ import {
   SiFigma,
 } from "react-icons/si";
 import { TbBrandAzure, TbBrandAws } from "react-icons/tb";
-import { Database, DatabaseZap, RefreshCw, Blocks, Webhook, Sparkles } from "lucide-react";
+import { Database, DatabaseZap, RefreshCw, Blocks, Webhook, Infinity as InfinityIcon, BrainCircuit, MessageSquareText, Bot, Puzzle, Plug } from "lucide-react";
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -45,8 +45,13 @@ const skillIcons: Record<string, IconComponent> = {
   "Agile Development": RefreshCw,
   "Software Architecture": Blocks,
   "REST APIs": Webhook,
+  "CI/CD": InfinityIcon,
   "Figma": SiFigma,
-  "AI-Assisted Development": Sparkles,
+  "LLM APIs": BrainCircuit,
+  "Prompt Engineering": MessageSquareText,
+  "Agentic Coding (Claude Code, Codex, Copilot)": Bot,
+  "Agent Skills": Puzzle,
+  "MCP Servers": Plug,
 };
 
 export function getSkillIcon(name: string): IconComponent | undefined {

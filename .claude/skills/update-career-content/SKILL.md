@@ -12,8 +12,7 @@ file, but some need companion edits that are easy to miss. Work through the rele
 
 - Decide `targets` first:
   - Leave `targets` out to show the entry on both the site and the CV.
-  - Use `[portfolio]` for site-only entries (projects are usually site-only; the CV template doesn't
-    render projects).
+  - Use `[portfolio]` for site-only entries.
   - Use `[cv]` for CV-only entries.
 - Dates are `YYYY-MM`; an ongoing role ends with `present`. Experience is listed **newest first**.
   A unit test checks both.
@@ -33,6 +32,9 @@ file, but some need companion edits that are easy to miss. Work through the rele
 4. YouTube links must be exactly `https://www.youtube.com/watch?v=<11-char id>`, with no trailing
    `/` and no extra query parameters.
 5. Add `tags` for the badges on the card, and optionally `badge: Beta` for a label on the thumbnail.
+6. To also list it under "Selected Projects" on the CV, give it a `cv_summary`: one line (~1.5 lines
+   printed) naming the main technologies. Projects without one stay off the CV. The project name
+   links to `demo`, or to `url` if there is no demo.
 
 **New skill:**
 - Add an icon for it in `src/data/skillIcons.tsx`, keyed by the exact skill name. Use `react-icons/si`

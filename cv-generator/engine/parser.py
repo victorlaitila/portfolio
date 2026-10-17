@@ -109,6 +109,8 @@ def _parse_project(data: dict, index: int) -> Project:
         name=_require(data, "name", ctx),
         description=_require(data, "description", ctx),
         url=data.get("url"),
+        demo=data.get("demo"),
+        cv_summary=data.get("cv_summary"),
         highlights=data.get("highlights", []),
         targets=data.get("targets"),
     )

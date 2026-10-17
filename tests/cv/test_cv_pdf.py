@@ -56,7 +56,7 @@ def expected_cv_strings() -> list[str]:
     strings = [p.name, p.title, p.email, p.location, cv.summary]
     if p.phone:
         strings.append(p.phone)
-    for link in (p.links.linkedin, p.links.website):
+    for link in (p.links.linkedin, p.links.github, p.links.website):
         if link:
             strings.append(link.replace("https://", ""))
 
@@ -72,6 +72,10 @@ def expected_cv_strings() -> list[str]:
             f"{format_date(edu.start)} - {format_date(edu.end)}",
             *edu.details,
         ]
+
+    for project in cv.projects:
+        if project.cv_summary:
+            strings += [project.name, project.cv_summary]
 
     skills = cv.skills
     for group in (skills.frontend, skills.backend, skills.technologies, skills.practices, skills.ai):
@@ -100,6 +104,8 @@ def test_cv_excludes_portfolio_only_entries(pdf_text: str, raw_yaml: dict):
         excluded += [d["text"] for d in edu.get("details", []) if portfolio_only(d)]
     for group in raw_yaml.get("skills", {}).values():
         excluded += [s["name"] for s in group if portfolio_only(s)]
+    # The CV only shows projects with a one-line `cv_summary`.
+    excluded += [p["name"] for p in raw_yaml.get("projects", []) if portfolio_only(p) or not p.get("cv_summary")]
 
     leaked = [text for text in excluded if normalize(text) in pdf_text]
     assert not leaked, f"{REGENERATE_HINT}\nPortfolio-only content found on CV: {leaked}"
@@ -107,8 +113,10 @@ def test_cv_excludes_portfolio_only_entries(pdf_text: str, raw_yaml: dict):
 
 def test_cv_links_point_to_current_urls(reader: PdfReader):
     # The text check above only sees the printed link text, so also check where each link goes.
-    links = parse_career_yaml(CAREER_YAML, target="cv").personal.links
-    expected = sorted(url for url in (links.linkedin, links.website) if url)
+    cv = parse_career_yaml(CAREER_YAML, target="cv")
+    links = cv.personal.links
+    project_links = [p.demo or p.url for p in cv.projects if p.cv_summary]
+    expected = sorted(url for url in (links.linkedin, links.github, links.website, *project_links) if url)
     actual = sorted(
         annot.get_object()["/A"]["/URI"]
         for page in reader.pages

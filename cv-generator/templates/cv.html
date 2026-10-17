@@ -70,8 +70,14 @@
         }
 
         .contact a {
-            color: #444;
+            color: #1a1a1a;
+            font-weight: 600;
             text-decoration: none;
+        }
+
+        .contact .sep {
+            color: #aaa;
+            margin: 0 6pt;
         }
 
         .header-separator {
@@ -82,7 +88,6 @@
         }
 
         .summary {
-            text-align: justify;
             margin: 5pt 0;
         }
 
@@ -128,6 +133,15 @@
             list-style: none;
         }
 
+        .project {
+            margin-bottom: 4pt;
+        }
+
+        .project a {
+            color: inherit;
+            text-decoration: none;
+        }
+
         .skills-section {
             margin-bottom: 5pt;
         }
@@ -165,12 +179,16 @@
     <header class="header">
         <h1>{{ data.personal.name }}</h1>
         <div class="title">{{ data.personal.title }}</div>
+        {#- Separators get their spacing from .sep, so no whitespace between items. #}
+        {%- set links = data.personal.links %}
         <div class="contact">
-            {{ data.personal.location }}
-            · {{ data.personal.email }}
-            {% if data.personal.phone %}· {{ data.personal.phone }}{% endif %}
-            {% if data.personal.links.linkedin %}· <a href="{{ data.personal.links.linkedin }}">{{ data.personal.links.linkedin | replace('https://', '') }}</a>{% endif %}
-            {% if data.personal.links.website %}· <a href="{{ data.personal.links.website }}">{{ data.personal.links.website | replace('https://', '') }}</a>{% endif %}
+            {{- data.personal.location }}<span class="sep">|</span>{{ data.personal.email }}
+            {%- if data.personal.phone %}<span class="sep">|</span>{{ data.personal.phone }}{% endif -%}
+        </div>
+        <div class="contact">
+            {%- for url in [links.linkedin, links.github, links.website] if url -%}
+            {% if not loop.first %}<span class="sep">|</span>{% endif %}<a href="{{ url }}">{{ url | replace('https://', '') }}</a>
+            {%- endfor -%}
         </div>
         <hr class="header-separator">
     </header>
@@ -198,6 +216,21 @@
         </div>
         {% endfor %}
     </section>
+
+    {% set cv_projects = data.projects | selectattr('cv_summary') | list %}
+    {% if cv_projects %}
+    <section>
+        <h2>Selected Projects</h2>
+        {% for project in cv_projects %}
+        <div class="project">
+            {#- Link the live demo when there is one: it's the quickest way for a reader to see the project. #}
+            {%- set project_link = project.demo or project.url %}
+            <span class="entry-title">{% if project_link %}<a href="{{ project_link }}">{{ project.name }}</a>{% else %}{{ project.name }}{% endif %}:</span>
+            {{ project.cv_summary }}
+        </div>
+        {% endfor %}
+    </section>
+    {% endif %}
 
     {% if data.education %}
     <section>
@@ -262,27 +295,14 @@
                 {% for skill in data.skills.ai %}{{ skill.name if skill is mapping else skill }}{% if not loop.last %}, {% endif %}{% endfor %}
             </div>
             {% endif %}
+            {% if data.additional.languages %}
+            <div class="skill-line">
+                <span class="skill-label">Languages:</span>
+                {{ data.additional.languages | join(', ') }}
+            </div>
+            {% endif %}
         </div>
     </section>
 
-    {% if data.additional %}
-    <section>
-        <h2>Additional Information</h2>
-        <div class="additional-section">
-            {% if data.additional.languages %}
-            <div class="additional-item"><span class="skill-label">Languages:</span> {{ data.additional.languages | join(', ') }}</div>
-            {% endif %}
-            {% if data.additional.courses %}
-            <div class="additional-item"><span class="skill-label">Courses:</span> {{ data.additional.courses | join(', ') }}</div>
-            {% endif %}
-            {% if data.additional.honors %}
-            <div class="additional-item"><span class="skill-label">Honors/Awards:</span> {{ data.additional.honors | join(', ') }}</div>
-            {% endif %}
-            {% if data.additional.references %}
-            <div class="additional-item">{{ data.additional.references }}</div>
-            {% endif %}
-        </div>
-    </section>
-    {% endif %}
 </body>
 </html>
