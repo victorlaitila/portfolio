@@ -1,7 +1,11 @@
 import { useEffect, useState, type RefObject } from "react";
 
-/** True once the element has scrolled into view. Stays true afterwards. */
-export function useInView(ref: RefObject<Element>, threshold = 0.25): boolean {
+/**
+ * True once the element's top has scrolled a quarter of the way up the viewport. Stays true afterwards.
+ * Measured from the top rather than as a share of the element, which a tall element on a short
+ * screen (a phone turned sideways) may never reach.
+ */
+export function useInView(ref: RefObject<Element>): boolean {
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
@@ -11,11 +15,11 @@ export function useInView(ref: RefObject<Element>, threshold = 0.25): boolean {
       ([entry]) => {
         if (entry.isIntersecting) setInView(true);
       },
-      { threshold },
+      { rootMargin: "0px 0px -25% 0px" },
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [ref, threshold, inView]);
+  }, [ref, inView]);
 
   return inView;
 }

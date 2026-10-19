@@ -265,36 +265,12 @@
     <section>
         <h2>Skills</h2>
         <div class="skills-section">
-            {% if data.skills.frontend %}
+            {% for category, label in [("frontend", "Frontend"), ("backend", "Backend & Data"), ("technologies", "Cloud, Testing & DevOps"), ("practices", "Engineering Practices"), ("ai", "AI")] if data.skills[category] %}
             <div class="skill-line">
-                <span class="skill-label">Frontend:</span>
-                {% for skill in data.skills.frontend %}{{ skill.name if skill is mapping else skill }}{% if not loop.last %}, {% endif %}{% endfor %}
+                <span class="skill-label">{{ label }}:</span>
+                {% for skill in data.skills[category] %}{{ skill.name if skill is mapping else skill }}{% if not loop.last %}, {% endif %}{% endfor %}
             </div>
-            {% endif %}
-            {% if data.skills.backend %}
-            <div class="skill-line">
-                <span class="skill-label">Backend & Data:</span>
-                {% for skill in data.skills.backend %}{{ skill.name if skill is mapping else skill }}{% if not loop.last %}, {% endif %}{% endfor %}
-            </div>
-            {% endif %}
-            {% if data.skills.technologies %}
-            <div class="skill-line">
-                <span class="skill-label">Cloud, Testing & DevOps:</span>
-                {% for skill in data.skills.technologies %}{{ skill.name if skill is mapping else skill }}{% if not loop.last %}, {% endif %}{% endfor %}
-            </div>
-            {% endif %}
-            {% if data.skills.practices %}
-            <div class="skill-line">
-                <span class="skill-label">Engineering Practices:</span>
-                {% for skill in data.skills.practices %}{{ skill.name if skill is mapping else skill }}{% if not loop.last %}, {% endif %}{% endfor %}
-            </div>
-            {% endif %}
-            {% if data.skills.ai %}
-            <div class="skill-line">
-                <span class="skill-label">AI:</span>
-                {% for skill in data.skills.ai %}{{ skill.name if skill is mapping else skill }}{% if not loop.last %}, {% endif %}{% endfor %}
-            </div>
-            {% endif %}
+            {% endfor %}
             {% if data.additional.languages %}
             <div class="skill-line">
                 <span class="skill-label">Languages:</span>

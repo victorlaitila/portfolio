@@ -17,6 +17,9 @@ component internals.
 | CV (pytest)      | `tests/cv`   | The committed PDF matches `career.yaml`; the CV parser        | `npm run test:cv`  |
 | E2E (Playwright) | `tests/e2e`  | Anything that needs the built site in a browser               | `npm run test:e2e` |
 
+Screenshot comparisons are not tests here. They are a check the user runs on demand
+(`/visual-check`).
+
 Prefer the cheapest layer that can catch the bug. For example, a malformed URL in `career.yaml` is
 a unit test; whether that link opens in a new tab is e2e.
 
@@ -48,6 +51,9 @@ a unit test; whether that link opens in a new tab is e2e.
 - **Text filters match substrings.** `filter({ hasText: "CSS" })` also matches "Tailwind CSS", and
   "Git" matches "GitHub Actions". When looping over names from `career.yaml`, match exactly with
   `filter({ has: page.getByText(name, { exact: true }) })`.
+- **Screen-size bugs need a test at that size.** Use `test.use({ viewport })` inside a
+  `test.describe`, as in `skills.spec.ts` (landscape phone).
+  The two default projects only cover one phone and one laptop size.
 - Smooth scrolling is on: use the auto-retrying `toBeInViewport()` rather than one-off position
   checks.
 - Files in `tests/e2e` and the Playwright config are type-checked by `tsconfig.node.json`.

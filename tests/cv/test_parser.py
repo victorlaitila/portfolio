@@ -14,6 +14,7 @@ experience:
   - {company: Both, title: T, location: L, start: 2024-01, end: present}
   - {company: CvOnly, title: T, location: L, start: 2023-01, end: 2023-12, targets: [cv]}
   - {company: PortfolioOnly, title: T, location: L, start: 2022-01, end: 2022-12, targets: [portfolio]}
+  - {company: EmptyTargets, title: T, location: L, start: 2021-01, end: 2021-12, targets: []}
 education:
   - institution: U
     degree: D
@@ -36,7 +37,8 @@ def career_yaml(tmp_path):
 
 def test_cv_target_keeps_untargeted_and_cv_entries(career_yaml):
     career = parse_career_yaml(career_yaml, target="cv")
-    assert [e.company for e in career.experience] == ["Both", "CvOnly"]
+    # An empty `targets` list means "everywhere", the same as on the site (src/data/targets.ts).
+    assert [e.company for e in career.experience] == ["Both", "CvOnly", "EmptyTargets"]
     assert career.education[0].details == ["GPA: 5"]
     assert career.skills.frontend == ["React"]
 
@@ -53,7 +55,6 @@ def test_missing_required_field_is_reported(tmp_path):
     [
         ("2024-09", "09/2024"),
         ("present", "Present"),
-        ("2021", "2021"),
         ("expected 2026-07", "Expected 07/2026"),
     ],
 )

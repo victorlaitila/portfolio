@@ -23,3 +23,15 @@ test("shows every skill immediately with reduced motion", async ({ page }) => {
   await page.goto("./");
   await expectAllSkillsVisible(page);
 });
+
+// A phone turned sideways shows less than a quarter of the skills console at once, so the
+// reveal must not wait for a share of it to be visible.
+test.describe("on a short landscape phone screen", () => {
+  test.use({ viewport: { width: 740, height: 360 } });
+
+  test("shows every skill once the section is scrolled into view", async ({ page }) => {
+    await page.goto("./");
+    await page.locator("section#skills").scrollIntoViewIfNeeded();
+    await expectAllSkillsVisible(page);
+  });
+});

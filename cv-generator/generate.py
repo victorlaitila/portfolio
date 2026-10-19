@@ -13,11 +13,12 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
 from engine.parser import ParseError, parse_career_yaml  # noqa: E402
-from engine.pdf import render_and_save_pdf  # noqa: E402
+from engine.pdf import generate_pdf, render_cv_html  # noqa: E402
 
 REPO_ROOT = Path(__file__).parent.parent
 CAREER_YAML = REPO_ROOT / "src" / "data" / "career.yaml"
 TEMPLATE = Path(__file__).parent / "templates" / "cv.html"
+# Must match CV_FILENAME in src/config/site.ts, which the site's download link uses.
 OUTPUT = REPO_ROOT / "public" / "Victor-Laitila-Software-Engineer-CV.pdf"
 
 
@@ -28,7 +29,7 @@ def main() -> None:
         print(f"Failed to parse {CAREER_YAML}: {e}", file=sys.stderr)
         sys.exit(1)
 
-    render_and_save_pdf(career, TEMPLATE, OUTPUT)
+    generate_pdf(render_cv_html(career, TEMPLATE), OUTPUT)
     print(f"Generated {OUTPUT.relative_to(REPO_ROOT)}")
 
 

@@ -118,7 +118,7 @@ function Module({ category, className, skills, index, elapsed }: ModuleProps) {
 
 /** The skills section, styled as a sci-fi system console that boots up when scrolled into view. */
 export function Skills() {
-  const { skills } = getCareerData();
+  const { skills, personal } = getCareerData();
   const categories = SKILL_CATEGORIES.filter((category) => skills[category].length > 0);
   const skillCount = categories.reduce((sum, category) => sum + skills[category].length, 0);
 
@@ -133,7 +133,7 @@ export function Skills() {
         <div className="hud-scanlines pointer-events-none absolute inset-0" aria-hidden="true" />
         {/* From md up, the status bar uses the module grid's columns, so the counts line up with the right-hand modules. */}
         <div className="relative flex flex-wrap items-center justify-between gap-2 md:grid md:grid-cols-2 md:gap-x-8 mb-4 sm:mb-6 font-mono text-[11px] tracking-widest text-primary/80">
-          <span>SYS://VICTOR.LAITILA/SKILLS</span>
+          <span>SYS://{personal.name.toUpperCase().split(" ").join(".")}/SKILLS</span>
           <div className="contents md:flex md:items-center md:justify-between">
             <span className="hidden sm:inline text-muted-foreground">
               {categories.length} MODULES · {skillCount} PACKAGES

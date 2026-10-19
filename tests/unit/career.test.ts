@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import yaml from 'js-yaml';
 import careerYamlRaw from '@/data/career.yaml?raw';
 import { getCareerData, getPortfolioExtensions } from '@/data';
-import type { CareerYaml } from '@/data/types';
+import { SKILL_CATEGORIES, type CareerYaml } from '@/data/types';
 import { isForPortfolio } from '@/data/targets';
 
 // career.yaml is hand-edited and drives both the site and the CV, so these
@@ -12,6 +12,7 @@ const raw = yaml.load(careerYamlRaw) as CareerYaml;
 const career = getCareerData();
 
 const YEAR_MONTH = /^\d{4}-(0[1-9]|1[0-2])$/;
+const END_DATE = /^(present|(expected )?\d{4}-(0[1-9]|1[0-2]))$/;
 
 describe('career.yaml', () => {
   it('has the personal info shown in the hero and contact sections', () => {
@@ -23,12 +24,18 @@ describe('career.yaml', () => {
     expect(personal.links.linkedin).toMatch(/^https:\/\//);
   });
 
-  it('uses YYYY-MM dates for experience (the site formats them as "Mon YYYY")', () => {
-    for (const exp of raw.experience) {
-      expect(String(exp.start), `${exp.company} start`).toMatch(YEAR_MONTH);
-      if (exp.end !== 'present') {
-        expect(String(exp.end), `${exp.company} end`).toMatch(YEAR_MONTH);
-      }
+  // The site can only format these (src/lib/dates.ts). Anything else, e.g. a year alone, crashes the page.
+  it('uses YYYY-MM dates (the site formats them as "Mon YYYY")', () => {
+    for (const entry of [...raw.experience, ...raw.education]) {
+      const name = 'company' in entry ? entry.company : entry.institution;
+      expect(String(entry.start), `${name} start`).toMatch(YEAR_MONTH);
+      expect(String(entry.end), `${name} end`).toMatch(END_DATE);
+    }
+  });
+
+  it('only uses skill categories that the site and the CV render', () => {
+    for (const category of Object.keys(raw.skills)) {
+      expect(SKILL_CATEGORIES, `skills.${category} is not shown anywhere`).toContain(category);
     }
   });
 

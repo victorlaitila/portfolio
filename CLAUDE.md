@@ -13,6 +13,9 @@ with Jinja2/WeasyPrint for the CV.
   before calling any change done.** It's the same set of checks CI runs. One-time setup:
   `npm run generate:cv` (creates the Python venv that `test:cv` uses) and
   `npx playwright install chromium`.
+- `npm run visual:check [-- <ref>]`: screenshots every section at 10 screen sizes on `main` (or
+  `<ref>`) and on the working tree, and lists what changed. Local only, not in CI. The user runs it
+  through `/visual-check`.
 - `npm run generate:cv`: regenerates `public/Victor-Laitila-Software-Engineer-CV.pdf` from
   `career.yaml`. The PDF is committed.
 - `npm run generate:og-image`: regenerates `public/og-image.jpg`, the link-preview image, from the
@@ -80,6 +83,9 @@ with Jinja2/WeasyPrint for the CV.
 - Reuse the existing shadcn/ui components before adding dependencies.
 - Changes must work at mobile width. The e2e tests run on a mobile viewport and fail on horizontal
   scrolling.
+- **After a change that can affect layout or looks, ask the user whether to run `/visual-check`.**
+  Give a one-line risk estimate (what it touches, which screen sizes could move). Never run it
+  without being asked. Don't ask for text, data or test-only changes.
 
 ## Tests
 

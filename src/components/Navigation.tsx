@@ -40,6 +40,7 @@ export function Navigation() {
                 key={id}
                 href={`#${id}`}
                 onClick={() => setActiveSection(id)}
+                aria-current={activeSection === id ? "location" : undefined}
                 className={cn(
                   "font-display transition-smooth text-xs font-medium flex items-center gap-2",
                   activeSection === id ? "text-foreground" : "text-muted-foreground",

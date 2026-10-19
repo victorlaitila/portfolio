@@ -13,6 +13,10 @@ export function useActiveSection<T extends string>(ids: readonly T[]): [T, Dispa
 
   useEffect(() => {
     const update = () => {
+      // On tall screens the page ends before the last section reaches the top, so the bottom counts as reaching it.
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (atBottom) return setActive(ids[ids.length - 1]);
+
       const position = window.scrollY + SCROLL_OFFSET_PX;
       const reached = ids.filter((id) => {
         const element = document.getElementById(id);

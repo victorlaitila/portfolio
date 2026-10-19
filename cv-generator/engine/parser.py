@@ -27,13 +27,13 @@ def _has_target(entry: dict, target: str | None) -> bool:
     """Check if an entry should be included for a given target.
 
     If no target is provided, include all entries.
-    If entry has no targets, include by default.
+    If entry has no targets (missing or empty), include by default, as the site does.
     """
     if target is None:
         return True
 
     targets = entry.get("targets")
-    if targets is None:
+    if not targets:
         return True
 
     return isinstance(targets, list) and target in targets
@@ -111,7 +111,6 @@ def _parse_project(data: dict, index: int) -> Project:
         url=data.get("url"),
         demo=data.get("demo"),
         cv_summary=data.get("cv_summary"),
-        highlights=data.get("highlights", []),
         targets=data.get("targets"),
     )
 
@@ -132,7 +131,6 @@ def _parse_additional(data: dict) -> Additional:
         languages=data.get("languages", []),
         courses=data.get("courses", []),
         honors=data.get("honors", []),
-        references=data.get("references"),
     )
 
 
@@ -150,9 +148,6 @@ def parse_career_yaml(path: Path, target: str | None = None) -> CareerData:
         ParseError: If validation fails
         FileNotFoundError: If file doesn't exist
     """
-    if not path.exists():
-        raise FileNotFoundError(f"Career data file not found: {path}")
-
     with open(path) as f:
         raw = yaml.safe_load(f)
 

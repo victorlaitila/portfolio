@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import type { ToastActionElement, ToastProps } from "@/components/ui/toast";
+import type { ToastProps } from "@/components/ui/toast";
 
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 1000000;
@@ -9,7 +9,6 @@ type ToasterToast = ToastProps & {
   id: string;
   title?: React.ReactNode;
   description?: React.ReactNode;
-  action?: ToastActionElement;
 };
 
 let count = 0;
@@ -23,10 +22,6 @@ type Action =
   | {
       type: "ADD_TOAST";
       toast: ToasterToast;
-    }
-  | {
-      type: "UPDATE_TOAST";
-      toast: Partial<ToasterToast>;
     }
   | {
       type: "DISMISS_TOAST";
@@ -65,12 +60,6 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
-      };
-
-    case "UPDATE_TOAST":
-      return {
-        ...state,
-        toasts: state.toasts.map((t) => (t.id === action.toast.id ? { ...t, ...action.toast } : t)),
       };
 
     case "DISMISS_TOAST": {
@@ -126,11 +115,6 @@ type Toast = Omit<ToasterToast, "id">;
 function toast({ ...props }: Toast) {
   const id = genId();
 
-  const update = (props: ToasterToast) =>
-    dispatch({
-      type: "UPDATE_TOAST",
-      toast: { ...props, id },
-    });
   const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id });
 
   dispatch({
@@ -148,7 +132,6 @@ function toast({ ...props }: Toast) {
   return {
     id: id,
     dismiss,
-    update,
   };
 }
 

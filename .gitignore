@@ -31,6 +31,8 @@ __pycache__
 # Test output
 test-results
 playwright-report
+visual-report
+.visual-baseline
 .pytest_cache
 
 # Claude Code personal settings

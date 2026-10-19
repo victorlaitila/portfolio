@@ -5,7 +5,6 @@ All fields are validated during parsing.
 """
 
 from dataclasses import dataclass, field as dc_field
-from datetime import date
 from typing import Any, Literal
 
 
@@ -36,33 +35,6 @@ class Experience:
     highlights: list[str] = dc_field(default_factory=list)
     targets: list[str] | None = None
 
-    @property
-    def is_current(self) -> bool:
-        return self.end == "present"
-
-    @property
-    def duration(self) -> str:
-        """Human-readable duration string."""
-        start_parts = self.start.split("-")
-        start_year, start_month = int(start_parts[0]), int(start_parts[1])
-
-        if self.is_current:
-            end_date = date.today()
-            end_year, end_month = end_date.year, end_date.month
-        else:
-            end_parts = self.end.split("-")
-            end_year, end_month = int(end_parts[0]), int(end_parts[1])
-
-        months = (end_year - start_year) * 12 + (end_month - start_month)
-        years, remaining_months = divmod(months, 12)
-
-        if years and remaining_months:
-            return f"{years}y {remaining_months}m"
-        elif years:
-            return f"{years}y"
-        else:
-            return f"{remaining_months}m"
-
 
 @dataclass
 class Education:
@@ -82,7 +54,6 @@ class Project:
     url: str | None = None
     demo: str | None = None
     cv_summary: str | None = None  # One-liner rendered on the CV - projects without one are left off
-    highlights: list[str] = dc_field(default_factory=list)
     targets: list[str] | None = None
 
 
@@ -100,7 +71,6 @@ class Additional:
     languages: list[str] = dc_field(default_factory=list)
     courses: list[str] = dc_field(default_factory=list)
     honors: list[str] = dc_field(default_factory=list)
-    references: str | None = None
 
 
 @dataclass
@@ -115,11 +85,3 @@ class CareerData:
     projects: list[Project] = dc_field(default_factory=list)
     additional: Additional = dc_field(default_factory=Additional)
     keywords: list[str] = dc_field(default_factory=list)
-
-    @property
-    def current_position(self) -> Experience | None:
-        """Returns current job position if any."""
-        for exp in self.experience:
-            if exp.is_current:
-                return exp
-        return None

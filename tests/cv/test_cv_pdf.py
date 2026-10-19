@@ -7,7 +7,6 @@ case.
 """
 
 import re
-from pathlib import Path
 
 import pytest
 import yaml
@@ -15,10 +14,7 @@ from pypdf import PdfReader
 
 from engine.parser import parse_career_yaml
 from engine.pdf import format_date
-
-REPO_ROOT = Path(__file__).resolve().parents[2]
-CAREER_YAML = REPO_ROOT / "src" / "data" / "career.yaml"
-CV_PDF = REPO_ROOT / "public" / "Victor-Laitila-Software-Engineer-CV.pdf"
+from generate import CAREER_YAML, OUTPUT as CV_PDF
 
 REGENERATE_HINT = "CV PDF is out of date with career.yaml - run `npm run generate:cv` and commit the PDF"
 
@@ -82,7 +78,7 @@ def expected_cv_strings() -> list[str]:
         strings += [skill_name(s) for s in group]
 
     extra = cv.additional
-    # Courses, honors and references are stored in career.yaml but not rendered on the CV.
+    # Courses and honors are stored in career.yaml but not rendered on the CV.
     strings += extra.languages
     return strings
 

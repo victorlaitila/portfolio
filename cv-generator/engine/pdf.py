@@ -36,7 +36,6 @@ def format_date(value: str | int | None) -> str:
 
     Supported inputs:
     - YYYY-MM -> MM/YYYY
-    - YYYY -> YYYY
     - present -> Present
     - expected YYYY-MM -> Expected MM/YYYY
     """
@@ -58,12 +57,7 @@ def format_date(value: str | int | None) -> str:
     try:
         return datetime.strptime(raw, "%Y-%m").strftime("%m/%Y")
     except ValueError:
-        pass
-
-    if raw.isdigit() and len(raw) == 4:
         return raw
-
-    return raw
 
 
 def render_cv_html(data: CareerData, template_path: Path) -> str:
@@ -81,35 +75,9 @@ def render_cv_html(data: CareerData, template_path: Path) -> str:
 
 def generate_pdf(html_content: str, output_path: Path) -> None:
     """Generate PDF from HTML content using WeasyPrint."""
-    try:
-        from weasyprint import HTML
-    except ImportError:
-        raise ImportError(
-            "WeasyPrint is required for PDF generation. "
-            "Install with: pip install weasyprint"
-        )
+    from weasyprint import HTML  # Imported here so tests that only render HTML don't load it.
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     logger.info(f"Generating PDF: {output_path}")
     HTML(string=html_content).write_pdf(output_path)
-
-
-def render_and_save_pdf(
-    data: CareerData,
-    template_path: Path,
-    output_path: Path,
-) -> Path:
-    """Render career data to PDF.
-
-    Args:
-        data: Career data to render
-        template_path: Path to HTML template
-        output_path: Where to save the PDF
-
-    Returns:
-        Path to generated PDF
-    """
-    html = render_cv_html(data, template_path)
-    generate_pdf(html, output_path)
-    return output_path
