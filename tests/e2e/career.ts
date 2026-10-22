@@ -3,7 +3,7 @@ import { career } from "../../scripts/career";
 import { isForPortfolio } from "../../src/data/targets";
 import { SKILL_CATEGORIES } from "../../src/data/types";
 
-export { BASE_PATH, SITE_URL } from "../../scripts/career";
+export { BASE_PATH, career, SITE_URL } from "../../scripts/career";
 
 export const personal = career.personal;
 export const projects = (career.projects ?? []).filter((p) => isForPortfolio(p.targets));

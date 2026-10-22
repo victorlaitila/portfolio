@@ -99,6 +99,11 @@ export function About() {
                       <Field label="BASE" value={personal.location} />
                       <Field label="ASSIGNMENT" value={current.company} />
                       <Field label="ACTIVE SINCE" value={since} />
+                      {career.languages.length > 0 && (
+                        <div className="col-span-2">
+                          <Field label="LANGUAGES" value={career.languages.map((l) => l.split(" (")[0]).join(" · ")} />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

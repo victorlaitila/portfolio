@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { personal } from "./career";
+import { career, personal } from "./career";
 
 // The off-duty side of the ID card only appears after flipping it, so a broken flip would hide it.
 test("the ID card flips between its front and its off-duty side", async ({ page }) => {
@@ -9,6 +9,9 @@ test("the ID card flips between its front and its off-duty side", async ({ page 
   const back = about.getByRole("group", { name: "Off-duty profile" });
 
   await expect(front.getByRole("heading", { name: personal.name })).toBeVisible();
+  for (const language of career.additional!.languages!) {
+    await expect(front).toContainText(language.split(" (")[0]);
+  }
   await expect(back, "only the visible side is exposed").toHaveCount(0);
 
   await about.getByRole("button", { name: /flip card/i }).click();

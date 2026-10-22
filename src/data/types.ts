@@ -74,6 +74,8 @@ export interface CareerYaml {
   education: Array<EducationBase & { details?: DetailEntry[] }>;
   skills: Record<SkillCategory, SkillEntry[]>;
   projects?: ProjectYaml[];
+  /** Languages are on both; courses and honors on the portfolio only. */
+  additional?: { languages?: string[]; courses?: string[]; honors?: string[] };
 }
 
 export type Education = EducationBase & { details: string[] };
@@ -92,4 +94,7 @@ export interface CareerData {
   education: Education[];
   skills: Record<SkillCategory, string[]>;
   projects: Project[];
+  languages: string[];
+  courses: string[];
+  honors: string[];
 }

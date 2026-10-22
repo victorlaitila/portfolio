@@ -194,8 +194,9 @@ additional:
     - English (Fluent)
     - Finnish (Native)
     - Swedish (Native)
-  # Not shown anywhere at the moment
+  # Courses and honors are shown on the portfolio (Education section), not on the CV.
   courses:
+    - "AI for Embedded Developers: Skills, Agents, and Integrated Workflows - Beningo Embedded Group (10/2026)"
     - Reserviupseerikurssi - RUK 257 (Finnish Reserve Officer Training, 2021)
   honors:
     - Scholarships for good academic progress (2017, 2018, 2022, 2023, 2024, 2025, 2026)

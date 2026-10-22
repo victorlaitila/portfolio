@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { CV_FILENAME, SECTION_IDS } from "../../src/config/site";
-import { BASE_PATH, personal, projects, SITE_URL } from "./career";
+import { BASE_PATH, career, personal, projects, SITE_URL } from "./career";
 
 const SECTIONS = Object.values(SECTION_IDS);
 
@@ -21,6 +21,15 @@ test("renders every section without errors", async ({ page }) => {
     await expect(page.locator("#projects").getByRole("heading", { name: project.name })).toBeVisible();
   }
   expect(errors).toEqual([]);
+});
+
+test("shows the courses and honors in the Education section", async ({ page }) => {
+  await page.goto("./");
+  const { courses = [], honors = [] } = career.additional ?? {};
+  const education = page.locator(`section#${SECTION_IDS.education}`);
+  for (const text of [...courses, ...honors]) {
+    await expect(education.getByText(text)).toBeVisible();
+  }
 });
 
 test("loads every image", async ({ page }) => {

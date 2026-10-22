@@ -46,6 +46,9 @@ function resolveCareerData(raw: CareerYaml): CareerData {
         image: project.image ? (portfolioExtensions.projectImages[project.image] ?? project.image) : undefined,
         tags: project.tags ?? [],
       })),
+    languages: raw.additional?.languages ?? [],
+    courses: raw.additional?.courses ?? [],
+    honors: raw.additional?.honors ?? [],
   };
 }
 
