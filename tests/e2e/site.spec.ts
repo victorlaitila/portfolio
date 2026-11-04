@@ -70,6 +70,13 @@ test("has the metadata used by search engines and link previews", async ({ page,
   expect((await request.get(favicon!)).ok(), `favicon ${favicon}`).toBe(true);
 });
 
+test("robots.txt and sitemap.xml point crawlers at the canonical URL", async ({ request }) => {
+  const robots = await (await request.get("/robots.txt")).text();
+  expect(robots).toContain(`Sitemap: ${SITE_URL}sitemap.xml`);
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  expect(sitemap).toContain(`<loc>${SITE_URL}</loc>`);
+});
+
 test("Download CV serves the committed PDF", async ({ page }) => {
   await page.goto("/");
   const link = page.getByRole("link", { name: "Download CV" });

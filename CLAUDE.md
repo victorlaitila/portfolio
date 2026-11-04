@@ -40,8 +40,8 @@ with Jinja2/WeasyPrint for the CV.
   section titles) stays inline in the component that uses it. The site is single-language, so it
   doesn't go through a strings file.
 - **The site is served at the domain root (`/`).** The canonical and link-preview URLs derive from
-  `personal.links.website` in `career.yaml` (via `scripts/career.ts`). Never hard-code the site
-  URL. Files in `public/` are linked from the root (`/file`). Router links use `<Link>`, never
+  `personal.links.website` in `career.yaml` (via `scripts/career.ts`), and so do `robots.txt` and
+  `sitemap.xml`, which `vite.config.ts` generates at build time. Never hard-code the site URL. Files in `public/` are linked from the root (`/file`). Router links use `<Link>`, never
   `<a href="/">`.
 - `src/pages/Index.tsx` stacks the section components, separated by `<SectionDivider />`. Section
   ids live in `SECTION_IDS` (`src/config/site.ts`). Use them for anchors instead of string literals.

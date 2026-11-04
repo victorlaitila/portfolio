@@ -21,6 +21,27 @@ export default defineConfig({
         handler: (html) => html.replaceAll("%SITE_URL%", SITE_URL),
       },
     },
+    {
+      // Built here rather than kept in public/ so the URL comes from career.yaml.
+      name: "seo-files",
+      apply: "build",
+      generateBundle() {
+        this.emitFile({
+          type: "asset",
+          fileName: "robots.txt",
+          source: `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}sitemap.xml\n`,
+        });
+        this.emitFile({
+          type: "asset",
+          fileName: "sitemap.xml",
+          source:
+            '<?xml version="1.0" encoding="UTF-8"?>\n' +
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+            `  <url><loc>${SITE_URL}</loc></url>\n` +
+            "</urlset>\n",
+        });
+      },
+    },
   ],
   resolve: {
     alias: {
