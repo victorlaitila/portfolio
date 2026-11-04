@@ -20,6 +20,7 @@ import {
 
 import articleSummarizerThumbnail from "@/assets/article-summarizer-thumbnail.webp";
 import dependencyRiskScannerThumbnail from "@/assets/dependency-risk-scanner-thumbnail.webp";
+import flagshipThumbnail from "@/assets/flagship-thumbnail.webp";
 import soundAtlasThumbnail from "@/assets/sound-atlas-thumbnail.webp";
 
 export interface IconText {
@@ -96,6 +97,7 @@ export const portfolioExtensions: PortfolioExtensions = {
   projectImages: {
     "article-summarizer-thumbnail.webp": articleSummarizerThumbnail,
     "dependency-risk-scanner-thumbnail.webp": dependencyRiskScannerThumbnail,
+    "flagship-thumbnail.webp": flagshipThumbnail,
     "sound-atlas-thumbnail.webp": soundAtlasThumbnail,
   },
 };

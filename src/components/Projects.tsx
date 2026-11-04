@@ -66,7 +66,7 @@ export function Projects() {
 
   return (
     <Section id={SECTION_IDS.projects} title="Featured Projects" background={backgroundImg}>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 gap-8">
         {projects.map((project) => (
           <ProjectCard key={project.name} project={project} />
         ))}

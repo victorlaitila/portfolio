@@ -20,6 +20,10 @@ test("renders every section without errors", async ({ page }) => {
   for (const project of projects) {
     await expect(page.locator("#projects").getByRole("heading", { name: project.name })).toBeVisible();
   }
+  for (const badge of new Set(projects.flatMap((p) => p.badge ?? []))) {
+    const count = projects.filter((p) => p.badge === badge).length;
+    await expect(page.locator("#projects").getByText(badge, { exact: true })).toHaveCount(count);
+  }
   expect(errors).toEqual([]);
 });
 

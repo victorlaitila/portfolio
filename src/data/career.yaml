@@ -139,6 +139,21 @@ skills:
     - MCP Servers
 
 projects:
+  - name: Flagship + MCP
+    description: A feature flag management platform with a dashboard for controlling releases across development, staging and production, and a demo storefront whose behaviour changes live as flags are toggled. Users can target specific customers and segments, roll features out gradually, run multivariate experiments and roll back any change from a full audit log, with role-based permissions guarding each environment. An MCP (Model Context Protocol) server lets AI assistants like Claude Code inspect flags, plan changes and apply them through the same API, while production stays read-only so a human always has the final say.
+    url: https://github.com/victorlaitila/flagship-mcp
+    cv_summary: React/TypeScript and Node.js (Express) feature flag platform with targeted rollouts, real-time updates, audit-logged rollbacks and a custom MCP server allowing AI agents to safely configure flags.
+    badge: Beta
+    image: flagship-thumbnail.webp
+    tags:
+      - React
+      - TypeScript
+      - Tailwind CSS
+      - Node.js (Express)
+      - SQLite
+      - Vitest
+      - Playwright
+
   - name: AI Article Summarizer
     description: A full-stack web application that extracts and summarizes content from URLs, uploaded files, and free text using a BART transformer model (facebook/bart-large-cnn) through the Hugging Face Inference API. Users can generate summaries in multiple modes, extract keywords automatically, save summaries to a personal library, access text-to-speech playback, and easily copy, download, or share results. A rate-limited FastAPI backend combines web scraping and PDF extraction with the model to deliver concise, non-destructive summaries, helping readers quickly grasp article content without losing important context.
     cv_summary: React/TypeScript and Python (FastAPI) app that summarizes URLs, PDFs and text with a Hugging Face transformer model, backed by PostgreSQL, Docker and Sentry monitoring.
@@ -161,9 +176,7 @@ projects:
     url: https://github.com/victorlaitila/dependency-risk-scanner
     demo: https://victorlaitila.github.io/dependency-risk-scanner/
     description: A full-stack web application that helps developers understand the security and structural risks within their project dependencies. Users upload lockfiles to visualize dependency relationships, identify high-impact packages, and assess known vulnerability exposure from the OSV.dev API. The app combines graph-based impact analysis with LLM-generated explanations (Hugging Face chat completions, with fallback handling) to provide both technical data and concise reasoning for dependency-risk decisions.
-    cv_summary: React/TypeScript and Node.js (Fastify) app that builds dependency graphs from lockfiles, scores package impact, adds OSV vulnerability data and explains risks with an LLM.
     image: dependency-risk-scanner-thumbnail.webp
-    badge: Beta
     tags:
       - React
       - TypeScript
