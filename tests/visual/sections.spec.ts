@@ -3,7 +3,7 @@ import { SECTION_IDS } from "../../src/config/site";
 import { personal } from "../e2e/career";
 
 test("every section matches the baseline and nothing scrolls sideways", async ({ page }) => {
-  await page.goto("./");
+  await page.goto("/");
   await page.locator("#home h2").filter({ hasText: personal.title }).waitFor(); // typewriter done
   await page.evaluate(() => document.fonts.ready);
 

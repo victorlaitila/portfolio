@@ -2,12 +2,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { BASE_PATH, SITE_URL } from "./scripts/career";
+import { SITE_URL } from "./scripts/career";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // Derived from personal.links.website in career.yaml, e.g. "/portfolio/" on GitHub Pages.
-  base: BASE_PATH,
   server: {
     host: "::",
     port: 8080,

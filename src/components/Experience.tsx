@@ -55,7 +55,7 @@ export function Experience() {
 
       <div className="text-center animate-fade-in">
         <Button variant="hero" size="lg" asChild className="font-display font-bold">
-          <a href={`${import.meta.env.BASE_URL}${CV_FILENAME}`} download>
+          <a href={`/${CV_FILENAME}`} download>
             <Download className="mr-2 h-5 w-5" />
             Download CV
           </a>

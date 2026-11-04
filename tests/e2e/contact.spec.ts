@@ -8,7 +8,7 @@ const MESSAGE = { name: "Ada Lovelace", email: "ada@example.com", message: "Hell
 test.beforeEach(async ({ page }) => {
   // Safety net: fail closed for anything EmailJS that a test didn't mock explicitly.
   await page.route("https://api.emailjs.com/**", (route) => route.abort());
-  await page.goto("./#contact");
+  await page.goto("/#contact");
 });
 
 async function fillForm(page: Page) {

@@ -1,14 +1,14 @@
 # Portfolio
 
 Victor Laitila's personal portfolio: a single-page React site deployed to GitHub Pages at
-https://victorlaitila.github.io/portfolio/, plus a Python generator for the downloadable CV PDF.
+https://www.victorlaitila.com/ (custom domain), plus a Python generator for the downloadable CV PDF.
 
 Stack: Vite + React 18 + TypeScript, Tailwind + shadcn/ui (`src/components/ui`), Python 3.10+
 with Jinja2/WeasyPrint for the CV.
 
 ## Commands
 
-- `npm run dev`: dev server at http://localhost:8080/portfolio/
+- `npm run dev`: dev server at http://localhost:8080/
 - `npm run check`: lint, typecheck, unit, CV and e2e tests, with a pass/fail summary. **Run it
   before calling any change done.** It's the same set of checks CI runs. One-time setup:
   `npm run generate:cv` (creates the Python venv that `test:cv` uses) and
@@ -39,10 +39,10 @@ with Jinja2/WeasyPrint for the CV.
   otherwise be written in two places. UI copy (button labels, toasts, form labels and placeholders,
   section titles) stays inline in the component that uses it. The site is single-language, so it
   doesn't go through a strings file.
-- **The site is served under `/portfolio/`.** That path, the canonical and link-preview URLs and the
-  test URLs all derive from `personal.links.website` in `career.yaml` (via `scripts/career.ts`).
-  Never hard-code the site URL or path. Files in `public/` must be linked as
-  `` `${import.meta.env.BASE_URL}file` ``. Router links use `<Link>`, never `<a href="/">`.
+- **The site is served at the domain root (`/`).** The canonical and link-preview URLs derive from
+  `personal.links.website` in `career.yaml` (via `scripts/career.ts`). Never hard-code the site
+  URL. Files in `public/` are linked from the root (`/file`). Router links use `<Link>`, never
+  `<a href="/">`.
 - `src/pages/Index.tsx` stacks the section components, separated by `<SectionDivider />`. Section
   ids live in `SECTION_IDS` (`src/config/site.ts`). Use them for anchors instead of string literals.
 - **Pushing to `main` runs the checks but does not deploy.**

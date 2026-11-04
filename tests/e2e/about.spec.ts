@@ -3,7 +3,7 @@ import { career, personal } from "./career";
 
 // The off-duty side of the ID card only appears after flipping it, so a broken flip would hide it.
 test("the ID card flips between its front and its off-duty side", async ({ page }) => {
-  await page.goto("./");
+  await page.goto("/");
   const about = page.locator("section#about");
   const front = about.getByRole("group", { name: "ID card" });
   const back = about.getByRole("group", { name: "Off-duty profile" });

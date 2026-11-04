@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { BASE_PATH, expectedExternalLinks, personal } from "./career";
+import { expectedExternalLinks, personal } from "./career";
 
 test.beforeEach(async ({ context, page }) => {
   // Answer navigations to other sites with a stub page, so tests check where links
@@ -11,7 +11,7 @@ test.beforeEach(async ({ context, page }) => {
     }
     return route.continue();
   });
-  await page.goto("./");
+  await page.goto("/");
 });
 
 test("shows exactly the links from career.yaml, all opening safely in a new tab", async ({ page }) => {
@@ -34,7 +34,7 @@ for (const url of expectedExternalLinks) {
     ]);
     await popup.waitForLoadState();
     expect(popup.url()).toBe(url);
-    expect(page.url(), "portfolio tab should stay open").toContain(BASE_PATH);
+    expect(page.url(), "portfolio tab should stay open").toMatch(/^http:\/\/localhost:/);
   });
 }
 

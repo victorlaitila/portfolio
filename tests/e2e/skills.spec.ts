@@ -13,14 +13,14 @@ async function expectAllSkillsVisible(page: Page) {
 // The skill tiles stay hidden until the section's boot animation reveals them on scroll,
 // so a broken animation would silently hide every skill.
 test("shows every skill once the section is scrolled into view", async ({ page }) => {
-  await page.goto("./");
+  await page.goto("/");
   await page.locator("section#skills").scrollIntoViewIfNeeded();
   await expectAllSkillsVisible(page);
 });
 
 test("shows every skill immediately with reduced motion", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("./");
+  await page.goto("/");
   await expectAllSkillsVisible(page);
 });
 
@@ -30,7 +30,7 @@ test.describe("on a short landscape phone screen", () => {
   test.use({ viewport: { width: 740, height: 360 } });
 
   test("shows every skill once the section is scrolled into view", async ({ page }) => {
-    await page.goto("./");
+    await page.goto("/");
     await page.locator("section#skills").scrollIntoViewIfNeeded();
     await expectAllSkillsVisible(page);
   });

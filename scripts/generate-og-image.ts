@@ -4,11 +4,11 @@
 // Usage: npm run generate:og-image
 import { execSync, spawn } from "node:child_process";
 import { chromium } from "@playwright/test";
-import { BASE_PATH, career } from "./career.ts";
+import { career } from "./career.ts";
 
 const PORT = 4175;
 const OUTPUT = "public/og-image.jpg";
-const url = `http://localhost:${PORT}${BASE_PATH}`;
+const url = `http://localhost:${PORT}/`;
 
 execSync("npm run build", { stdio: "inherit" });
 const server = spawn("npx", ["vite", "preview", "--port", String(PORT), "--strictPort"], { stdio: "ignore" });

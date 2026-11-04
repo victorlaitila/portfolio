@@ -1,5 +1,4 @@
 import { defineConfig, devices } from "@playwright/test";
-import { BASE_PATH } from "./scripts/career";
 
 const PORT = 4173;
 
@@ -9,7 +8,7 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [["github"], ["html", { open: "never" }]] : "list",
   use: {
-    baseURL: `http://localhost:${PORT}${BASE_PATH}`,
+    baseURL: `http://localhost:${PORT}`,
     trace: "retain-on-failure",
   },
   projects: [
@@ -26,7 +25,7 @@ export default defineConfig({
       VITE_EMAILJS_TEMPLATE_ID: process.env.VITE_EMAILJS_TEMPLATE_ID || "local_template",
       VITE_EMAILJS_PUBLIC_KEY: process.env.VITE_EMAILJS_PUBLIC_KEY || "local_key",
     },
-    url: `http://localhost:${PORT}${BASE_PATH}`,
+    url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
   },
 });

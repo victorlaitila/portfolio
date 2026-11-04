@@ -3,7 +3,7 @@
 Hi! I'm Victor, a software engineer based in Helsinki. This is the source of my personal portfolio,
 where you can find my projects, skills and experience.
 
-**🌐 [victorlaitila.github.io/portfolio](https://victorlaitila.github.io/portfolio/)**
+**🌐 [victorlaitila.com](https://www.victorlaitila.com/)**
 
 ## Built with
 
@@ -16,7 +16,7 @@ where you can find my projects, skills and experience.
 
 ```bash
 npm install
-npm run dev    # http://localhost:8080/portfolio/
+npm run dev    # http://localhost:8080/
 npm run check  # all quality checks
 ```
 

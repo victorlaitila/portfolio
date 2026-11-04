@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { CV_FILENAME, SECTION_IDS } from "../../src/config/site";
-import { BASE_PATH, career, personal, projects, SITE_URL } from "./career";
+import { career, personal, projects, SITE_URL } from "./career";
 
 const SECTIONS = Object.values(SECTION_IDS);
 
@@ -11,7 +11,7 @@ test("renders every section without errors", async ({ page }) => {
   page.on("pageerror", (err) => errors.push(err.message));
   page.on("console", (msg) => msg.type() === "error" && errors.push(msg.text()));
 
-  await page.goto("./");
+  await page.goto("/");
 
   await expect(page.getByRole("heading", { level: 1 })).toContainText(personal.name.split(" ")[0]);
   for (const id of SECTIONS) {
@@ -24,7 +24,7 @@ test("renders every section without errors", async ({ page }) => {
 });
 
 test("shows the courses and honors in the Education section", async ({ page }) => {
-  await page.goto("./");
+  await page.goto("/");
   const { courses = [], honors = [] } = career.additional ?? {};
   const education = page.locator(`section#${SECTION_IDS.education}`);
   for (const text of [...courses, ...honors]) {
@@ -33,7 +33,7 @@ test("shows the courses and honors in the Education section", async ({ page }) =
 });
 
 test("loads every image", async ({ page }) => {
-  await page.goto("./");
+  await page.goto("/");
   // Scroll through the page so anything rendered on scroll gets a chance to load.
   for (const id of SECTIONS) await page.locator(`section#${id}`).scrollIntoViewIfNeeded();
   await page.waitForLoadState("networkidle");
@@ -45,13 +45,13 @@ test("loads every image", async ({ page }) => {
 });
 
 test("does not scroll horizontally", async ({ page }) => {
-  await page.goto("./");
+  await page.goto("/");
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   expect(overflow).toBeLessThanOrEqual(0);
 });
 
 test("has the metadata used by search engines and link previews", async ({ page, request }) => {
-  await page.goto("./");
+  await page.goto("/");
   await expect(page).toHaveTitle(new RegExp(personal.name));
   await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /\S/);
   await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", /\S/);
@@ -71,7 +71,7 @@ test("has the metadata used by search engines and link previews", async ({ page,
 });
 
 test("Download CV serves the committed PDF", async ({ page }) => {
-  await page.goto("./");
+  await page.goto("/");
   const link = page.getByRole("link", { name: "Download CV" });
   await link.scrollIntoViewIfNeeded();
 
@@ -89,13 +89,12 @@ test("unknown URLs show the 404 page with a working way back", async ({ page }) 
   // (Checked on disk: the local preview server falls back to index.html for any path.)
   expect(existsSync("dist/404.html"), "dist/404.html missing - see the build script").toBe(true);
 
-  await page.goto("./does-not-exist");
+  await page.goto("/does-not-exist");
   await expect(page.getByRole("heading", { name: "404" })).toBeVisible();
 
-  // "/" alone would leave the site on GitHub Pages, which hosts it under a sub-path.
   const home = page.getByRole("link", { name: "Return to Home" });
-  await expect(home).toHaveAttribute("href", BASE_PATH);
+  await expect(home).toHaveAttribute("href", "/");
   await home.click();
-  await expect(page).toHaveURL((url) => url.pathname === BASE_PATH);
+  await expect(page).toHaveURL((url) => url.pathname === "/");
   await expect(page.locator("section#home")).toBeVisible();
 });
