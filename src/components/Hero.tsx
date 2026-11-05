@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { SECTION_IDS } from "@/config/site";
 import { getCareerData, getPortfolioExtensions } from "@/data";
 import { useTypewriter } from "@/hooks/useTypewriter";
-import { CursorTrail } from "./CursorTrail";
 import { HeroBackground } from "./HeroBackground";
 import { SocialLinks } from "./SocialLinks";
 
@@ -26,7 +25,6 @@ export function Hero() {
       id={SECTION_IDS.home}
       className="min-h-screen flex items-center relative z-10 overflow-hidden pt-24 pb-16 lg:pt-16 lg:pb-0"
     >
-      <CursorTrail />
       <HeroBackground />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">

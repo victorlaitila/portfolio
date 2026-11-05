@@ -65,15 +65,10 @@ export default {
           "0%": { opacity: "0", transform: "scale(0.95)" },
           "100%": { opacity: "1", transform: "scale(1)" },
         },
-        "cursor-fade": {
-          "0%": { opacity: "0.8", transform: "translate(-50%, -50%) scale(1)" },
-          "100%": { opacity: "0", transform: "translate(-50%, -50%) scale(0.5)" },
-        },
       },
       animation: {
         "fade-in": "fade-in 0.6s ease-out",
         "scale-in": "scale-in 0.5s ease-out",
-        "cursor-fade": "cursor-fade 0.6s forwards",
       },
     },
   },
