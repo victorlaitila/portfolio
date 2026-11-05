@@ -1,8 +1,11 @@
 import type { CSSProperties } from "react";
 import { useGlitchBurst } from "@/hooks/useGlitchBurst";
+import { HERO_SPLIT_MEDIA } from "@/config/site";
 import { cn } from "@/lib/utils";
 import heroCyan from "@/assets/hero-cyan.webp";
 import heroCharcoal from "@/assets/hero-charcoal.webp";
+import heroCyanMobile from "@/assets/hero-cyan-mobile.webp";
+import heroCharcoalMobile from "@/assets/hero-charcoal-mobile.webp";
 
 // Fades the avatar into the page background so its body doesn't end in a hard edge.
 const FADE_OUT = "linear-gradient(to bottom, black 60%, transparent 100%)";
@@ -20,6 +23,10 @@ const GLITCH_TIMING = {
 // The base frame plus two tinted copies for the chromatic-aberration fringe.
 // Styles and keyframes live in index.css under "Hero glitch".
 const GLITCH_LAYERS = ["hero-glitch-base", "hero-glitch-cyan-tint", "hero-glitch-magenta-tint"];
+
+// Outside the split layout the image is dimmed and only a slice around the avatar shows, so a small
+// crop around the face is enough.
+const MOBILE_MEDIA = `not all and ${HERO_SPLIT_MEDIA}`;
 
 /**
  * Digital-avatar hero image. The cyan frame is the permanent background;
@@ -40,17 +47,24 @@ export function HeroBackground() {
         } as CSSProperties
       }
     >
-      <img src={heroCyan} alt="" className="hero-image" />
+      <picture>
+        <source media={MOBILE_MEDIA} srcSet={heroCyanMobile} />
+        <img src={heroCyan} alt="" className="hero-image" {...{ fetchpriority: "high" }} />
+      </picture>
+      {/* Only needed once the first glitch burst plays, so it shouldn't compete with the cyan frame. */}
       {GLITCH_LAYERS.map((layer) => (
-        <img
-          key={layer}
-          src={heroCharcoal}
-          alt=""
-          className={cn("hero-image hero-glitch-layer", layer, isGlitching && "hero-glitch-play")}
-        />
+        <picture key={layer}>
+          <source media={MOBILE_MEDIA} srcSet={heroCharcoalMobile} />
+          <img
+            src={heroCharcoal}
+            alt=""
+            {...{ fetchpriority: "low" }}
+            className={cn("hero-image hero-glitch-layer", layer, isGlitching && "hero-glitch-play")}
+          />
+        </picture>
       ))}
-      {/* Below lg the text column is centered over the avatar, so darken the image to keep it readable. */}
-      <div className="absolute inset-0 bg-background/80 lg:hidden" />
+      {/* Outside the split layout the text is centered over the avatar, so darken the image to keep it readable. */}
+      <div className="absolute inset-0 bg-background/80 hero-split:hidden" />
     </div>
   );
 }

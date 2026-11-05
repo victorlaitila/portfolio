@@ -23,15 +23,15 @@ export function Hero() {
   return (
     <section
       id={SECTION_IDS.home}
-      className="min-h-screen flex items-center relative z-10 overflow-hidden pt-24 pb-16 lg:pt-16 lg:pb-0"
+      className="min-h-screen flex items-center relative z-10 overflow-hidden pt-24 pb-16 hero-split:pt-16 hero-split:pb-0"
     >
       <HeroBackground />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          <div className="space-y-6 md:space-y-8 animate-fade-in text-center lg:text-left order-2 lg:order-1">
+        <div className="grid items-center">
+          <div className="hero-text space-y-6 md:space-y-8 animate-fade-in text-center hero-split:text-left">
             <div className="space-y-2 md:space-y-4">
-              <div className="flex justify-center lg:justify-start gap-2">
+              <div className="flex justify-center hero-split:justify-start gap-2">
                 <p className={`${GREETING} text-accent`}>Hi,</p>
                 <p className={GREETING}>I'm</p>
               </div>
@@ -48,11 +48,11 @@ export function Hero() {
               </h2>
             </div>
 
-            <p className="font-display text-sm sm:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed">
+            <p className="font-display text-sm sm:text-base text-muted-foreground max-w-lg mx-auto hero-split:mx-0 leading-relaxed">
               {tagline}
             </p>
 
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            <div className="flex flex-wrap items-center justify-center hero-split:justify-start gap-4 pt-2">
               <Button variant="hero" size="lg" asChild className="font-display font-bold">
                 <a href={`#${SECTION_IDS.projects}`}>View Projects</a>
               </Button>
@@ -61,7 +61,7 @@ export function Hero() {
               </Button>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
+            <div className="flex flex-wrap items-center justify-center hero-split:justify-start gap-3 pt-2">
               <SocialLinks />
               <div className="flex items-center gap-2 text-muted-foreground ml-4">
                 <MapPin className="h-5 w-5 text-accent/90" />
@@ -72,7 +72,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="hidden lg:block absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <div className="hidden hero-split:block absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <a href={`#${SECTION_IDS.about}`} aria-label="Scroll to about section">
           <ArrowDown className="h-6 w-6 mx-auto text-muted-foreground" />
         </a>

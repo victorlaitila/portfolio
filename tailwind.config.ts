@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
+import { HERO_SPLIT_MEDIA } from "./src/config/site";
 
 export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
@@ -12,6 +13,9 @@ export default {
       },
     },
     extend: {
+      screens: {
+        "hero-split": { raw: HERO_SPLIT_MEDIA },
+      },
       fontFamily: {
         // Headings and labels. Loaded from Google Fonts in index.html.
         display: ["Orbitron", "sans-serif"],
