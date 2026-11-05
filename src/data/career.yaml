@@ -153,6 +153,7 @@ projects:
       - SQLite
       - Vitest
       - Playwright
+      - GitHub Actions
 
   - name: AI Article Summarizer
     description: A full-stack web application that extracts and summarizes content from URLs, uploaded files, and free text using a BART transformer model (facebook/bart-large-cnn) through the Hugging Face Inference API. Users can generate summaries in multiple modes, extract keywords automatically, save summaries to a personal library, access text-to-speech playback, and easily copy, download, or share results. A rate-limited FastAPI backend combines web scraping and PDF extraction with the model to deliver concise, non-destructive summaries, helping readers quickly grasp article content without losing important context.
