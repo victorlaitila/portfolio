@@ -43,7 +43,8 @@ with Jinja2/WeasyPrint for the CV.
   `personal.links.website` in `career.yaml` (via `scripts/career.ts`), and so do `robots.txt` and
   `sitemap.xml`, which `vite.config.ts` generates at build time. Never hard-code the site URL. Files in `public/` are linked from the root (`/file`). Router links use `<Link>`, never
   `<a href="/">`.
-- `src/pages/Index.tsx` stacks the section components, separated by `<SectionDivider />`. Section
+- `src/pages/Index.tsx` stacks the section components. There are no dividers: each section's
+  background fades out at its edges (`SectionBackground.tsx`) and the hero avatar fades into the page. Section
   ids live in `SECTION_IDS` (`src/config/site.ts`). Use them for anchors instead of string literals.
 - **Pushing to `main` runs the checks but does not deploy.**
   - `ci.yml`: every check, on pushes to `main` and on pull requests. Never deploys.

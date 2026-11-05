@@ -4,6 +4,9 @@ import { cn } from "@/lib/utils";
 import heroCyan from "@/assets/hero-cyan.webp";
 import heroCharcoal from "@/assets/hero-charcoal.webp";
 
+// Fades the avatar into the page background so its body doesn't end in a hard edge.
+const FADE_OUT = "linear-gradient(to bottom, black 60%, transparent 100%)";
+
 // Periodic glitch burst: shows the charcoal frame in a flickering, RGB-split
 // jump-cut every so often, then settles back on the cyan background.
 const GLITCH_TIMING = {
@@ -29,7 +32,13 @@ export function HeroBackground() {
     <div
       className="absolute inset-0 -z-10 overflow-hidden"
       aria-hidden="true"
-      style={{ "--hero-glitch-duration": `${GLITCH_TIMING.burstMs}ms` } as CSSProperties}
+      style={
+        {
+          "--hero-glitch-duration": `${GLITCH_TIMING.burstMs}ms`,
+          maskImage: FADE_OUT,
+          WebkitMaskImage: FADE_OUT,
+        } as CSSProperties
+      }
     >
       <img src={heroCyan} alt="" className="hero-image" />
       {GLITCH_LAYERS.map((layer) => (
