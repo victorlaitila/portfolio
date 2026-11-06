@@ -23,7 +23,7 @@ export function Hero() {
   return (
     <section
       id={SECTION_IDS.home}
-      className="min-h-screen flex items-center relative z-10 overflow-hidden pt-24 pb-16 hero-split:pt-16 hero-split:pb-0"
+      className="min-h-screen flex items-center relative z-10 overflow-hidden pt-24 pb-16 -mb-18 hero-split:pt-16 hero-split:pb-0 hero-split:mb-0"
     >
       <HeroBackground />
 
